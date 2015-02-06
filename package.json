@@ -1,10 +1,10 @@
 {
-  "name": "MCNode",
-  "version": "0.1.0",
+  "name": "mcnode",
+  "version": "1.0.0",
   "description": "A Minecraft library to fetch information from Mojang's API",
-  "main": "lib/",
+  "main": "./lib",
   "scripts": {
-    "test": "node lib/"
+    "test": "node ~/node_modules/mcnode"
   },
   "repository": {
     "type": "git",
