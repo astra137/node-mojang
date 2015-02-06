@@ -1,0 +1,25 @@
+{
+  "name": "MCNode",
+  "version": "0.1.0",
+  "description": "A Minecraft library to fetch information from Mojang's API",
+  "main": "lib/",
+  "scripts": {
+    "test": "node lib/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JamenMarz/MCNode.git"
+  },
+  "keywords": [
+    "Minecraft",
+    "HTTP",
+    "API",
+    "Mojang"
+  ],
+  "author": "Jamen Marz <jamen.marz@gmail.com> (https://jamenmarz.com/)",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/JamenMarz/MCNode/issues"
+  },
+  "homepage": "https://github.com/JamenMarz/MCNode"
+}
