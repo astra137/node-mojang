@@ -1,0 +1,23 @@
+{
+  "name": "mojang",
+  "version": "0.0.0",
+  "description": "A node.js wrapper for Mojang's API.",
+  "main": "lib/",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamen/node-mojang.git"
+  },
+  "keywords": [
+    "mojang",
+    "minecraft"
+  ],
+  "author": "Jamen Marzonie <jamenmarz@gmail.com> (http://jamenmarz.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jamen/node-mojang/issues"
+  },
+  "homepage": "https://github.com/jamen/node-mojang#readme"
+}
