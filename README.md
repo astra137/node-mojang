@@ -1,5 +1,5 @@
-mojang
-======
+node-mojang
+===========
 > A node.js wrapper for Mojang's API.
 
 This is a simple wrapper for Mojang's HTTP API for Minecraft.  Access and interact with Mojang through this library that offers a Node-esque interface.
