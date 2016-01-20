@@ -48,12 +48,57 @@ mojang.profile([ '123FOO', '456BAR' ]).then(...)
 ```
 
 ### `mojang.history(uuid)`
+Fetch history by UUID.
  - `uuid`: (String, Array) UUID(s) of history(ies) you want.
 
 ```javascript
 mojang.history('123FOO').then(...);
 mojang.history([ '123FOO', '456BAR' ]).then(...)
 ```
+
+### `mojang.auth(username, password, [clientToken])`
+Authenticate
+ - `username`: (String) email or uesrname of the Mojang account.
+ - `password`: (String) password of the Mojang account.
+ - `clientToken` (String) optional clientToken.
+
+```javascript
+mojang.auth('foo', 'bar', 'baz').then(...);
+```
+
+### `mojang.validate(accessToken, clientToken)`
+Validate
+ - `accessToken`: (String) accessToken of authentication.
+ - `clientToken`: (String) clientToken of authentication.
+
+```javascript
+mojang.validate('foo', 'bar').then(...);
+```
+
+### `mojang.refresh(accessToken, clientToken, [profile])`
+Refresh
+ - `accessToken`: (String) accessToken of authentication.
+ - `clientToken`: (String) clientToken of authentication.
+ - `profile`: (Object) selectedProfile
+
+```javascript
+mojang.refresh('foo', 'bar', {}).then(...);
+```
+
+### `mojang.invalidate(accessToken, clientToken)`
+Invalidate
+ - `accessToken`: (String) accessToken of authentication.
+ - `clientToken`: (String) clientToken of authentication.
+
+```javascript
+mojang.invalidate('foo', 'bar').then(...);
+```
+
+
+### `mojang.signout(username, password)`
+Signout
+ - `username`: (String) username of Mojang account.
+ - `password`: (String) password of Mojang account.
 
 ### Using in parity
 Since `node-mojang` is designed around promises, you can do quick multi-request actions.  For instance, if you want to get the history from a username, you can do something like this:
