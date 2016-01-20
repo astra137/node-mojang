@@ -2,7 +2,7 @@ node-mojang
 ===========
 > A node.js wrapper for Mojang's API.
 
-This is a simple wrapper for Mojang's HTTP API for Minecraft.  Access and interact with Mojang through this library that offers a Node-esque interface.
+A simple Node.js wrapper for Mojang's HTTP API.  It uses HTTPS requests wrapped in `Promise` objects, so you can perform multi-request actions easier.  Manage multiple Mojang requests easier with this API.
 
 ## Installation
 ```shell
@@ -18,27 +18,27 @@ import mojang from 'mojang';
 var mojang = require('mojang');
 ```
 
-#### `mojang.username(name, [date])`
+### `mojang.username(name, [date])`
 Fetch UUID from the name(s).
  - `name`: (String, Array, Object) name, array of names, or object of names with dates.
  - `date`: (String) A unix timestamp
 
 ```javascript
 mojang.username('RamenMarz').then(...);
-mojang.username('RamenMarz', Date.now());
+mojang.username('RamenMarz', Date.now()).then;
 mojang.username([ 'RamenMarz', 'Foo' ]).then(...);
 mojang.username([ 'RamenMarz', 'Foo' ], Date.now()).then(...);
 mojang.username({ 'RamenMarz': Date.now(), 'Foo': Date.now() }).then(...);
 ```
 
-#### `mojang.status()`
+### `mojang.status()`
 Get Mojang's servers' statuses.
 
 ```javascript
 mojang.status().then(...);
 ```
 
-#### `mojang.profile(uuid)`
+### `mojang.profile(uuid)`
 Get profile from UUIDs.
  - `uuid`: (String, Array) UUID(s) of profile(s) you want.
 
@@ -47,7 +47,7 @@ mojang.profile('123FOO').then(...);
 mojang.profile([ '123FOO', '456BAR' ]).then(...)
 ```
 
-#### `mojang.history(uuid)`
+### `mojang.history(uuid)`
  - `uuid`: (String, Array) UUID(s) of history(ies) you want.
 
 ```javascript
@@ -55,7 +55,7 @@ mojang.history('123FOO').then(...);
 mojang.history([ '123FOO', '456BAR' ]).then(...)
 ```
 
-#### Using in parity
+### Using in parity
 Since `node-mojang` is designed around promises, you can do quick multi-request actions.  For instance, if you want to get the history from a username, you can do something like this:
 ```javascript
 mojang.username('RamenMarz')
