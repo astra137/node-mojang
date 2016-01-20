@@ -11,18 +11,61 @@ $ npm install mojang
 
 ## Usage
 ```javascript
+// ES6
 import mojang from 'mojang';
 
-mojang.username('jamen')
-.then(uuid => mojang.profile(uuid))
-.then(function(profile) {
-  console.log(profile);
+// ES5
+var mojang = require('mojang');
+```
+
+#### `mojang.username(name, [date])`
+Fetch UUID from the name(s).
+ - `name`: (String, Array, Object) name, array of names, or object of names with dates.
+ - `date`: (String) A unix timestamp
+
+```javascript
+mojang.username('RamenMarz').then(...);
+mojang.username('RamenMarz', Date.now());
+mojang.username([ 'RamenMarz', 'Foo' ]).then(...);
+mojang.username([ 'RamenMarz', 'Foo' ], Date.now()).then(...);
+mojang.username({ 'RamenMarz': Date.now(), 'Foo': Date.now() }).then(...);
+```
+
+#### `mojang.status()`
+Get Mojang's servers' statuses.
+
+```javascript
+mojang.status().then(...);
+```
+
+#### `mojang.profile(uuid)`
+Get profile from UUIDs.
+ - `uuid`: (String, Array) UUID(s) of profile(s) you want.
+
+```javascript
+mojang.profile('123FOO').then(...);
+mojang.profile([ '123FOO', '456BAR' ]).then(...)
+```
+
+#### `mojang.history(uuid)`
+ - `uuid`: (String, Array) UUID(s) of history(ies) you want.
+
+```javascript
+mojang.history('123FOO').then(...);
+mojang.history([ '123FOO', '456BAR' ]).then(...)
+```
+
+#### Using in parity
+Since `node-mojang` is designed around promises, you can do quick multi-request actions.  For instance, if you want to get the history from a username, you can do something like this:
+```javascript
+mojang.username('RamenMarz')
+.then(user => mojang.history(user.id))
+.then(function(history) {
   // ...
 });
 ```
 
-## Docs & Support
- - [GitHub Wiki](https://github.com/jamen/node-mojang/wiki)
+## Support
  - [Repo Issues](https://github.com/jamen/node-mojang/issues)
  - [Authors](#Credits)
 
