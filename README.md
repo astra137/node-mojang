@@ -12,12 +12,19 @@ $ npm install mojang
 ## Usage
 ```javascript
 import mojang from 'mojang';
+
+mojang.username('jamen')
+.then(uuid => mojang.profile(uuid))
+.then(function(profile) {
+  console.log(profile);
+  // ...
+});
 ```
 
 ## Docs & Support
- - [GitHub Wiki](/wiki)
- - [Repo Issues](/issues)
- - [Contact](#Credits)
+ - [GitHub Wiki](https://github.com/jamen/node-mojang/wiki)
+ - [Repo Issues](https://github.com/jamen/node-mojang/issues)
+ - [Authors](#Credits)
 
 ## Credits
 
