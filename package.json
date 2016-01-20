@@ -1,6 +1,6 @@
 {
   "name": "mojang",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "A node.js wrapper for Mojang's API.",
   "main": "lib/",
   "scripts": {
