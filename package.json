@@ -1,7 +1,7 @@
 {
   "name": "mojang",
   "author": "Jamen Marzonie",
-  "version": "0.0.0",
+  "version": "1.0.0-0",
   "description": "Node.js library for interacting with Mojang's HTTP API.",
   "main": "lib",
   "repository": {
