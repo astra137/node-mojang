@@ -1,5 +1,5 @@
 # mojang
-> A node.js wrapper for Mojang's API.
+> Node.js library for interacting with Mojang's HTTP API.
 
 ## Installation
 ```shell
@@ -16,5 +16,5 @@ import mojang from 'mojang';
 |:---:|
 | [Jamen Marzonie][github] |
 
-  [avatar]: https://avatars.githubusercontent.com/u/6251703?v=3
+  [avatar]: https://avatars.githubusercontent.com/u/6251703?v=3&s=125
   [github]: https://github.com/jamen
