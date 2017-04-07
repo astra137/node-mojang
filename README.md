@@ -61,6 +61,7 @@ Authenticate
  - `username`: (String) email or uesrname of the Mojang account.
  - `password`: (String) password of the Mojang account.
  - `clientToken` (String) optional clientToken.
+ - `authAgent` (Object) agent object containing a *name* and a *version* property
 
 ```javascript
 mojang.auth('foo', 'bar', 'baz').then(...);
