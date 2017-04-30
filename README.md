@@ -101,6 +101,16 @@ Signout
  - `username`: (String) username of Mojang account.
  - `password`: (String) password of Mojang account.
 
+
+### `mojang.user(accessToken)`
+Get detailed information about a validated user. Check the [wiki][wiki-user] for details on the returned Object.
+- `accessToken`: (String) accessToken of authentication.
+
+```javascript
+mojang.user('foo').then(...);
+```
+
+
 ### Using in parity
 Since `node-mojang` is designed around promises, you can do quick multi-request actions.  For instance, if you want to get the history from a username, you can do something like this:
 ```javascript
@@ -127,6 +137,8 @@ mojang.username('RamenMarz')
 <!-- All links must be "tagged" -->
  [example-badge]: https://img.shields.io/badge/example-badge-green.svg
  [foobar-badge]: https://img.shields.io/badge/foobar-baz-green.svg
+
+ [wiki-user]: http://wiki.vg/Mojang_API#Response_9
 
  [@jamen]: https://github.com/jamen
  [jamen-image]: https://avatars2.githubusercontent.com/u/6251703?v=3&s=125
