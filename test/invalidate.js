@@ -10,6 +10,7 @@ describe('mojang.invalidate()', () => {
     nock('https://authserver.mojang.com')
       .post('/invalidate')
       .reply(204)
+    done()
   })
 
   it('should reject with valid tokens', (done) => {
