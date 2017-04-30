@@ -22,6 +22,7 @@
   "homepage": "https://github.com/jamen/node-mojang#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.3.0"
+    "mocha": "^3.3.0",
+    "nock": "^9.0.13"
   }
 }
