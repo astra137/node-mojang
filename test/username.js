@@ -3,7 +3,7 @@ const chai = require('chai')
 const expect = chai.expect
 const mojang = require('../')
 
-describe('#username()', () => {
+describe('mojang.username()', () => {
   
   it('should return a object with id and name', (done) => {
     mojang.username('MoVo99')

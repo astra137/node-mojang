@@ -7,7 +7,7 @@ const mojang = require('../index');
 //
 // Test for username history
 //
-describe('NameHistory', () => {
+describe('mojang.history()', () => {
 
   beforeEach(function (done) {
     this.timeout(1000*60)

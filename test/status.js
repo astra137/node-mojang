@@ -2,7 +2,7 @@ const chai = require('chai')
 const expect = chai.expect
 const mojang = require('../')
 
-describe('status', () => {
+describe('mojang.status()', () => {
 
   it('should return an array', (done) => {
     mojang.status()

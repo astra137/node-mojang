@@ -3,7 +3,7 @@ const chai = require('chai')
 const expect = chai.expect
 const mojang = require('../')
 
-describe('authentification', () => {
+describe('mojang.auth()', () => {
 
   // TODO implement test scenario with valid credentials 
 
