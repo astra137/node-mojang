@@ -44,6 +44,11 @@ describe('mojang.user()', () => {
       done()
   })
 
+  after((done) => {
+    nock.cleanAll()
+    done()
+  })
+
   it('should resolve with a user object when a valid accessToken is provided', (done) => {
     mojang.user('valid12345')
       .then((user) => {

@@ -22,6 +22,11 @@ describe('mojang.validate()', () => {
       done()
   })
 
+  after((done) => {
+    nock.cleanAll()
+    done()  
+  })
+
   it('should reject when a valid accessToken is provided', (done) => {
     mojang.validate('0123456789', '9876543210')
       .then((result) => {

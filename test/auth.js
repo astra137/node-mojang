@@ -24,6 +24,11 @@ describe('mojang.auth()', () => {
       done()
   })
 
+  after((done) => {
+    nock.cleanAll()
+    done()
+  })
+
   it('should return an access token with valid credentials', (done) => {
     mojang.auth('valid@user.com', 'password')
       .then((tokens) => {

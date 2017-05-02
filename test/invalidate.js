@@ -13,6 +13,11 @@ describe('mojang.invalidate()', () => {
     done()
   })
 
+  after((done) => {
+    nock.cleanAll()
+    done()
+  })
+
   it('should reject with valid tokens', (done) => {
     mojang.invalidate('123456abcdefghijklmnopqrstuvxyz', 'xxxxyyyyd6b94f58b7fa21a1189a62e4')
       .then((result) => {

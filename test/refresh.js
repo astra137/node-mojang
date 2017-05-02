@@ -17,6 +17,11 @@ describe('mojang.refresh()', () => {
     done()
   })
 
+  after((done) => {
+    nock.cleanAll()
+    done()
+  })
+
   it('should return a new access and client token', (done) => {
     mojang.refresh('123456abcdefghijklmnopqrstuvxyz', 'xxxxyyyyd6b94f58b7fa21a1189a62e4')
       .then((tokens) => {

@@ -24,6 +24,11 @@ describe('mojang.signout()', () => {
       done()
   })
 
+  after((done) => {
+    nock.cleanAll()
+    done()
+  })
+
   it('should reject with valid credentials', (done) => {
     mojang.signout('valid@user.com', 'password')
       .then((result) => {

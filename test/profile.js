@@ -25,6 +25,11 @@ describe('mojang.profile()', () => {
       .reply(204, {})
     done()
   })
+    
+  after((done) => {
+    nock.cleanAll()
+    done()
+  })
 
   it('with a valid uuid should return a json object', (done) => {
     mojang.profile('47c49720c9ee42009ef05e1c4cd2760c')
