@@ -41,7 +41,6 @@ describe('mojang.user()', () => {
         error: 'UnauthorizedOperationException',
         errorMessage: 'User not authenticated'
       })
-      .log(console.log)
       done()
   })
 
