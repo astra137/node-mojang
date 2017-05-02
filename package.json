@@ -4,7 +4,7 @@
   "description": "A node.js wrapper for Mojang's API.",
   "main": "lib/",
   "scripts": {
-    "test": "ava"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/jamen/node-mojang/issues"
   },
-  "homepage": "https://github.com/jamen/node-mojang#readme"
+  "homepage": "https://github.com/jamen/node-mojang#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
+    "nock": "^9.0.13"
+  }
 }
