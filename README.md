@@ -1,5 +1,7 @@
 mojang
 ======
+[![Build Status](https://travis-ci.org/jamen/node-mojang.svg?branch=master)](https://travis-ci.org/jamen/node-mojang)
+
 > A node.js wrapper for Mojang's API.
 
 A simple Node.js wrapper for Mojang's HTTP API.  It uses HTTPS requests wrapped in `Promise` objects, so you can perform multi-request actions easier.  Manage multiple Mojang requests easier with this API.
