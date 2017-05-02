@@ -27,7 +27,7 @@ describe('mojang.history()', () => {
       })
   })
 
-  it('with an invalid uuid should reject with error', () => {
+  it('with an invalid uuid should reject with error', (done) => {
     mojang.history('123')
       .then((history) => {
         expect(history).to.be.null
