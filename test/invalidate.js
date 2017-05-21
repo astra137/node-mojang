@@ -18,22 +18,22 @@ describe('mojang.invalidate()', () => {
     done()
   })
 
-  it('should reject with valid tokens', (done) => {
+  it('should resolve with valid tokens', (done) => {
     mojang.invalidate('123456abcdefghijklmnopqrstuvxyz', 'xxxxyyyyd6b94f58b7fa21a1189a62e4')
       .then((result) => {
-        expect(result).to.be.null
+        expect(result).to.not.be.null
         done()
       })
       .catch((err) => {
-        expect(err).to.not.be.null
+        expect(err).to.be.null
         done()
       })
   })
 
-  it('as well as with invalid ones', (done) => {
+  it('should reject with invalid tokens', (done) => {
     mojang.invalidate('', '')
       .then((result) => {
-        expect(resizeBy).to.be.null
+        expect(result).to.be.null
         done()
       })
       .catch((err) => {

@@ -45,11 +45,11 @@ describe('mojang.auth()', () => {
   it('should fail with invalid credentials', (done) => {
     mojang.auth('invalid@username.com', 'invalidpassword')
       .then((result) => {
-        expect(result).to.have.property('error')
+        expect(result).to.be.null
         done()
       })
       .catch((err) => {
-        expect(err).to.be.null
+        expect(err).to.not.be.null
         done()
       })
   })
