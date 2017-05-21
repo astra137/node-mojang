@@ -19,7 +19,7 @@ describe('mojang.validate()', () => {
         error: 'ForbiddenOperationException',
         errorMessage: 'Invalid token'
       })
-      done()
+    done()
   })
 
   after((done) => {
@@ -27,11 +27,23 @@ describe('mojang.validate()', () => {
     done()  
   })
 
-  it('should reject when a valid accessToken is provided', (done) => {
+  it('should resolve when a valid accessToken is provided', (done) => {
     mojang.validate('0123456789', '9876543210')
       .then((result) => {
-        expect(result).to.be.null
+        expect(result).to.not.be.null
         done()
+      })
+      .catch((err) => {
+        expect(err).to.be.null
+        done()
+      })
+  })
+
+  it('should reject when an invalid accessToken is provided', (done) => {
+    mojang.validate('00123456789', '98765432100')
+      .then((result) => {
+        expect(result).to.be.null
+        done()        
       })
       .catch((err) => {
         expect(err).to.not.be.null
@@ -39,30 +51,14 @@ describe('mojang.validate()', () => {
       })
   })
 
-  it('should resolve when an invalid accessToken is provided', (done) => {
-    mojang.validate('00123456789', '98765432100')
-      .then((result) => {
-        expect(result).to.not.be.null
-        expect(result).to.have.property('error')
-        expect(result).to.have.property('errorMessage')
-        done()        
-      })
-      .catch((err) => {
-        expect(err).to.be.null
-        done()
-      })
-  })
-
-  it('should resolve when the clientToken is not vallid for this accessToken', (done) => {
+  it('should reject when the clientToken is not valid for this accessToken', (done) => {
     mojang.validate('00123456789', '')
       .then((result) => {
-        expect(result).to.not.be.null
-        expect(result).to.have.property('error')
-        expect(result).to.have.property('errorMessage')
+        expect(result).to.be.null
         done()
       })
       .catch((err) => {
-        expect(err).to.be.null
+        expect(err).to.not.be.null
         done()
       })
   })
