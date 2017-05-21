@@ -29,19 +29,19 @@ describe('mojang.signout()', () => {
     done()
   })
 
-  it('should reject with valid credentials', (done) => {
+  it('should resolve with valid credentials', (done) => {
     mojang.signout('valid@user.com', 'password')
       .then((result) => {
-        expect(result).to.be.null
+        expect(result).to.not.be.null
         done()
       })
       .catch((err) => {
-        expect(err).to.not.be.null
+        expect(err).to.be.null
         done()
       })
   })
 
-  it('should resolve with invalid credentials', (done) => {
+  it('should reject with invalid credentials', (done) => {
     mojang.signout('invalid@user.com', 'password')
       .then((result)=> {
         expect(result).to.have.property('error')
@@ -49,7 +49,7 @@ describe('mojang.signout()', () => {
         done()        
       })
       .catch((err) => {
-        expect(err).to.be.null
+        expect(err).to.not.be.null
         done()
       })
   })
