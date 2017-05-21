@@ -64,15 +64,14 @@ describe('mojang.user()', () => {
       })
   })
 
-  it('should resolve with an error', (done) => {
+  it('should reject with an error', (done) => {
     mojang.user('1234567890abcde')
       .then((user) => {
-        expect(user).to.have.property('error')
-        expect(user).to.have.property('errorMessage')
+        expect(user).to.be.null
         done()
       })
       .catch((err) => {
-        expect(err).to.be.null
+        expect(err).to.not.be.null
         done()
       })
   })
