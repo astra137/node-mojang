@@ -1,6 +1,6 @@
-'use strict'
-const chai = require('chai')
-const expect = chai.expect
+/* eslint-env mocha */
+
+const {expect} = require('chai')
 const mojang = require('../index')
 
 //
@@ -15,6 +15,7 @@ describe('mojang.history()', () => {
   it('with a valid uuid should resolve with json response', (done) => {
     mojang.history('47c49720c9ee42009ef05e1c4cd2760c')
       .then((history) => {
+        console.log(history)
         expect(history).to.not.be.null
         expect(history).to.have.length.of.at.least(1)
         done()
@@ -32,6 +33,7 @@ describe('mojang.history()', () => {
         done()
       })
       .catch((err) => {
+        console.log(err)
         expect(err).to.not.be.null
         done()
       })

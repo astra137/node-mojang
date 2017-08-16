@@ -1,1 +1,3 @@
-module.exports = require('./lib')
+module.exports = {
+  authenticate: require('./lib/authenticate')
+}

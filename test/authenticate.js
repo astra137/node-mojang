@@ -1,10 +1,10 @@
-'use strict'
-const chai = require('chai')
-const expect = chai.expect
-const nock = require('nock')
-const mojang = require('../')
+/* eslint-env mocha */
 
-describe('mojang.auth()', () => {
+const {expect} = require('chai')
+const nock = require('nock')
+const mojang = require('..')
+
+describe('authenticate()', () => {
   before((done) => {
     nock('https://authserver.mojang.com')
       .post('/authenticate', {
@@ -14,7 +14,9 @@ describe('mojang.auth()', () => {
         accessToken: '123456abcdefghijklmnopqrstuvxyz',
         clientToken: 'xxxxyyyyd6b94f58b7fa21a1189a62e4'
       })
-      .post('/authenticate')
+      .post('/authenticate', {
+        username: 'invalid@user.com'
+      })
       .reply(200, {
         error: 'ForbiddenOperationException',
         errorMessage: 'Invalid credentials. Invalid username or password.'
@@ -28,27 +30,21 @@ describe('mojang.auth()', () => {
   })
 
   it('should return an access token with valid credentials', (done) => {
-    mojang.auth('valid@user.com', 'password')
+    mojang.authenticate('valid@user.com', 'password')
       .then((tokens) => {
         expect(tokens).to.have.property('accessToken')
         expect(tokens).to.have.property('clientToken')
-        done()
       })
-      .catch((err) => {
-        expect(err).to.be.null
-        done()
-      })
+      .then(done)
+      .catch(done)
   })
 
   it('should fail with invalid credentials', (done) => {
-    mojang.auth('invalid@username.com', 'invalidpassword')
+    mojang.authenticate('invalid@user.com', 'password')
       .then((result) => {
         expect(result).to.have.property('error')
-        done()
       })
-      .catch((err) => {
-        expect(err).to.be.null
-        done()
-      })
+      .then(done)
+      .catch(done)
   })
 })
