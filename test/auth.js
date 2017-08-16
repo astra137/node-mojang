@@ -1,13 +1,11 @@
-'use strict';
+'use strict'
 const chai = require('chai')
 const expect = chai.expect
 const nock = require('nock')
 const mojang = require('../')
 
 describe('mojang.auth()', () => {
-
   before((done) => {
-
     nock('https://authserver.mojang.com')
       .post('/authenticate', {
         username: 'valid@user.com'
@@ -21,7 +19,7 @@ describe('mojang.auth()', () => {
         error: 'ForbiddenOperationException',
         errorMessage: 'Invalid credentials. Invalid username or password.'
       })
-      done()
+    done()
   })
 
   after((done) => {
@@ -53,5 +51,4 @@ describe('mojang.auth()', () => {
         done()
       })
   })
-
 })

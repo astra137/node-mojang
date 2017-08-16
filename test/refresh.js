@@ -1,13 +1,11 @@
-'use strict';
+'use strict'
 const chai = require('chai')
 const expect = chai.expect
 const nock = require('nock')
 const mojang = require('../')
 
 describe('mojang.refresh()', () => {
-
   before((done) => {
-
     nock('https://authserver.mojang.com')
       .post('/refresh')
       .reply(200, {
@@ -34,5 +32,4 @@ describe('mojang.refresh()', () => {
         done()
       })
   })
-
 })

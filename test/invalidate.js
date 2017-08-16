@@ -1,11 +1,10 @@
-'use strict';
+'use strict'
 const chai = require('chai')
 const expect = chai.expect
 const nock = require('nock')
 const mojang = require('../')
 
 describe('mojang.invalidate()', () => {
-
   before((done) => {
     nock('https://authserver.mojang.com')
       .post('/invalidate')
@@ -41,5 +40,4 @@ describe('mojang.invalidate()', () => {
         done()
       })
   })
-
 })

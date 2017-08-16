@@ -1,16 +1,14 @@
-'use strict';
-const chai = require('chai');
-const expect = chai.expect;
-const mojang = require('../index');
-
+'use strict'
+const chai = require('chai')
+const expect = chai.expect
+const mojang = require('../index')
 
 //
 // Test for username history
 //
 describe('mojang.history()', () => {
-
   beforeEach(function (done) {
-    this.timeout(1000*60)
+    this.timeout(1000 * 60)
     setTimeout(done, 1000 * 30)
   })
 
@@ -38,5 +36,4 @@ describe('mojang.history()', () => {
         done()
       })
   })
-
 })

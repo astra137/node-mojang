@@ -3,7 +3,6 @@ const expect = chai.expect
 const mojang = require('../')
 
 describe('mojang.status()', () => {
-
   it('should return an array', (done) => {
     mojang.status()
       .then((status) => {
@@ -15,5 +14,4 @@ describe('mojang.status()', () => {
         done()
       })
   })
-
 })

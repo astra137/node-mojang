@@ -1,11 +1,10 @@
-'use strict';
+'use strict'
 const chai = require('chai')
 const expect = chai.expect
 const nock = require('nock')
 const mojang = require('../')
 
 describe('mojang.user()', () => {
-  
   before((done) => {
     nock('https://api.mojang.com', {
       allowUnmocked: true
@@ -13,12 +12,12 @@ describe('mojang.user()', () => {
       .get('/user')
       .reply(200, {
         id: 123456789,
-        email: "john.doe@example.com",
-        firstName: "John",
-        lastName: "Doe",
-        username: "john.doe@example.com",
-        registerIp: "127.0.0.1",
-        migratedFrom: "minecraft.net",
+        email: 'john.doe@example.com',
+        firstName: 'John',
+        lastName: 'Doe',
+        username: 'john.doe@example.com',
+        registerIp: '127.0.0.1',
+        migratedFrom: 'minecraft.net',
         migratedAt: Date.now(),
         registeredAt: Date.now(),
         passwordChangedAt: Date.now(),
@@ -29,10 +28,10 @@ describe('mojang.user()', () => {
         migrated: false,
         emailVerified: true,
         legacyUser: false,
-        emailSubscriptionStatus: "PENDING",
-        emailSubscriptionKey: "1234567890987654321",
+        emailSubscriptionStatus: 'PENDING',
+        emailSubscriptionKey: '1234567890987654321',
         verifiedByParent: false,
-        fullName: "John Doe",
+        fullName: 'John Doe',
         fromMigratedUser: true,
         hashed: false
       })
@@ -41,7 +40,7 @@ describe('mojang.user()', () => {
         error: 'UnauthorizedOperationException',
         errorMessage: 'User not authenticated'
       })
-      done()
+    done()
   })
 
   after((done) => {
@@ -76,5 +75,4 @@ describe('mojang.user()', () => {
         done()
       })
   })
-
 })

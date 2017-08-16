@@ -1,22 +1,21 @@
-'use strict';
+'use strict'
 const chai = require('chai')
 const expect = chai.expect
 const nock = require('nock')
 const mojang = require('../')
 
 describe('mojang.profile()', () => {
-
   before((done) => {
     nock('https://sessionserver.mojang.com')
       .get('/session/minecraft/profile/47c49720c9ee42009ef05e1c4cd2760c')
       .times(2)
       .reply(200, {
         id: '47c49720c9ee42009ef05e1c4cd2760c',
-        name: 'testusername', 
+        name: 'testusername',
         properties: [
           {
-          name: 'textures',
-          value: '123'
+            name: 'textures',
+            value: '123'
           }
         ]
       })
@@ -25,7 +24,7 @@ describe('mojang.profile()', () => {
       .reply(204, {})
     done()
   })
-    
+
   after((done) => {
     nock.cleanAll()
     done()
@@ -47,16 +46,16 @@ describe('mojang.profile()', () => {
 
   it('with an array of uuids should return a json array of the same length', (done) => {
     mojang.profile([
-      '47c49720c9ee42009ef05e1c4cd2760c',
+      '47c49720c9ee42009ef05e1c4cd2760c'
     ])
-    .then((profiles) => {
-      expect(profiles).to.not.be.null
-      done()
-    })
-    .catch((err) => {
-      expect(err).to.be.null
-      done()
-    })
+      .then((profiles) => {
+        expect(profiles).to.not.be.null
+        done()
+      })
+      .catch((err) => {
+        expect(err).to.be.null
+        done()
+      })
   })
 
   it('with an invalid uuid should reject with error', (done) => {
@@ -70,5 +69,4 @@ describe('mojang.profile()', () => {
         done()
       })
   })
-
 })

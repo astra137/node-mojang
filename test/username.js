@@ -1,10 +1,9 @@
-'use strict';
+'use strict'
 const chai = require('chai')
 const expect = chai.expect
 const mojang = require('../')
 
 describe('mojang.username()', () => {
-  
   it('should return a object with id and name', (done) => {
     mojang.username('MoVo99')
       .then((user) => {
@@ -30,5 +29,4 @@ describe('mojang.username()', () => {
         done()
       })
   })
-
 })

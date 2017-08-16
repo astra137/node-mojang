@@ -1,11 +1,10 @@
-'use strict';
+'use strict'
 const chai = require('chai')
 const expect = chai.expect
 const nock = require('nock')
 const mojang = require('../')
 
 describe('mojang.validate()', () => {
-
   before((done) => {
     nock('https://authserver.mojang.com')
       .post('/validate', {
@@ -19,12 +18,12 @@ describe('mojang.validate()', () => {
         error: 'ForbiddenOperationException',
         errorMessage: 'Invalid token'
       })
-      done()
+    done()
   })
 
   after((done) => {
     nock.cleanAll()
-    done()  
+    done()
   })
 
   it('should reject when a valid accessToken is provided', (done) => {
@@ -45,7 +44,7 @@ describe('mojang.validate()', () => {
         expect(result).to.not.be.null
         expect(result).to.have.property('error')
         expect(result).to.have.property('errorMessage')
-        done()        
+        done()
       })
       .catch((err) => {
         expect(err).to.be.null
@@ -66,5 +65,4 @@ describe('mojang.validate()', () => {
         done()
       })
   })
-
 })

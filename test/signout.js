@@ -1,11 +1,10 @@
-'use strict';
+'use strict'
 const chai = require('chai')
 const expect = chai.expect
 const nock = require('nock')
 const mojang = require('../')
 
 describe('mojang.signout()', () => {
-
   before((done) => {
     nock('https://authserver.mojang.com')
       .post('/signout', {
@@ -18,10 +17,10 @@ describe('mojang.signout()', () => {
         password: 'password'
       })
       .reply(403, {
-        error: "ForbiddenOperationException",
-        errorMessage: "Invalid credentials. Invalid username or password."
+        error: 'ForbiddenOperationException',
+        errorMessage: 'Invalid credentials. Invalid username or password.'
       })
-      done()
+    done()
   })
 
   after((done) => {
@@ -43,10 +42,10 @@ describe('mojang.signout()', () => {
 
   it('should resolve with invalid credentials', (done) => {
     mojang.signout('invalid@user.com', 'password')
-      .then((result)=> {
+      .then((result) => {
         expect(result).to.have.property('error')
         expect(result).to.have.property('errorMessage')
-        done()        
+        done()
       })
       .catch((err) => {
         expect(err).to.be.null
