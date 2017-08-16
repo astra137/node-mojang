@@ -41,10 +41,11 @@ describe('authenticate()', () => {
 
   it('should fail with invalid credentials', (done) => {
     mojang.authenticate('invalid@user.com', 'password')
-      .then((result) => {
-        expect(result).to.have.property('error')
+      .catch((err) => {
+        expect(err).to.have.property('message')
       })
-      .then(done)
-      .catch(done)
+      .then(() => {
+        done(new Error('should have rejected'))
+      })
   })
 })
