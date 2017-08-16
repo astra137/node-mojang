@@ -1,3 +1,4 @@
 module.exports = {
-  authenticate: require('./lib/authenticate')
+  authenticate: require('./lib/authenticate'),
+  invalidate: require('./lib/invalidate')
 }
