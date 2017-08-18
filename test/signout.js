@@ -1,17 +1,21 @@
-'use strict'
-const chai = require('chai')
-const expect = chai.expect
+/* eslint-env mocha */
+
+const {expect} = require('chai')
 const nock = require('nock')
-const mojang = require('../')
+const signout = require('../lib/signout')
 
 describe('mojang.signout()', () => {
   before((done) => {
+    // Behavior observed 17.08.2017 by maccelerated
     nock('https://authserver.mojang.com')
       .post('/signout', {
         username: 'valid@user.com',
         password: 'password'
       })
-      .reply(200, {})
+      .reply(204)
+
+    // Behavior observed 17.08.2017 by maccelerated
+    nock('https://authserver.mojang.com')
       .post('/signout', {
         username: 'invalid@user.com',
         password: 'password'
@@ -28,28 +32,22 @@ describe('mojang.signout()', () => {
     done()
   })
 
-  it('should reject with valid credentials', (done) => {
-    mojang.signout('valid@user.com', 'password')
-      .then((result) => {
-        expect(result).to.be.null
-        done()
-      })
-      .catch((err) => {
-        expect(err).to.not.be.null
-        done()
-      })
+  it('should resolve with valid credentials', () => {
+    return signout('valid@user.com', 'password')
   })
 
-  it('should resolve with invalid credentials', (done) => {
-    mojang.signout('invalid@user.com', 'password')
-      .then((result) => {
-        expect(result).to.have.property('error')
-        expect(result).to.have.property('errorMessage')
-        done()
+  it('should reject with invalid credentials', () => {
+    signout('invalid@user.com', 'password')
+      .then(() => {
+        throw new Error('should have rejected')
       })
       .catch((err) => {
-        expect(err).to.be.null
-        done()
+        expect(err).to.have.property('statusCode')
+        expect(err.statusCode).to.equal(403)
+        expect(err).to.have.property('name')
+        expect(err.name).to.equal('ForbiddenOperationException')
+        expect(err).to.have.property('message')
+        expect(err.message).to.equal('Invalid credentials. Invalid username or password.')
       })
   })
 })

@@ -1,14 +1,26 @@
-'use strict'
-const chai = require('chai')
-const expect = chai.expect
+/* eslint-env mocha */
+
 const nock = require('nock')
-const mojang = require('../')
+const invalidate = require('../lib/invalidate')
 
 describe('mojang.invalidate()', () => {
   before((done) => {
+    // Behavior observed 17.08.2017 by maccelerated
     nock('https://authserver.mojang.com')
-      .post('/invalidate')
+      .post('/invalidate', {
+        accessToken: 'valid',
+        clientToken: 'clientToken' // optional
+      })
       .reply(204)
+
+    // Behavior observed 17.08.2017 by maccelerated
+    nock('https://authserver.mojang.com')
+      .post('/invalidate', {
+        accessToken: 'invalid',
+        clientToken: 'clientToken'
+      })
+      .reply(204)
+
     done()
   })
 
@@ -17,27 +29,11 @@ describe('mojang.invalidate()', () => {
     done()
   })
 
-  it('should reject with valid tokens', (done) => {
-    mojang.invalidate('123456abcdefghijklmnopqrstuvxyz', 'xxxxyyyyd6b94f58b7fa21a1189a62e4')
-      .then((result) => {
-        expect(result).to.be.null
-        done()
-      })
-      .catch((err) => {
-        expect(err).to.not.be.null
-        done()
-      })
+  it('should resolve with valid tokens', () => {
+    return invalidate('valid', 'clientToken')
   })
 
-  it('as well as with invalid ones', (done) => {
-    mojang.invalidate('', '')
-      .then((result) => {
-        expect(resizeBy).to.be.null
-        done()
-      })
-      .catch((err) => {
-        expect(err).to.not.be.null
-        done()
-      })
+  it('should also resolve with invalid tokens', () => {
+    return invalidate('invalid', 'clientToken')
   })
 })

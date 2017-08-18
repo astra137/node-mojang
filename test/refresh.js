@@ -1,16 +1,38 @@
-'use strict'
-const chai = require('chai')
-const expect = chai.expect
+/* eslint-env mocha */
+
+const {expect} = require('chai')
 const nock = require('nock')
-const mojang = require('../')
+const refresh = require('../lib/refresh')
 
 describe('mojang.refresh()', () => {
   before((done) => {
     nock('https://authserver.mojang.com')
-      .post('/refresh')
+      .post('/refresh', {
+        accessToken: 'oldvalid',
+        clientToken: 'client',
+        selectedProfile: null,
+        requestUser: true
+      })
       .reply(200, {
-        accessToken: '123456abcdefghijklmnopqrstuvxyz',
-        clientToken: 'xxxxyyyyd6b94f58b7fa21a1189a62e4'
+        accessToken: 'newvalid',
+        clientToken: 'client',
+        selectedProfile: {
+          id: 'profile identifier',
+          name: 'player name'
+        },
+        user: {
+          id: 'user identifier',
+          properties: []
+        }
+      })
+
+      .post('/refresh', {
+        accessToken: 'invalid',
+        clientToken: 'client'
+      })
+      .reply(403, {
+        error: 'ForbiddenOperationException',
+        errorMessage: 'Invalid token'
       })
     done()
   })
@@ -20,16 +42,28 @@ describe('mojang.refresh()', () => {
     done()
   })
 
-  it('should return a new access and client token', (done) => {
-    mojang.refresh('123456abcdefghijklmnopqrstuvxyz', 'xxxxyyyyd6b94f58b7fa21a1189a62e4')
+  it('should return a new access and client token', () => {
+    return refresh('oldvalid', 'client', null, true)
       .then((tokens) => {
         expect(tokens).to.have.property('accessToken')
         expect(tokens).to.have.property('clientToken')
-        done()
+        expect(tokens).to.have.property('selectedProfile')
+        expect(tokens).to.have.property('user')
+      })
+  })
+
+  it('should reject with invalid tokens', () => {
+    return refresh('invalid', 'client', null, true)
+      .then(() => {
+        throw new Error('should have rejected')
       })
       .catch((err) => {
-        expect(err).to.be.null
-        done()
+        expect(err).to.have.property('statusCode')
+        expect(err.statusCode).to.equal(403)
+        expect(err).to.have.property('name')
+        expect(err.name).to.equal('ForbiddenOperationException')
+        expect(err).to.have.property('message')
+        expect(err.message).to.equal('Invalid token')
       })
   })
 })

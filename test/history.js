@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 const {expect} = require('chai')
-const mojang = require('../index')
+const history = require('../lib/history')
 
 //
 // Test for username history
@@ -13,7 +13,7 @@ describe('mojang.history()', () => {
   })
 
   it('with a valid uuid should resolve with json response', (done) => {
-    mojang.history('47c49720c9ee42009ef05e1c4cd2760c')
+    history('47c49720c9ee42009ef05e1c4cd2760c')
       .then((history) => {
         console.log(history)
         expect(history).to.not.be.null
@@ -27,7 +27,7 @@ describe('mojang.history()', () => {
   })
 
   it('with an invalid uuid should reject with error', (done) => {
-    mojang.history('123')
+    history('123')
       .then((history) => {
         expect(history).to.be.null
         done()

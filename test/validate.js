@@ -1,23 +1,49 @@
-'use strict'
-const chai = require('chai')
-const expect = chai.expect
+/* eslint-env mocha */
+
+const {expect} = require('chai')
 const nock = require('nock')
-const mojang = require('../')
+const validate = require('../lib/validate')
 
 describe('mojang.validate()', () => {
   before((done) => {
+    // Behavior observed 17.08.2017 by maccelerated
     nock('https://authserver.mojang.com')
       .post('/validate', {
-        accessToken: '0123456789',
-        clientToken: '9876543210'
+        accessToken: 'valid',
+        clientToken: 'clientid'
       })
-      .reply(204, {})
-      .post('/validate')
-      .times(2)
+      .reply(204)
+
+    // Behavior observed 17.08.2017 by maccelerated
+    nock('https://authserver.mojang.com')
+      .post('/validate', {
+        accessToken: 'valid'
+        // clientToken is optional
+      })
+      .reply(204)
+
+    // Behavior observed 17.08.2017 by maccelerated
+    nock('https://authserver.mojang.com')
+      .post('/validate', {
+        accessToken: 'invalid',
+        clientToken: 'clientid'
+      })
       .reply(403, {
         error: 'ForbiddenOperationException',
         errorMessage: 'Invalid token'
       })
+
+    // Behavior observed 17.08.2017 by maccelerated
+    nock('https://authserver.mojang.com')
+      .post('/validate', {
+        accessToken: 'valid',
+        clientToken: 'wrongclient'
+      })
+      .reply(403, {
+        error: 'ForbiddenOperationException',
+        errorMessage: 'Invalid token'
+      })
+
     done()
   })
 
@@ -26,43 +52,41 @@ describe('mojang.validate()', () => {
     done()
   })
 
-  it('should reject when a valid accessToken is provided', (done) => {
-    mojang.validate('0123456789', '9876543210')
-      .then((result) => {
-        expect(result).to.be.null
-        done()
+  it('should resolve with a valid accessToken and clientToken', () => {
+    return validate('valid', 'clientid')
+  })
+
+  it('should resolve with without clientToken', () => {
+    return validate('valid')
+  })
+
+  it('should reject with an invalid accessToken', () => {
+    validate('invalid', 'clientid')
+      .then(() => {
+        throw new Error('should have rejected')
       })
       .catch((err) => {
-        expect(err).to.not.be.null
-        done()
+        expect(err).to.have.property('statusCode')
+        expect(err.statusCode).to.equal(403)
+        expect(err).to.have.property('name')
+        expect(err.name).to.equal('ForbiddenOperationException')
+        expect(err).to.have.property('message')
+        expect(err.message).to.equal('Invalid token')
       })
   })
 
-  it('should resolve when an invalid accessToken is provided', (done) => {
-    mojang.validate('00123456789', '98765432100')
-      .then((result) => {
-        expect(result).to.not.be.null
-        expect(result).to.have.property('error')
-        expect(result).to.have.property('errorMessage')
-        done()
+  it('should reject when clientToken is not valid for accessToken', () => {
+    validate('valid', 'wrongclient')
+      .then(() => {
+        throw new Error('should have rejected')
       })
       .catch((err) => {
-        expect(err).to.be.null
-        done()
-      })
-  })
-
-  it('should resolve when the clientToken is not vallid for this accessToken', (done) => {
-    mojang.validate('00123456789', '')
-      .then((result) => {
-        expect(result).to.not.be.null
-        expect(result).to.have.property('error')
-        expect(result).to.have.property('errorMessage')
-        done()
-      })
-      .catch((err) => {
-        expect(err).to.be.null
-        done()
+        expect(err).to.have.property('statusCode')
+        expect(err.statusCode).to.equal(403)
+        expect(err).to.have.property('name')
+        expect(err.name).to.equal('ForbiddenOperationException')
+        expect(err).to.have.property('message')
+        expect(err.message).to.equal('Invalid token')
       })
   })
 })
