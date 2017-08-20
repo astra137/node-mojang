@@ -1,39 +1,30 @@
-/* eslint-env mocha */
-
+const test = require('ava')
 const nock = require('nock')
 const invalidate = require('../lib/invalidate')
 
-describe('mojang.invalidate()', () => {
-  before((done) => {
-    // Behavior observed 17.08.2017 by maccelerated
-    nock('https://authserver.mojang.com')
-      .post('/invalidate', {
-        accessToken: 'valid',
-        clientToken: 'clientToken' // optional
-      })
-      .reply(204)
+test('resolves with valid tokens', async t => {
+  // Behavior observed 17.08.2017 by maccelerated
+  // clientToken is optional but must match
+  nock('https://authserver.mojang.com')
+    .post('/invalidate', {
+      accessToken: 'valid',
+      clientToken: 'whatever'
+    })
+    .reply(204)
 
-    // Behavior observed 17.08.2017 by maccelerated
-    nock('https://authserver.mojang.com')
-      .post('/invalidate', {
-        accessToken: 'invalid',
-        clientToken: 'clientToken'
-      })
-      .reply(204)
+  await invalidate('valid', 'whatever')
+  t.pass()
+})
 
-    done()
-  })
+test('should also resolve with invalid tokens', async t => {
+  // Behavior observed 17.08.2017 by maccelerated
+  nock('https://authserver.mojang.com')
+    .post('/invalidate', {
+      accessToken: 'invalid',
+      clientToken: 'whatever'
+    })
+    .reply(204)
 
-  after((done) => {
-    nock.cleanAll()
-    done()
-  })
-
-  it('should resolve with valid tokens', () => {
-    return invalidate('valid', 'clientToken')
-  })
-
-  it('should also resolve with invalid tokens', () => {
-    return invalidate('invalid', 'clientToken')
-  })
+  await invalidate('invalid', 'whatever')
+  t.pass()
 })

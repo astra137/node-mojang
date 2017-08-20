@@ -1,69 +1,50 @@
-/* eslint-env mocha */
-
-const {expect} = require('chai')
+const test = require('ava')
 const nock = require('nock')
 const refresh = require('../lib/refresh')
 
-describe('mojang.refresh()', () => {
-  before((done) => {
-    nock('https://authserver.mojang.com')
-      .post('/refresh', {
-        accessToken: 'oldvalid',
-        clientToken: 'client',
-        selectedProfile: null,
-        requestUser: true
-      })
-      .reply(200, {
-        accessToken: 'newvalid',
-        clientToken: 'client',
-        selectedProfile: {
-          id: 'profile identifier',
-          name: 'player name'
-        },
-        user: {
-          id: 'user identifier',
-          properties: []
-        }
-      })
+test('returns a new access and client token', async t => {
+  // Behavior observed 17.08.2017 by maccelerated
+  nock('https://authserver.mojang.com')
+    .post('/refresh', {
+      accessToken: 'oldvalid',
+      clientToken: 'client',
+      selectedProfile: null,
+      requestUser: true
+    })
+    .reply(200, {
+      accessToken: 'newvalid',
+      clientToken: 'client',
+      selectedProfile: {
+        id: 'profile identifier',
+        name: 'player name'
+      },
+      user: {
+        id: 'user identifier',
+        properties: []
+      }
+    })
 
-      .post('/refresh', {
-        accessToken: 'invalid',
-        clientToken: 'client'
-      })
-      .reply(403, {
-        error: 'ForbiddenOperationException',
-        errorMessage: 'Invalid token'
-      })
-    done()
-  })
+  const nextSession = await refresh('oldvalid', 'client', null, true)
+  t.is(nextSession.accessToken, 'newvalid')
+  t.is(nextSession.clientToken, 'client')
+  t.truthy(nextSession.selectedProfile)
+  t.truthy(nextSession.user)
+})
 
-  after((done) => {
-    nock.cleanAll()
-    done()
-  })
+test('rejects with invalid tokens', async t => {
+  // Behavior observed 17.08.2017 by maccelerated
+  nock('https://authserver.mojang.com')
+    .post('/refresh', {
+      accessToken: 'invalid',
+      clientToken: 'client'
+    })
+    .reply(403, {
+      error: 'ForbiddenOperationException',
+      errorMessage: 'Invalid token'
+    })
 
-  it('should return a new access and client token', () => {
-    return refresh('oldvalid', 'client', null, true)
-      .then((tokens) => {
-        expect(tokens).to.have.property('accessToken')
-        expect(tokens).to.have.property('clientToken')
-        expect(tokens).to.have.property('selectedProfile')
-        expect(tokens).to.have.property('user')
-      })
-  })
-
-  it('should reject with invalid tokens', () => {
-    return refresh('invalid', 'client', null, true)
-      .then(() => {
-        throw new Error('should have rejected')
-      })
-      .catch((err) => {
-        expect(err).to.have.property('statusCode')
-        expect(err.statusCode).to.equal(403)
-        expect(err).to.have.property('name')
-        expect(err.name).to.equal('ForbiddenOperationException')
-        expect(err).to.have.property('message')
-        expect(err.message).to.equal('Invalid token')
-      })
-  })
+  const err = await t.throws(refresh('invalid', 'client', null, true))
+  t.is(err.statusCode, 403)
+  t.is(err.name, 'ForbiddenOperationException')
+  t.is(err.message, 'Invalid token')
 })
