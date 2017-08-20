@@ -1,41 +1,31 @@
-/* eslint-env mocha */
-
-const {expect} = require('chai')
+const test = require('ava')
+const nock = require('nock')
 const history = require('../lib/history')
 
-//
-// Test for username history
-//
-describe('mojang.history()', () => {
-  beforeEach(function (done) {
-    this.timeout(1000 * 60)
-    setTimeout(done, 1000 * 30)
-  })
+test('resolves with a valid profile id', async t => {
+  // observed 20.08.2017 by maccelerated
+  nock('https://api.mojang.com')
+    .get('/user/profiles/0d252b7218b648bfb86c2ae476954d32/names')
+    .reply(200, [
+      {
+        name: 'previous'
+      },
+      {
+        name: 'username',
+        changedToAt: 1503271972505
+      }
+    ])
 
-  it('with a valid uuid should resolve with json response', (done) => {
-    history('47c49720c9ee42009ef05e1c4cd2760c')
-      .then((history) => {
-        console.log(history)
-        expect(history).to.not.be.null
-        expect(history).to.have.length.of.at.least(1)
-        done()
-      })
-      .catch((err) => {
-        expect(err).to.be.null
-        done()
-      })
-  })
+  const names = await history('0d252b7218b648bfb86c2ae476954d32')
+  t.is(names.length, 2)
+})
 
-  it('with an invalid uuid should reject with error', (done) => {
-    history('123')
-      .then((history) => {
-        expect(history).to.be.null
-        done()
-      })
-      .catch((err) => {
-        console.log(err)
-        expect(err).to.not.be.null
-        done()
-      })
-  })
+test('rejects with an invalid profile id', async t => {
+  // observed 20.08.2017 by maccelerated
+  nock('https://api.mojang.com')
+    .get('/user/profiles/7125ba8b1c864508b92bb5c042ccfe2b/names')
+    .reply(204)
+
+  const err = await t.throws(history('7125ba8b1c864508b92bb5c042ccfe2b'))
+  t.is(err.message, 'Profile does not exist')
 })
