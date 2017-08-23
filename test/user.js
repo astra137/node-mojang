@@ -1,78 +1,71 @@
-'use strict'
-const chai = require('chai')
-const expect = chai.expect
+const test = require('ava')
 const nock = require('nock')
-const mojang = require('../')
+const user = require('../lib/user')
 
-describe('mojang.user()', () => {
-  before((done) => {
-    nock('https://api.mojang.com', {
-      allowUnmocked: true
+test('does not send empty access token', async t => {
+  // bahavior observed 22.08.2017 by maccelerated
+  nock('https://api.mojang.com', {
+    badheaders: ['authorization']
+  })
+    .get('/user')
+    .reply(401, {
+      error: 'UnauthorizedOperationException',
+      errorMessage: 'User not authenticated'
     })
-      .get('/user')
-      .reply(200, {
-        id: 123456789,
-        email: 'john.doe@example.com',
-        firstName: 'John',
-        lastName: 'Doe',
-        username: 'john.doe@example.com',
-        registerIp: '127.0.0.1',
-        migratedFrom: 'minecraft.net',
-        migratedAt: Date.now(),
-        registeredAt: Date.now(),
-        passwordChangedAt: Date.now(),
-        dateOfBirth: Date.now(),
-        deleted: false,
-        blocked: false,
-        secured: true,
-        migrated: false,
-        emailVerified: true,
-        legacyUser: false,
-        emailSubscriptionStatus: 'PENDING',
-        emailSubscriptionKey: '1234567890987654321',
-        verifiedByParent: false,
-        fullName: 'John Doe',
-        fromMigratedUser: true,
-        hashed: false
-      })
-      .get('/user')
-      .reply(401, {
-        error: 'UnauthorizedOperationException',
-        errorMessage: 'User not authenticated'
-      })
-    done()
-  })
 
-  after((done) => {
-    nock.cleanAll()
-    done()
-  })
+  await t.throws(user())
+})
 
-  it('should resolve with a user object when a valid accessToken is provided', (done) => {
-    mojang.user('valid12345')
-      .then((user) => {
-        expect(user).to.have.property('id')
-        expect(user).to.have.property('email')
-        expect(user).to.have.property('firstName')
-        expect(user).to.have.property('lastName')
-        done()
-      })
-      .catch((err) => {
-        expect(err).to.be.null
-        done()
-      })
+test('wraps api error on bad access token', async t => {
+  // bahavior observed 22.08.2017 by maccelerated
+  nock('https://api.mojang.com', {
+    reqheaders: {
+      'authorization': 'Bearer badormissing'
+    }
   })
+    .get('/user')
+    .reply(401, {
+      error: 'UnauthorizedOperationException',
+      errorMessage: 'User not authenticated'
+    })
 
-  it('should resolve with an error', (done) => {
-    mojang.user('1234567890abcde')
-      .then((user) => {
-        expect(user).to.have.property('error')
-        expect(user).to.have.property('errorMessage')
-        done()
-      })
-      .catch((err) => {
-        expect(err).to.be.null
-        done()
-      })
+  const err = await t.throws(user('badormissing'))
+  t.is(err.name, 'UnauthorizedOperationException')
+  t.is(err.message, 'User not authenticated')
+})
+
+test('resolves with a valid access token', async t => {
+  // bahavior observed 22.08.2017 by maccelerated
+  nock('https://api.mojang.com', {
+    reqheaders: {
+      'authorization': 'Bearer goodaccesstoken'
+    }
   })
+    .get('/user')
+    .reply(200, {
+      'id': '0123456789',
+      'email': 'user@domain.tld',
+      'firstName': 'First',
+      'lastName': 'Last',
+      'username': 'user@domain.tld',
+      'registerIp': '8.8.8.8',
+      'migratedFrom': 'minecraft.net',
+      'migratedAt': 1503453184000,
+      'registeredAt': 1503453184000,
+      'passwordChangedAt': 1503453184000,
+      'dateOfBirth': 1503453184000,
+      'deleted': false,
+      'blocked': false,
+      'secured': true,
+      'migrated': false,
+      'emailVerified': true,
+      'legacyUser': false,
+      'verifiedByParent': false,
+      'fullName': 'First Last',
+      'fromMigratedUser': true,
+      'hashed': false
+    })
+
+  const info = await user('goodaccesstoken')
+  t.truthy(info.username)
 })
