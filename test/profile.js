@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const sessionProfile = require('../lib/session-profile')
+const sessionProfile = require('../lib/profile')
 
 test('resolves with a profile session with a valid id', async t => {
   // behavior observed 22.08.2017 by maccelerated
