@@ -1,148 +1,27 @@
-mojang
-======
-[![Build Status](https://travis-ci.org/jamen/node-mojang.svg?branch=master)](https://travis-ci.org/jamen/node-mojang)
+# mojang [![Build Status](https://travis-ci.org/jamen/node-mojang.svg?branch=master)](https://travis-ci.org/jamen/node-mojang)
 
-> A node.js wrapper for Mojang's API.
+> A Node.js wrapper for Mojang's different APIs.
 
-A simple Node.js wrapper for Mojang's HTTP API.  It uses HTTPS requests wrapped in `Promise` objects, so you can perform multi-request actions easier.  Manage multiple Mojang requests easier with this API.
-
-## Installation
+## Install
 ```shell
 $ npm install mojang
 ```
 
 ## Usage
-```javascript
-// ES6
-import mojang from 'mojang';
+```js
+const mojang = require('mojang')
 
-// ES5
-var mojang = require('mojang');
+mojang.authenticate('email@domain.tld', 'mojang secret')
+  .then(session => mojang.user(session.accessToken))
+  .then(user => console.info(user))
+  .catch(err => console.error(err))
 ```
 
-### `mojang.username(name, [date])`
-Fetch UUID from the name(s).
- - `name`: (String, Array, Object) name, array of names, or object of names with dates.
- - `date`: (String) A unix timestamp
-
-```javascript
-mojang.username('RamenMarz').then(...);
-mojang.username('RamenMarz', Date.now()).then;
-mojang.username([ 'RamenMarz', 'Foo' ]).then(...);
-mojang.username([ 'RamenMarz', 'Foo' ], Date.now()).then(...);
-mojang.username({ 'RamenMarz': Date.now(), 'Foo': Date.now() }).then(...);
-```
-
-### `mojang.status()`
-Get Mojang's servers' statuses.
-
-```javascript
-mojang.status().then(...);
-```
-
-### `mojang.profile(uuid)`
-Get profile from UUIDs.
- - `uuid`: (String, Array) UUID(s) of profile(s) you want.
-
-```javascript
-mojang.profile('123FOO').then(...);
-mojang.profile([ '123FOO', '456BAR' ]).then(...)
-```
-
-### `mojang.history(uuid)`
-Fetch history by UUID.
- - `uuid`: (String, Array) UUID(s) of history(ies) you want.
-
-```javascript
-mojang.history('123FOO').then(...);
-mojang.history([ '123FOO', '456BAR' ]).then(...)
-```
-
-### `mojang.auth(username, password, [clientToken])`
-Authenticate
- - `username`: (String) email or uesrname of the Mojang account.
- - `password`: (String) password of the Mojang account.
- - `clientToken` (String) optional clientToken.
- - `authAgent` (Object) agent object containing a *name* and a *version* property
-
-```javascript
-mojang.auth('foo', 'bar', 'baz').then(...);
-```
-
-### `mojang.validate(accessToken, clientToken)`
-Validate
- - `accessToken`: (String) accessToken of authentication.
- - `clientToken`: (String) clientToken of authentication.
-
-```javascript
-mojang.validate('foo', 'bar').then(...);
-```
-
-### `mojang.refresh(accessToken, clientToken, [profile])`
-Refresh
- - `accessToken`: (String) accessToken of authentication.
- - `clientToken`: (String) clientToken of authentication.
- - `profile`: (Object) selectedProfile
-
-```javascript
-mojang.refresh('foo', 'bar', {}).then(...);
-```
-
-### `mojang.invalidate(accessToken, clientToken)`
-Invalidate
- - `accessToken`: (String) accessToken of authentication.
- - `clientToken`: (String) clientToken of authentication.
-
-```javascript
-mojang.invalidate('foo', 'bar').then(...);
-```
-
-
-### `mojang.signout(username, password)`
-Signout
- - `username`: (String) username of Mojang account.
- - `password`: (String) password of Mojang account.
-
-
-### `mojang.user(accessToken)`
-Get detailed information about a validated user. Check the [wiki][wiki-user] for details on the returned Object.
-- `accessToken`: (String) accessToken of authentication.
-
-```javascript
-mojang.user('foo').then(...);
-```
-
-
-### Using in parity
-Since `node-mojang` is designed around promises, you can do quick multi-request actions.  For instance, if you want to get the history from a username, you can do something like this:
-```javascript
-mojang.username('RamenMarz')
-.then(user => mojang.history(user.id))
-.then(function(history) {
-  // ...
-});
-```
+> See the [API documentation](https://maccelerated.github.io/node-mojang) for more information.
 
 ## Support
- - [Repo Issues](https://github.com/jamen/node-mojang/issues)
- - [Authors](#Credits)
 
-## Credits
-
-|![Jamen Marz][jamen-image]|
-|:--------:|
-| [@jamen] |
+- [Submit an issue/bug](https://github.com/jamen/node-mojang/issues)
 
 ## License
-[MIT][license] &copy; Jamen Marzonie
-
-<!-- All links must be "tagged" -->
- [example-badge]: https://img.shields.io/badge/example-badge-green.svg
- [foobar-badge]: https://img.shields.io/badge/foobar-baz-green.svg
-
- [wiki-user]: http://wiki.vg/Mojang_API#Response_9
-
- [@jamen]: https://github.com/jamen
- [jamen-image]: https://avatars2.githubusercontent.com/u/6251703?v=3&s=125
-
- [license]: LICENSE
+[MIT](LICENSE) &copy; Jamen Marzonie

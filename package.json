@@ -4,7 +4,8 @@
   "description": "A node.js wrapper for Mojang's API.",
   "main": "lib/",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "docs": "documentation build libs -f html -o docs"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/jamen/node-mojang#readme",
   "devDependencies": {
     "ava": "^0.22.0",
+    "documentation": "^5.2.2",
     "eslint": "^4.5.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
