@@ -3,7 +3,7 @@ const nock = require('nock')
 const status = require('../lib/status')
 
 test('resolves with cleaned array', async t => {
-  // Behavior mocked by maccelerated
+  // Behavior observed 22.08.2017 by maccelerated
   nock('https://status.mojang.com')
     .get('/check')
     .reply(200, [
