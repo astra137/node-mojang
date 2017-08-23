@@ -1,61 +1,60 @@
-/* eslint-env mocha */
-
-const {expect} = require('chai')
+const test = require('ava')
 const nock = require('nock')
 const status = require('../lib/status')
 
-describe('mojang.status()', () => {
-  before((done) => {
-    // Behavior observed 17.08.2017 by maccelerated
-    nock('https://status.mojang.com')
-      .get('/check')
-      .reply(200, [
-        {
-          'minecraft.net': 'green'
-        },
-        {
-          'session.minecraft.net': 'green'
-        },
-        {
-          'account.mojang.com': 'green'
-        },
-        {
-          'auth.mojang.com': 'green'
-        },
-        {
-          'skins.minecraft.net': 'green'
-        },
-        {
-          'authserver.mojang.com': 'green'
-        },
-        {
-          'sessionserver.mojang.com': 'green'
-        },
-        {
-          'api.mojang.com': 'green'
-        },
-        {
-          'textures.minecraft.net': 'green'
-        },
-        {
-          'mojang.com': 'green'
-        }
-      ])
+test('resolves with cleaned array', async t => {
+  // Behavior mocked by maccelerated
+  nock('https://status.mojang.com')
+    .get('/check')
+    .reply(200, [
+      {
+        'minecraft.net': 'green'
+      },
+      {
+        'session.minecraft.net': 'yellow'
+      },
+      {
+        'account.mojang.com': 'red'
+      },
+      {
+        'auth.mojang.com': 'green'
+      },
+      {
+        'skins.minecraft.net': 'green'
+      },
+      {
+        'authserver.mojang.com': 'green'
+      },
+      {
+        'sessionserver.mojang.com': 'green'
+      },
+      {
+        'api.mojang.com': 'green'
+      },
+      {
+        'textures.minecraft.net': 'green'
+      },
+      {
+        'mojang.com': 'green'
+      }
+    ])
 
-    done()
-  })
+  const list = await status()
+  t.true(list instanceof Array)
+  t.is(list.length, 10)
 
-  after((done) => {
-    nock.cleanAll()
-    done()
-  })
+  const webStatus = list.find(s => s.hostname === 'minecraft.net')
+  t.is(webStatus.color, 'green')
+  t.true(webStatus.isAvailable)
+  t.false(webStatus.hasIssues)
 
-  it('should return an array', () => {
-    status()
-      .then((status) => {
-        expect(status).to.not.be.null
-        expect(status).to.not.be.null
-        expect(status).to.not.be.null
-      })
-  })
+  const sessionStatus = list.find(s => s.hostname === 'session.minecraft.net')
+  t.is(sessionStatus.color, 'yellow')
+  t.true(sessionStatus.isAvailable)
+  t.true(sessionStatus.hasIssues)
+
+  const accountStatus = list.find(s => s.hostname === 'account.mojang.com')
+  t.is(accountStatus.color, 'red')
+  t.false(accountStatus.isAvailable)
+  t.true(accountStatus.hasIssues)
 })
