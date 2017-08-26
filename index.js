@@ -1,6 +1,7 @@
 exports.getNameHistory = require('./src/mojang/get-name-history')
-exports.getUserInfo = require('./src/mojang/get-user-info')
-exports.getUuidAt = require('./src/mojang/get-uuid-at')
+exports.getProfileAt = require('./src/mojang/get-profile-at')
+exports.getUserProfiles = require('./src/mojang/get-user-profiles')
+exports.getUser = require('./src/mojang/get-user')
 
 exports.getProfile = require('./src/session/get-profile')
 
@@ -13,26 +14,39 @@ exports.signout = require('./src/yggdrasil/signout')
 exports.validate = require('./src/yggdrasil/validate')
 
 /**
+  * @typedef {Object} MojangProfile
+  * @property {String} id - unique profile ID
+  * @property {String} agent - minecraft, scrolls
+  * @property {String} name - in-game name (IGN)
+  * @property {String} userId
+  * @property {Number} createdAt
+  * @property {Boolean} legacyProfile
+  * @property {Boolean} deleted
+  * @property {Boolean} paid
+  * @property {Boolean} migrated
+  */
+
+/**
   * @typedef {Object} MojangUser
-  * @property {string} id - A unique user ID
-  * @property {string} email
-  * @property {string} firstName
-  * @property {string} lastName
-  * @property {string} username
-  * @property {string} registerIp
-  * @property {string} migratedFrom
-  * @property {number} migratedAt
-  * @property {number} registeredAt
-  * @property {number} passwordChangedAt
-  * @property {number} dateOfBirth
-  * @property {boolean} deleted
-  * @property {boolean} blocked
-  * @property {boolean} secured
-  * @property {boolean} migrated
-  * @property {boolean} emailVerified
-  * @property {boolean} legacyUser
-  * @property {boolean} verifiedByParent
-  * @property {string} fullName
-  * @property {boolean} fromMigratedUser
-  * @property {boolean} hashed
+  * @property {String} id - unique user ID
+  * @property {String} email
+  * @property {String} firstName
+  * @property {String} lastName
+  * @property {String} username
+  * @property {String} registerIp
+  * @property {String} migratedFrom
+  * @property {Number} migratedAt
+  * @property {Number} registeredAt
+  * @property {Number} passwordChangedAt
+  * @property {Number} dateOfBirth
+  * @property {Boolean} deleted
+  * @property {Boolean} blocked
+  * @property {Boolean} secured
+  * @property {Boolean} migrated
+  * @property {Boolean} emailVerified
+  * @property {Boolean} legacyUser
+  * @property {Boolean} verifiedByParent
+  * @property {String} fullName
+  * @property {Boolean} fromMigratedUser
+  * @property {Boolean} hashed
   */

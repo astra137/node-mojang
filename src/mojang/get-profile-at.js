@@ -2,7 +2,8 @@ const got = require('got')
 const {USER_AGENT, MOJANG_API} = require('../constants')
 
 /**
- * Gets a username at a given timestamp.
+ * Gets a game profile from a given timestamp.
+ *
  * @param {String} name - Current profile name of the user
  * @param {Number} [date] - UNIX timestamp to check the username at
  * @param {String} [agent] - Game agent to check against
@@ -11,7 +12,7 @@ const {USER_AGENT, MOJANG_API} = require('../constants')
  * @returns {Promise.<Object>} that resolves with `{id, name, legacy, demo}`.
  * @see {@link http://wiki.vg/Mojang_API#Username_-.3E_UUID_at_time}
  */
-function getUuidAt (name, date, agent = 'minecraft') {
+function getProfileAt (name, date, agent = 'minecraft') {
   const hasDate = typeof date !== 'undefined'
   const query = hasDate
     ? `/users/profiles/${agent}/${name}?at=${date}`
@@ -37,4 +38,4 @@ function getUuidAt (name, date, agent = 'minecraft') {
     })
 }
 
-module.exports = getUuidAt
+module.exports = getProfileAt
