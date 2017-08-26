@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const status = require('../lib/status')
+const status = require('../../src/status/check')
 
 test('resolves with cleaned array', async t => {
   // Behavior observed 22.08.2017 by maccelerated

@@ -1,12 +1,17 @@
-const statusapi = require('./endpoints/statusapi')
+const got = require('got')
+const {USER_AGENT, STATUS_API} = require('../constants')
 
 /**
- * Returns status of various Mojang services in a custom format.
+ * Returns status of various Mojang services in a more helpful format.
  *
+ * @returns {Array.<Object>} - a list like `[{hostname, color, isAvailable, hasIssues}]`
  * @see {@link http://wiki.vg/Mojang_API#API_Status}
  */
-function status () {
-  return statusapi('/check')
+function check () {
+  return got(`${STATUS_API}/check`, {
+    headers: { 'user-agent': USER_AGENT },
+    json: true
+  })
     .then(res => res.body)
     .then((sites) => sites.reduce((acc, val) => {
       const hostname = Object.keys(val)[0]
@@ -20,4 +25,4 @@ function status () {
     }, []))
 }
 
-module.exports = status
+module.exports = check

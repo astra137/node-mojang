@@ -1,20 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const user = require('../lib/user')
-
-test('does not send empty access token', async t => {
-  // bahavior observed 22.08.2017 by maccelerated
-  nock('https://api.mojang.com', {
-    badheaders: ['authorization']
-  })
-    .get('/user')
-    .reply(401, {
-      error: 'UnauthorizedOperationException',
-      errorMessage: 'User not authenticated'
-    })
-
-  await t.throws(user())
-})
+const getUserInfo = require('../../src/mojang/get-user-info')
 
 test('wraps api error on bad access token', async t => {
   // bahavior observed 22.08.2017 by maccelerated
@@ -29,7 +15,7 @@ test('wraps api error on bad access token', async t => {
       errorMessage: 'User not authenticated'
     })
 
-  const err = await t.throws(user('badormissing'))
+  const err = await t.throws(getUserInfo('badormissing'))
   t.is(err.name, 'UnauthorizedOperationException')
   t.is(err.message, 'User not authenticated')
 })
@@ -66,6 +52,6 @@ test('resolves with a valid access token', async t => {
       'hashed': false
     })
 
-  const info = await user('goodaccesstoken')
+  const info = await getUserInfo('goodaccesstoken')
   t.truthy(info.username)
 })

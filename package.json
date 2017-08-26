@@ -5,7 +5,7 @@
   "main": "lib/",
   "scripts": {
     "test": "ava",
-    "docs": "documentation build lib -f html -o docs"
+    "docs": "documentation build index.js -f html -o docs"
   },
   "repository": {
     "type": "git",

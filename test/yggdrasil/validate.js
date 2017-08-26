@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const validate = require('../lib/validate')
+const validate = require('../../src/yggdrasil/validate')
 
 test('resolves with a valid accessToken and clientToken', async t => {
   // Behavior observed 17.08.2017 by maccelerated

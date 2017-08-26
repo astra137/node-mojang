@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const invalidate = require('../lib/invalidate')
+const invalidate = require('../../src/yggdrasil/invalidate')
 
 test('resolves with valid tokens', async t => {
   // Behavior observed 17.08.2017 by maccelerated

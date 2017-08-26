@@ -1,3 +1,8 @@
 {
-  "extends": "standard"
+  "extends": [
+    "standard"
+  ],
+  "rules": {
+    "valid-jsdoc": "warn"
+  }
 }

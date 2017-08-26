@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const signout = require('../lib/signout')
+const signout = require('../../src/yggdrasil/signout')
 
 test('resolves with valid credentials', async t => {
   // Behavior observed 17.08.2017 by maccelerated
