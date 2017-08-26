@@ -2,6 +2,8 @@
 
 > A Node.js wrapper for Mojang's different APIs.
 
+A (soon to be) complete interface for all [endpoints available from Mojang](http://wiki.vg/Main_Page).
+
 ## Install
 ```shell
 $ npm install mojang
