@@ -3,11 +3,11 @@ const {USER_AGENT, YGGDRASIL_API} = require('../constants')
 const handle = require('./handle-response')
 
 /**
- * Invalidates access tokens for a given account.
+ * Invalidates access tokens of a given Mojang account.
  *
- * @param {String} username - required. Valid username of a Mojang account
- * @param {String} password - required. Password for the given account
- * @returns {Promise} - resolves if credentials were correct
+ * @param {String} username - username (email) of a Mojang account
+ * @param {String} password - password for the given account
+ * @returns {Promise} resolves if credentials were correct
  * @see {@link http://wiki.vg/Authentication#Signout}
  */
 function signout (username, password) {

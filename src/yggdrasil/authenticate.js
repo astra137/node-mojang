@@ -5,13 +5,13 @@ const handle = require('./handle-response')
 /**
  * Authenticates a user with their Mojang credentials.
  *
- * @param {String} username - required. Valid username of a Mojang account
- * @param {String} password - required. Password for the given account
- * @param {String} clientToken - optional. Client token for the request
- * @param {Object} agent - optional. If valid, adds selectedProfile to response
- * @param {String} agent.name - The name of the agent. Can be "Minecraft" or "Scrolls"
- * @param {Number} agent.version - Version number of the agent. Use 1 as a default value
- * @returns {Promise.<Object>} - Promise which resolves to a session {clientToken, accessToken, selectedProfile, user}
+ * @param {String} username - username (email) of a Mojang account
+ * @param {String} password - password for the given account
+ * @param {String} [clientToken] - server will generate a client token if empty
+ * @param {Object} [agent] - if valid, adds `selectedProfile` to response
+ * @param {String} agent.name - name of the agent ('Minecraft' or 'Scrolls')
+ * @param {Number} agent.version - version number of the agent (use `1`)
+ * @returns {Promise.<Object>} resolves to a session {clientToken, accessToken, selectedProfile, user}
  * @see {@link http://wiki.vg/Authentication#Authenticate}
  */
 function authenticate (username, password, clientToken, agent) {

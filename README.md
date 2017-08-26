@@ -12,7 +12,7 @@ $ npm install mojang
 const mojang = require('mojang')
 
 mojang.authenticate('email@domain.tld', 'mojang secret')
-  .then(session => mojang.user(session.accessToken))
+  .then(session => mojang.getUser(session.accessToken))
   .then(user => console.info(user))
   .catch(err => console.error(err))
 ```

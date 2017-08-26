@@ -907,7 +907,7 @@
   <p>Authenticates a user with their Mojang credentials.</p>
 
 
-  <div class='pre p1 fill-light mt0'>authenticate(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  <div class='pre p1 fill-light mt0'>authenticate(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
   
   
 
@@ -925,7 +925,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>username</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    required. Valid username of a Mojang account
+	    username (email) of a Mojang account
 
           </div>
           
@@ -934,7 +934,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>password</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    required. Password for the given account
+	    password for the given account
 
           </div>
           
@@ -942,8 +942,8 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    optional. Client token for the request
+            <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
+	    server will generate a client token if empty
 
           </div>
           
@@ -951,8 +951,10 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>agent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-	    optional. If valid, adds selectedProfile to response
+            <span class='code bold'>agent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    if valid, adds 
+<code>selectedProfile</code>
+ to response
 
           </div>
           
@@ -972,14 +974,16 @@
                 <tr>
                   <td class='break-word'><span class='code bold'>agent.name</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
                   </td>
-                  <td class='break-word'><span>The name of the agent. Can be "Minecraft" or "Scrolls"
+                  <td class='break-word'><span>name of the agent ('Minecraft' or 'Scrolls')
 </span></td>
                 </tr>
               
                 <tr>
                   <td class='break-word'><span class='code bold'>agent.version</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
                   </td>
-                  <td class='break-word'><span>Version number of the agent. Use 1 as a default value
+                  <td class='break-word'><span>version number of the agent (use 
+<code>1</code>
+)
 </span></td>
                 </tr>
               
@@ -997,7 +1001,7 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
-        Promise which resolves to a session {clientToken, accessToken, selectedProfile, user}
+        resolves to a session {clientToken, accessToken, selectedProfile, user}
 
       
     
@@ -1030,10 +1034,10 @@
   </div>
   
 
-  <p>Invalidate an obtained access token.</p>
+  <p>Invalidate an access token.</p>
 
 
-  <div class='pre p1 fill-light mt0'>invalidate(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+  <div class='pre p1 fill-light mt0'>invalidate(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
   
   
 
@@ -1051,7 +1055,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    required. Access token to be invalidated
+	    a session access token
 
           </div>
           
@@ -1059,8 +1063,8 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    optional. Must match the one used to obtain the access token
+            <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
+	    must match the one used to obtain the access token
 
           </div>
           
@@ -1108,10 +1112,10 @@
   </div>
   
 
-  <p>Refreshes a given access token.</p>
+  <p>Refreshes a given access token. May work on invalid access tokens.</p>
 
 
-  <div class='pre p1 fill-light mt0'>refresh(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, selectedProfile: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  <div class='pre p1 fill-light mt0'>refresh(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, selectedProfile: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
   
   
 
@@ -1129,7 +1133,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    required. Valid access token
+	    a session access token
 
           </div>
           
@@ -1138,7 +1142,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    required. Must match the one used to obtain the access token
+	    must match the one used to obtain the access token
 
           </div>
           
@@ -1146,8 +1150,8 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>selectedProfile</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-	    optional. Only use with access tokens that were 
+            <span class='code bold'>selectedProfile</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    only use with access tokens that were 
 <em>not</em>
  assigned a game profile
 
@@ -1169,14 +1173,14 @@
                 <tr>
                   <td class='break-word'><span class='code bold'>selectedProfile.id</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
                   </td>
-                  <td class='break-word'><span>Player id
+                  <td class='break-word'><span>profile ID
 </span></td>
                 </tr>
               
                 <tr>
                   <td class='break-word'><span class='code bold'>selectedProfile.name</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
                   </td>
-                  <td class='break-word'><span>Player name
+                  <td class='break-word'><span>profile name (IGN)
 </span></td>
                 </tr>
               
@@ -1194,7 +1198,7 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
-        Promise which resolves to a session {clientToken, accessToken, selectedProfile, user}
+        resolves to a new session {clientToken, accessToken, selectedProfile, user}
 
       
     
@@ -1227,7 +1231,7 @@
   </div>
   
 
-  <p>Invalidates access tokens for a given account.</p>
+  <p>Invalidates access tokens of a given Mojang account.</p>
 
 
   <div class='pre p1 fill-light mt0'>signout(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
@@ -1248,7 +1252,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>username</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    required. Valid username of a Mojang account
+	    username (email) of a Mojang account
 
           </div>
           
@@ -1257,7 +1261,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>password</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    required. Password for the given account
+	    password for the given account
 
           </div>
           
@@ -1308,7 +1312,7 @@
   <p>Checks if an access token is suitable for use with a Minecraft server.</p>
 
 
-  <div class='pre p1 fill-light mt0'>validate(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+  <div class='pre p1 fill-light mt0'>validate(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
   
   
 
@@ -1326,7 +1330,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    required. Access token to be validated
+	    a session access token
 
           </div>
           
@@ -1334,8 +1338,8 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    optional. Must match the one used to obtain the access token
+            <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
+	    ust match the one used to obtain the access token
 
           </div>
           
@@ -1350,7 +1354,7 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
-        resolves if access token is valid
+        resolves if tokens are valid
 
       
     
