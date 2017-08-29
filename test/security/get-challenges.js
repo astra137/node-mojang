@@ -42,6 +42,24 @@ test('resolves with valid access token', async t => {
 
   const list = await getChallenges('goodaccesstoken')
   t.is(list[0].question.id, 1)
+  t.is(list[0].answer.id, 200000006)
 })
 
-test.todo('rejects if access token is bad')
+// API behavior observed 29.08.2017 by maccelerated
+test('rejects if access token is bad', async t => {
+  const accessToken = 'badaccesstoken'
+  nock('https://api.mojang.com', {
+    reqheaders: {
+      'authorization': `Bearer ${accessToken}`
+    }
+  })
+    .get('/user/security/challenges')
+    .reply(401, {
+      'error': 'Unauthorized',
+      'errorMessage': 'The request requires user authentication'
+    })
+
+  const err = await t.throws(getChallenges(accessToken))
+  t.is(err.name, 'Unauthorized')
+  t.is(err.message, 'The request requires user authentication')
+})
