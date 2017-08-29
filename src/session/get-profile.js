@@ -5,6 +5,8 @@ const {USER_AGENT, SESSION_API} = require('../constants')
 /**
  * A special service that returns a profile's name, skin URL, and cape URL.
  *
+ * *This endpoint is used by the official launcher to load the current skin.*
+ *
  * **Rate limit: You can request the same profile once per minute.**
  *
  * @param {String} profileId - profile UUID of a player
