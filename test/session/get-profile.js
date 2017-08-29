@@ -21,6 +21,7 @@ test('resolves with decoded textures data', async t => {
   t.is(profile.timestamp, 1503964970854)
   t.is(profile.skin, 'http://textures.minecraft.net/texture/a116e69a845e227f7ca1fdde8c357c8c821ebd4ba619382ea4a1f87d4ae94')
   t.is(profile.cape, 'http://textures.minecraft.net/texture/eec3cabfaeed5dafe61c6546297e853a547c39ec238d7c44bf4eb4a49dc1f2c0')
+  t.falsy(profile.isSlim)
 })
 
 // User is boring regular user and has no cape.
@@ -40,6 +41,24 @@ test('resolves with no cape if profile does not have one', async t => {
   const profile = await getProfile('47c49720c9ee42009ef05e1c4cd2760c')
   t.truthy(profile.skin)
   t.falsy(profile.cape)
+})
+
+// User is using the slim skin version and metadata is on textures.SKIN
+// API behavior observed 28.08.2017 by maccelerated
+test('resolves with no cape if profile does not have one', async t => {
+  nock('https://sessionserver.mojang.com')
+    .get('/session/minecraft/profile/47c49720c9ee42009ef05e1c4cd2760c')
+    .reply(200, {
+      'id': '47c49720c9ee42009ef05e1c4cd2760c',
+      'name': 'MoVo99',
+      'properties': [{
+        'name': 'textures',
+        'value': 'eyJ0aW1lc3RhbXAiOjE1MDM5NjU0MTE3ODQsInByb2ZpbGVJZCI6IjQ3YzQ5NzIwYzllZTQyMDA5ZWYwNWUxYzRjZDI3NjBjIiwicHJvZmlsZU5hbWUiOiJNb1ZvOTkiLCJ0ZXh0dXJlcyI6eyJTS0lOIjp7Im1ldGFkYXRhIjp7Im1vZGVsIjoic2xpbSJ9LCJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzY0YTZhNDlmZTA1ZDUzYjY3NjljNDM3OTE3NmU5MTJiNjg5NDJlOWNlZjM0MmE4NjY4NDZkMjFmN2FjZTllMjQifX19'
+      }]
+    })
+
+  const profile = await getProfile('47c49720c9ee42009ef05e1c4cd2760c')
+  t.truthy(profile.isSlim)
 })
 
 // A user has deleted their profile skin.
@@ -84,4 +103,18 @@ test('rejects with an invalid id', async t => {
 
   const err = await t.throws(getProfile('ae2b1fca515949e5d54fb22b8ed95575'))
   t.is(err.message, 'no such profile')
+})
+
+// API behavior observed 28.08.2017 by maccelerated
+test('rejects if the API throttles the client', async t => {
+  nock('https://sessionserver.mojang.com')
+    .get('/session/minecraft/profile/ae2b1fca515949e5d54fb22b8ed95575')
+    .reply(429, {
+      'error': 'TooManyRequestsException',
+      'errorMessage': 'The client has sent too many requests within a certain amount of time'
+    })
+
+  const err = await t.throws(getProfile('ae2b1fca515949e5d54fb22b8ed95575'))
+  t.is(err.name, 'TooManyRequestsException')
+  t.is(err.message, 'The client has sent too many requests within a certain amount of time')
 })

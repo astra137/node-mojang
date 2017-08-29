@@ -8,7 +8,7 @@ const {USER_AGENT, SESSION_API} = require('../constants')
  * **Rate limit: You can request the same profile once per minute.**
  *
  * @param {String} profileId - profile UUID of a player
- * @returns {Promise.<Object>} resolves to `{id, name, timestamp, skin, cape}`
+ * @returns {Promise.<Object>} resolves to `{id, name, timestamp, skin, cape, isSlim}`
  * @see {@link http://wiki.vg/Mojang_API#UUID_-.3E_Profile_.2B_Skin.2FCape}
  */
 function getProfile (profileId) {
@@ -16,17 +16,26 @@ function getProfile (profileId) {
     headers: { 'user-agent': USER_AGENT },
     json: true
   })
+    .catch(err => {
+      if (err.response) {
+        err.name = err.response.body.error
+        err.message = err.response.body.errorMessage
+      }
+      throw err
+    })
     .then(res => {
       if (res.statusCode === 204) throw new Error('no such profile')
       const {id, name, properties} = res.body
       if (properties[0].name !== 'textures') throw new Error(`textures missing: ${id}`)
       const {timestamp, textures} = JSON.parse(Base64.decode(properties[0].value))
+      const {SKIN, CAPE} = textures
       return {
         id,
         name,
         timestamp,
-        skin: textures.SKIN && textures.SKIN.url,
-        cape: textures.CAPE && textures.CAPE.url
+        skin: SKIN && SKIN.url,
+        cape: CAPE && CAPE.url,
+        isSlim: SKIN && SKIN.metadata && SKIN.metadata.model === 'slim'
       }
     })
 }
