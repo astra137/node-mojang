@@ -13,6 +13,7 @@ test('resolves when access token, profile, and URL are valid', async t => {
     .reply(204)
 
   await setSkin('goodaccesstoken', '7ddf32e17a6ac5ce04a8ecbf782ca509', 'urlOfPNG')
+  t.pass()
 })
 
 // API behavior observed 28.08.2017 by maccelerated
@@ -26,6 +27,7 @@ test('Optionally sends slim skin type when selected', async t => {
     .reply(204)
 
   await setSkin('goodaccesstoken', '7ddf32e17a6ac5ce04a8ecbf782ca509', 'urlOfPNG', true)
+  t.pass()
 })
 
 // API behavior observed 28.08.2017 by maccelerated

@@ -45,6 +45,16 @@
               
                 
                 <li><a
+                  href='#check'
+                  class="">
+                  check
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#getnamehistory'
                   class="">
                   getNameHistory
@@ -65,16 +75,6 @@
               
                 
                 <li><a
-                  href='#getuserprofiles'
-                  class="">
-                  getUserProfiles
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
                   href='#getuser'
                   class="">
                   getUser
@@ -85,9 +85,9 @@
               
                 
                 <li><a
-                  href='#getprofile'
+                  href='#getuserprofiles'
                   class="">
-                  getProfile
+                  getUserProfiles
                   
                 </a>
                 
@@ -95,9 +95,9 @@
               
                 
                 <li><a
-                  href='#check'
+                  href='#setskin'
                   class="">
-                  check
+                  setSkin
                   
                 </a>
                 
@@ -148,6 +148,16 @@
                   href='#validate'
                   class="">
                   validate
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getprofile'
+                  class="">
+                  getProfile
                   
                 </a>
                 
@@ -464,6 +474,62 @@
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='check'>
+      check
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Returns status of various Mojang services in a more helpful format.</p>
+
+
+  <div class='pre p1 fill-light mt0'>check(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
+        a list like 
+<code>[{hostname, color, isAvailable, hasIssues}]</code>
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='getnamehistory'>
       getNameHistory
     </h3>
@@ -493,7 +559,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>profileId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    Required. An existing profile ID (does not work with user ID).
+	    profile UUID (does not work with user ID)
 
           </div>
           
@@ -508,7 +574,7 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></code>:
-        that resolves with 
+        resolves with 
 <code>[{name, changedToAt}]</code>
 .
 
@@ -543,7 +609,7 @@
   </div>
   
 
-  <p>Gets a game profile from a given timestamp.</p>
+  <p>Gets an abbreviated game profile from a given timestamp.</p>
 
 
   <div class='pre p1 fill-light mt0'>getProfileAt(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>?, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
@@ -564,7 +630,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    Current profile name of the user
+	    current profile name (IGN) of the user
 
           </div>
           
@@ -583,7 +649,7 @@
           <div>
             <span class='code bold'>agent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?
             = <code>&#39;minecraft&#39;</code>)</code>
-	    Game agent to check against
+	    game agent to check against
 
           </div>
           
@@ -598,9 +664,8 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
-        that resolves with 
+        resolves with 
 <code>{id, name, legacy, demo}</code>
-.
 
       
     
@@ -612,8 +677,77 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> {id, name, legacy, demo} = <span class="hljs-keyword">await</span> getNameAt(<span class="hljs-string">'Notch'</span>)</pre>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> {id, name, legacy, demo} = <span class="hljs-keyword">await</span> getProfileAt(<span class="hljs-string">'Notch'</span>)</pre>
     
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getuser'>
+      getUser
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets a logged-in user's private Mojang account information.</p>
+
+
+  <div class='pre p1 fill-light mt0'>getUser(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojanguser">MojangUser</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    valid access token for the user's account
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojanguser">MojangUser</a>></code>:
+        resolves if access token is valid
+
+      
+    
+  
+
+  
+
   
 
   
@@ -701,18 +835,18 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='getuser'>
-      getUser
+    <h3 class='fl m0' id='setskin'>
+      setSkin
     </h3>
     
     
   </div>
   
 
-  <p>Gets a logged-in user's private Mojang account information.</p>
+  <p>Sets a logged-in user's in-game skin to an online image.</p>
 
 
-  <div class='pre p1 fill-light mt0'>getUser(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojanguser">MojangUser</a>></div>
+  <div class='pre p1 fill-light mt0'>setSkin(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, skinUrl: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, isSlim: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
   
   
 
@@ -736,71 +870,29 @@
           
         </div>
       
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojanguser">MojangUser</a>></code>:
-        resolves if access token is valid
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='getprofile'>
-      getProfile
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>A special service that returns a profile's name, skin URL, and cape URL.</p>
-<p><strong>Rate limit: You can request the same profile once per minute.</strong></p>
-
-
-  <div class='pre p1 fill-light mt0'>getProfile(profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>profileId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    profile UUID of a player
+	    which profile to update the skin of (Minecraft profile UUID)
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>skinUrl</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    Internet-accessible URL of the image file
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>isSlim</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?
+            = <code>false</code>)</code>
+	    if true, the slim model will be used with the skin
 
           </div>
           
@@ -814,65 +906,8 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
-        resolves to 
-<code>{id, name, timestamp, skin, cape, isSlim}</code>
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='check'>
-      check
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Returns status of various Mojang services in a more helpful format.</p>
-
-
-  <div class='pre p1 fill-light mt0'>check(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
-        a list like 
-<code>[{hostname, color, isAvailable, hasIssues}]</code>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
+        resolves if access token, profile ID, and skin URL are valid
 
       
     
@@ -1356,6 +1391,77 @@
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
         resolves if tokens are valid
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getprofile'>
+      getProfile
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>A special service that returns a profile's name, skin URL, and cape URL.</p>
+<p><strong>Rate limit: You can request the same profile once per minute.</strong></p>
+
+
+  <div class='pre p1 fill-light mt0'>getProfile(profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>profileId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    profile UUID of a player
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
+        resolves to 
+<code>{id, name, timestamp, skin, cape, isSlim}</code>
 
       
     

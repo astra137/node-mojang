@@ -1,17 +1,18 @@
+exports.check = require('./src/status/check')
+
 exports.getNameHistory = require('./src/mojang/get-name-history')
 exports.getProfileAt = require('./src/mojang/get-profile-at')
-exports.getUserProfiles = require('./src/mojang/get-user-profiles')
 exports.getUser = require('./src/mojang/get-user')
-
-exports.getProfile = require('./src/session/get-profile')
-
-exports.check = require('./src/status/check')
+exports.getUserProfiles = require('./src/mojang/get-user-profiles')
+exports.setSkin = require('./src/mojang/set-skin')
 
 exports.authenticate = require('./src/yggdrasil/authenticate')
 exports.invalidate = require('./src/yggdrasil/invalidate')
 exports.refresh = require('./src/yggdrasil/refresh')
 exports.signout = require('./src/yggdrasil/signout')
 exports.validate = require('./src/yggdrasil/validate')
+
+exports.getProfile = require('./src/session/get-profile')
 
 /**
   * @typedef {Object} MojangProfile
