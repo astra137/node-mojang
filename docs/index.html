@@ -778,7 +778,7 @@
   </div>
   
 
-  <p>A special service that returns a profile's name, skin, cape, and maybe more.</p>
+  <p>A special service that returns a profile's name, skin URL, and cape URL.</p>
 <p><strong>Rate limit: You can request the same profile once per minute.</strong></p>
 
 
@@ -800,7 +800,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>profileId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    required. UUID of a player
+	    profile UUID of a player
 
           </div>
           
@@ -815,7 +815,8 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
-        Promise which resolves to {id, name, properties}
+        resolves to 
+<code>{id, name, timestamp, skin, cape}</code>
 
       
     

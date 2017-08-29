@@ -1,13 +1,14 @@
 const got = require('got')
+const {Base64} = require('js-base64')
 const {USER_AGENT, SESSION_API} = require('../constants')
 
 /**
- * A special service that returns a profile's name, skin, cape, and maybe more.
+ * A special service that returns a profile's name, skin URL, and cape URL.
  *
  * **Rate limit: You can request the same profile once per minute.**
  *
- * @param {String} profileId - required. UUID of a player
- * @returns {Promise.<Object>} - Promise which resolves to {id, name, properties}
+ * @param {String} profileId - profile UUID of a player
+ * @returns {Promise.<Object>} resolves to `{id, name, timestamp, skin, cape}`
  * @see {@link http://wiki.vg/Mojang_API#UUID_-.3E_Profile_.2B_Skin.2FCape}
  */
 function getProfile (profileId) {
@@ -16,11 +17,16 @@ function getProfile (profileId) {
     json: true
   })
     .then(res => {
-      if (res.statusCode === 204) {
-        throw new Error('Profile does not exist')
-      } else {
-        // TODO parse textures value
-        return res.body
+      if (res.statusCode === 204) throw new Error('no such profile')
+      const {id, name, properties} = res.body
+      if (properties[0].name !== 'textures') throw new Error(`textures missing: ${id}`)
+      const {timestamp, textures} = JSON.parse(Base64.decode(properties[0].value))
+      return {
+        id,
+        name,
+        timestamp,
+        skin: textures.SKIN && textures.SKIN.url,
+        cape: textures.CAPE && textures.CAPE.url
       }
     })
 }
