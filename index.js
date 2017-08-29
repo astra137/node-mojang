@@ -1,18 +1,23 @@
 exports.check = require('./src/status/check')
 
-exports.getNameHistory = require('./src/mojang/get-name-history')
-exports.getProfileAt = require('./src/mojang/get-profile-at')
-exports.getUser = require('./src/mojang/get-user')
-exports.getUserProfiles = require('./src/mojang/get-user-profiles')
-exports.setSkin = require('./src/mojang/set-skin')
-
 exports.authenticate = require('./src/yggdrasil/authenticate')
 exports.invalidate = require('./src/yggdrasil/invalidate')
 exports.refresh = require('./src/yggdrasil/refresh')
 exports.signout = require('./src/yggdrasil/signout')
 exports.validate = require('./src/yggdrasil/validate')
 
+exports.getChallenges = require('./src/security/get-challenges')
+exports.getSecureLocation = require('./src/security/get-secure-location')
+exports.setSecureLocation = require('./src/security/set-secure-location')
+
 exports.getProfile = require('./src/session/get-profile')
+
+exports.getNameHistory = require('./src/mojang/get-name-history')
+exports.getProfileAt = require('./src/mojang/get-profile-at')
+exports.getUser = require('./src/mojang/get-user')
+exports.getUserProfiles = require('./src/mojang/get-user-profiles')
+exports.setSkin = require('./src/mojang/set-skin')
+exports.resetSkin = require('./src/mojang/reset-skin')
 
 /**
   * @typedef {Object} MojangProfile
