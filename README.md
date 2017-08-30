@@ -1,8 +1,8 @@
 # mojang [![Build Status](https://travis-ci.org/jamen/node-mojang.svg?branch=master)](https://travis-ci.org/jamen/node-mojang)
 
-> A Node.js wrapper for Mojang's different APIs.
+> An async Node.js library that wraps Mojang's HTTP APIs.
 
-A (soon to be) complete interface for all [endpoints available from Mojang](http://wiki.vg/Main_Page).
+Includes the functions described on the [Minecraft modern wiki](http://wiki.vg/Main_Page), as well as several equally-important but undocumented endpoints. Please use [GitHub Issues](https://github.com/jamen/node-mojang/issues) to submit a bug, request an example, or report a missing feature.
 
 ## Install
 ```shell
@@ -10,6 +10,8 @@ $ npm install mojang
 ```
 
 ## Usage
+Read the [documentation](https://maccelerated.github.io/node-mojang) or look in [examples/](/tree/master/examples) and [test/](/tree/master/test) folders.
+
 ```js
 const mojang = require('mojang')
 
@@ -19,14 +21,8 @@ mojang.authenticate('email@domain.tld', 'mojang secret')
   .catch(err => console.error(err))
 ```
 
-> See the [API documentation](https://maccelerated.github.io/node-mojang) for more information.
-
-## Support
-
-- [Submit an issue/bug](https://github.com/jamen/node-mojang/issues)
-
 ## Testing
-> Rate limit errors with `Invalid credentials. Invalid username or password.`
+> Rate limit errors look like `Invalid credentials. Invalid username or password.`
 
 ```shell
 $ npm test
