@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const status = require('../../src/status/check')
+const {check} = require('../..')
 
 test('resolves with cleaned array', async t => {
   // Behavior observed 22.08.2017 by maccelerated
@@ -39,7 +39,7 @@ test('resolves with cleaned array', async t => {
       }
     ])
 
-  const list = await status()
+  const list = await check()
   t.true(list instanceof Array)
   t.is(list.length, 10)
 

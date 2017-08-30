@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const getChallenges = require('../../src/security/get-challenges')
+const {getChallenges} = require('../..')
 
 // API behavior observed 28.08.2017 by maccelerated
 test('resolves with valid access token', async t => {

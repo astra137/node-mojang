@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const getProfile = require('../../src/session/get-profile')
+const {getProfile} = require('../..')
 
 // API behavior observed 28.08.2017 by maccelerated
 test('resolves with decoded textures data', async t => {

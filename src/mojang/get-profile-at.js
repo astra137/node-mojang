@@ -1,4 +1,5 @@
 const got = require('got')
+const onApiError = require('../on-api-error')
 const {USER_AGENT, MOJANG_API} = require('../constants')
 
 /**
@@ -7,10 +8,11 @@ const {USER_AGENT, MOJANG_API} = require('../constants')
  * @param {String} name - current profile name (IGN) of the user
  * @param {Number} [date] - UNIX timestamp to check the username at
  * @param {String} [agent] - game agent to check against
- * @example
- * const {id, name, legacy, demo} = await getProfileAt('Notch')
  * @returns {Promise.<Object>} resolves with `{id, name, legacy, demo}`
  * @see {@link http://wiki.vg/Mojang_API#Username_-.3E_UUID_at_time}
+ * @deprecated prefer searching by UUID instead of name
+ * @example
+ * const {id, name, legacy, demo} = await getProfileAt('Notch')
  */
 function getProfileAt (name, date, agent = 'minecraft') {
   const hasDate = typeof date !== 'undefined'
@@ -19,19 +21,13 @@ function getProfileAt (name, date, agent = 'minecraft') {
     : `/users/profiles/${agent}/${name}`
 
   return got(`${MOJANG_API}${query}`, {
-    json: true,
-    headers: { 'user-agent': USER_AGENT }
+    headers: {'user-agent': USER_AGENT},
+    json: true
   })
-    .catch(err => {
-      if (err.response) {
-        err.name = err.response.body.error
-        err.message = err.response.body.errorMessage
-      }
-      throw err
-    })
+    .catch(onApiError)
     .then(res => {
       if (res.statusCode === 204) {
-        throw new Error(`name ${name} ${hasDate ? 'did' : 'does'} not exist`)
+        throw new Error(`so such name at time: ${name}`)
       } else {
         return res.body
       }

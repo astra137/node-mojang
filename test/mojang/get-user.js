@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const getUser = require('../../src/mojang/get-user')
+const {getUser} = require('../..')
 
 test('wraps api error on bad access token', async t => {
   // bahavior observed 22.08.2017 by maccelerated

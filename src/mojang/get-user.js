@@ -1,4 +1,5 @@
 const got = require('got')
+const onApiError = require('../on-api-error')
 const {USER_AGENT, MOJANG_API} = require('../constants')
 
 /**
@@ -10,20 +11,14 @@ const {USER_AGENT, MOJANG_API} = require('../constants')
  */
 function getUser (accessToken) {
   return got(`${MOJANG_API}/user`, {
-    json: true,
     headers: {
       'user-agent': USER_AGENT,
       'authorization': `Bearer ${accessToken}`
-    }
+    },
+    json: true
   })
+    .catch(onApiError)
     .then(res => res.body)
-    .catch(err => {
-      if (err.response) {
-        err.name = err.response.body.error
-        err.message = err.response.body.errorMessage
-      }
-      throw err
-    })
 }
 
 module.exports = getUser

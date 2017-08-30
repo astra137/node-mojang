@@ -1,4 +1,5 @@
 const got = require('got')
+const onApiError = require('../on-api-error')
 const {USER_AGENT, MOJANG_API} = require('../constants')
 
 /**
@@ -24,14 +25,8 @@ function setSkin (accessToken, profileId, skinUrl, isSlim = false) {
       url: skinUrl
     }
   })
+    .catch(onApiError)
     .then(res => res.body)
-    .catch(err => {
-      if (err.response) {
-        err.name = err.response.body.error
-        err.message = err.response.body.errorMessage
-      }
-      throw err
-    })
 }
 
 module.exports = setSkin

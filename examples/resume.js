@@ -12,22 +12,17 @@ See http://wiki.vg/Authentication for additional information.
 */
 
 async function resume (session) {
-  try {
-    const {accessToken, clientToken} = session
-    await mojang.validate(accessToken, clientToken)
+  const {accessToken, clientToken} = session
+  if (await mojang.isValid(accessToken, clientToken)) {
     return session
-    // old session is still good
-  } catch (err) {
-    const {accessToken, clientToken} = session
+  } else {
     return mojang.refresh(accessToken, clientToken)
-    // new session automatically created
   }
 }
 
-const session = {
+resume({
   accessToken: process.env.ACCESS_TOKEN,
-  clientToken: 'b1624569-34dd-4a65-8ff8-55bffd0db83d'
-}
-resume(session)
+  clientToken: process.env.CLIENT_TOKEN
+})
   .then(nextSession => console.info(nextSession))
   .catch(err => console.error(err))

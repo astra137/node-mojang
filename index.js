@@ -1,14 +1,14 @@
 exports.check = require('./src/status/check')
 
 exports.authenticate = require('./src/yggdrasil/authenticate')
-exports.invalidate = require('./src/yggdrasil/invalidate')
+exports.isValid = require('./src/yggdrasil/is-valid')
 exports.refresh = require('./src/yggdrasil/refresh')
+exports.invalidate = require('./src/yggdrasil/invalidate')
 exports.signout = require('./src/yggdrasil/signout')
-exports.validate = require('./src/yggdrasil/validate')
 
+exports.isSecure = require('./src/security/is-secure')
 exports.getChallenges = require('./src/security/get-challenges')
-exports.getSecureLocation = require('./src/security/get-secure-location')
-exports.setSecureLocation = require('./src/security/set-secure-location')
+exports.answerChallenges = require('./src/security/answer-challenges')
 
 exports.getProfile = require('./src/session/get-profile')
 

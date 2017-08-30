@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const refresh = require('../../src/yggdrasil/refresh')
+const {refresh} = require('../..')
 
 test('returns a new access and client token', async t => {
   // Behavior observed 17.08.2017 by maccelerated

@@ -25,5 +25,13 @@ mojang.authenticate('email@domain.tld', 'mojang secret')
 
 - [Submit an issue/bug](https://github.com/jamen/node-mojang/issues)
 
+## Testing
+> Rate limit errors with `Invalid credentials. Invalid username or password.`
+
+```shell
+$ npm test
+$ nf run npm run test-online
+```
+
 ## License
 [MIT](LICENSE) &copy; Jamen Marzonie

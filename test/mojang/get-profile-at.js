@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const getProfileAt = require('../../src/mojang/get-profile-at')
+const {getProfileAt} = require('../..')
 
 test('resolves with a valid username', async t => {
   // behavior observed 23.08.2017 by maccelerated
@@ -35,7 +35,7 @@ test('rejects with invalid username', async t => {
     .reply(204)
 
   const err = await t.throws(getProfileAt('notrealusername'))
-  t.is(err.message, 'name notrealusername does not exist')
+  t.is(err.message, 'so such name at time: notrealusername')
 })
 
 test('rejects if username did not exist at the time', async t => {
@@ -45,7 +45,7 @@ test('rejects if username did not exist at the time', async t => {
     .reply(204)
 
   const err = await t.throws(getProfileAt('notch', 0))
-  t.is(err.message, 'name notch did not exist')
+  t.is(err.message, 'so such name at time: notch')
 })
 
 test('rejects wrapped error on invalid timestamp', async t => {

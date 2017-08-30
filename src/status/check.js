@@ -4,7 +4,7 @@ const {USER_AGENT, STATUS_API} = require('../constants')
 /**
  * Returns status of various Mojang services in a more helpful format.
  *
- * @returns {Array.<Object>} - a list like `[{hostname, color, isAvailable, hasIssues}]`
+ * @returns {Promise<Array>} resolves a list like `[{hostname, color, isAvailable, hasIssues}]`
  * @see {@link http://wiki.vg/Mojang_API#API_Status}
  */
 function check () {

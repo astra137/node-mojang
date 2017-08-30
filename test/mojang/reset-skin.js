@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const resetSkin = require('../../src/mojang/reset-skin')
+const {resetSkin} = require('../..')
 
 // API behavior observed 28.08.2017 by maccelerated
 test('resolves when access token, profile', async t => {

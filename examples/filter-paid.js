@@ -1,7 +1,7 @@
-const {getUuidAt} = require('..')
+const {getProfileAt} = require('..')
 
 async function filterByPaid (names) {
-  const list = await Promise.all(names.map(n => getUuidAt(n)))
+  const list = await Promise.all(names.map(n => getProfileAt(n)))
   return list
     .filter(({demo}) => !demo)
     .map(({name}) => name)

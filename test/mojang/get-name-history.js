@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const getNameHistory = require('../../src/mojang/get-name-history')
+const {getNameHistory} = require('../..')
 
 test('resolves with a valid profile id', async t => {
   // observed 20.08.2017 by maccelerated
@@ -26,5 +26,5 @@ test('rejects with an invalid profile id', async t => {
     .reply(204)
 
   const err = await t.throws(getNameHistory('7125ba8b1c864508b92bb5c042ccfe2b'))
-  t.is(err.message, 'profileId does not exist')
+  t.is(err.message, 'no such profile: 7125ba8b1c864508b92bb5c042ccfe2b')
 })
