@@ -10,10 +10,11 @@ exports.isSecure = require('./src/security/is-secure')
 exports.getChallenges = require('./src/security/get-challenges')
 exports.answerChallenges = require('./src/security/answer-challenges')
 
-exports.getProfile = require('./src/session/get-profile')
+exports.getSession = require('./src/session/get-session')
 
 exports.getNameHistory = require('./src/mojang/get-name-history')
 exports.getProfileAt = require('./src/mojang/get-profile-at')
+exports.getProfiles = require('./src/mojang/get-profiles')
 exports.getUser = require('./src/mojang/get-user')
 exports.getUserProfiles = require('./src/mojang/get-user-profiles')
 exports.setSkin = require('./src/mojang/set-skin')

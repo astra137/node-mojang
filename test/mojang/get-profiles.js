@@ -3,7 +3,7 @@ const nock = require('nock')
 const {getProfiles} = require('../..')
 
 // API behavior observed 30.08.2017 by maccelerated
-test('resolves with a valid username', async t => {
+test('resolves with minecraft profiles by default', async t => {
   nock('https://api.mojang.com')
     .post('/profiles/minecraft', [
       'notch',
@@ -30,6 +30,31 @@ test('resolves with a valid username', async t => {
 })
 
 // API behavior observed 30.08.2017 by maccelerated
+test('resolves with scrolls profiles if specified', async t => {
+  nock('https://api.mojang.com')
+    .post('/profiles/scrolls', [
+      'jeb'
+    ])
+    .reply(200, [
+      {
+        'id': 'e79eed64bc614b558ff4adae64030d52',
+        'name': 'jeb'
+      }
+    ])
+
+  const list = await getProfiles(['jeb'], 'scrolls')
+  t.is(list[0].name, 'jeb')
+  t.falsy(list[0].legacy)
+  t.falsy(list[0].demo)
+})
+
+// A sort of input validation.
+test('rejects with got error if names is not array or string', async t => {
+  const err = await t.throws(getProfiles('notch'))
+  t.is(err.message, 'options.body must be a plain Object or Array when options.form or options.json is used')
+})
+
+// API behavior observed 30.08.2017 by maccelerated
 test('rejects with API error if profile name is null or empty', async t => {
   nock('https://api.mojang.com')
     .post('/profiles/minecraft', [''])
@@ -43,6 +68,7 @@ test('rejects with API error if profile name is null or empty', async t => {
   t.is(err.name, `IllegalArgumentException`)
 })
 
+// I tried to also test for null, but got does not send body if it is null.
 // API behavior observed 30.08.2017 by maccelerated
 test('rejects with API error if list is undefined', async t => {
   nock('https://api.mojang.com')
@@ -58,27 +84,16 @@ test('rejects with API error if list is undefined', async t => {
 })
 
 // API behavior observed 30.08.2017 by maccelerated
-test('rejects with API error if list is null', async t => {
-  nock('https://api.mojang.com')
-    .post('/profiles/minecraft', null)
-    .reply(415, {
-      'error': 'ResourceException',
-      'errorMessage': 'Unsupported Media Type (415) - The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method'
-    })
-
-  const err = await t.throws(getProfiles(null))
-  t.is(err.name, `ResourceException`)
-})
-
-// API behavior observed 30.08.2017 by maccelerated
 test('rejects with API error if list is an object', async t => {
+  const apiError = {
+    'error': 'JsonMappingException',
+    'errorMessage': 'Can not deserialize instance of java.lang.String out of START_OBJECT token\n at [Source: HttpInputOverHTTP@24f9111d; line: 1, column: 1]'
+  }
   nock('https://api.mojang.com')
     .post('/profiles/minecraft', {})
-    .reply(400, {
-      'error': 'JsonMappingException',
-      'errorMessage': 'Can not deserialize instance of java.lang.String out of START_OBJECT token\n at [Source: HttpInputOverHTTP@24f9111d; line: 1, column: 1]'
-    })
+    .reply(400, apiError)
 
   const err = await t.throws(getProfiles({}))
-  t.is(err.name, `JsonMappingException`)
+  t.is(err.message, apiError.errorMessage)
+  t.is(err.name, apiError.error)
 })

@@ -135,9 +135,9 @@
               
                 
                 <li><a
-                  href='#getprofile'
+                  href='#getsession'
                   class="">
-                  getProfile
+                  getSession
                   
                 </a>
                 
@@ -158,6 +158,16 @@
                   href='#getprofileat'
                   class="">
                   getProfileAt
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getprofiles'
+                  class="">
+                  getProfiles
                   
                 </a>
                 
@@ -1339,8 +1349,8 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='getprofile'>
-      getProfile
+    <h3 class='fl m0' id='getsession'>
+      getSession
     </h3>
     
     
@@ -1352,7 +1362,7 @@
 <p><strong>Rate limit: You can request the same profile once per minute.</strong></p>
 
 
-  <div class='pre p1 fill-light mt0'>getProfile(profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  <div class='pre p1 fill-light mt0'>getSession(profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
   
   
 
@@ -1559,6 +1569,99 @@
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> {id, name, legacy, demo} = <span class="hljs-keyword">await</span> getProfileAt(<span class="hljs-string">'Notch'</span>)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getprofiles'>
+      getProfiles
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets a list of abbreviated game profiles from the list of profile names.</p>
+<p><strong>It seems results are reordered alphabetically.</strong></p>
+
+
+  <div class='pre p1 fill-light mt0'>getProfiles(names: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>>, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>names</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>>)</code>
+	    list of current profile names (IGN)
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>agent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?
+            = <code>&#39;minecraft&#39;</code>)</code>
+	    game agent to search within (minecraft, scrolls)
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></code>:
+        resolves with 
+<code>[{id, name, legacy?, demo?}]</code>
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPaidMinecraftProfiles</span> (<span class="hljs-params">names</span>) </span>{
+  <span class="hljs-keyword">const</span> list = <span class="hljs-keyword">await</span> getProfiles(names)
+  <span class="hljs-keyword">return</span> list.filter(<span class="hljs-function">(<span class="hljs-params">{demo}</span>) =&gt;</span> !demo)
+}
+
+<span class="hljs-keyword">const</span> paidProfiles = <span class="hljs-keyword">await</span> getProfiles([<span class="hljs-string">'notch'</span>, <span class="hljs-string">'nonExistingPlayer'</span>])
+<span class="hljs-comment">// [{id: '...', name: 'Notch'}]</span></pre>
     
   
 

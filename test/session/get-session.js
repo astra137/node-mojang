@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const {getProfile} = require('../..')
+const {getSession} = require('../..')
 
 // API behavior observed 28.08.2017 by maccelerated
 test('resolves with decoded textures data', async t => {
@@ -15,7 +15,7 @@ test('resolves with decoded textures data', async t => {
       }]
     })
 
-  const profile = await getProfile('069a79f444e94726a5befca90e38aaf5')
+  const profile = await getSession('069a79f444e94726a5befca90e38aaf5')
   t.is(profile.id, '069a79f444e94726a5befca90e38aaf5')
   t.is(profile.name, 'Notch')
   t.is(profile.timestamp, 1503964970854)
@@ -38,7 +38,7 @@ test('resolves with no cape if profile does not have one', async t => {
       }]
     })
 
-  const profile = await getProfile('47c49720c9ee42009ef05e1c4cd2760c')
+  const profile = await getSession('47c49720c9ee42009ef05e1c4cd2760c')
   t.truthy(profile.skin)
   t.falsy(profile.cape)
 })
@@ -57,7 +57,7 @@ test('resolves with no cape if profile does not have one', async t => {
       }]
     })
 
-  const profile = await getProfile('47c49720c9ee42009ef05e1c4cd2760c')
+  const profile = await getSession('47c49720c9ee42009ef05e1c4cd2760c')
   t.truthy(profile.isSlim)
 })
 
@@ -75,7 +75,7 @@ test('resolves with no skin or cape', async t => {
       }]
     })
 
-  const profile = await getProfile('1a79a4d60de6718e8e5b326e338ae533')
+  const profile = await getSession('1a79a4d60de6718e8e5b326e338ae533')
   t.falsy(profile.skin)
   t.falsy(profile.cape)
 })
@@ -91,7 +91,7 @@ test('rejects if textures is missing', async t => {
       'properties': []
     })
 
-  const err = await t.throws(getProfile('c32b3ba80aa6d20e8a118b595e6b838d'))
+  const err = await t.throws(getSession('c32b3ba80aa6d20e8a118b595e6b838d'))
   t.is(err.message, `Cannot read property 'name' of undefined`)
 })
 
@@ -101,7 +101,7 @@ test('rejects with an invalid id', async t => {
     .get('/session/minecraft/profile/ae2b1fca515949e5d54fb22b8ed95575')
     .reply(204)
 
-  const err = await t.throws(getProfile('ae2b1fca515949e5d54fb22b8ed95575'))
+  const err = await t.throws(getSession('ae2b1fca515949e5d54fb22b8ed95575'))
   t.is(err.message, 'no such profile')
 })
 
@@ -114,7 +114,7 @@ test('rejects if the API throttles the client', async t => {
       'errorMessage': 'The client has sent too many requests within a certain amount of time'
     })
 
-  const err = await t.throws(getProfile('ae2b1fca515949e5d54fb22b8ed95575'))
+  const err = await t.throws(getSession('ae2b1fca515949e5d54fb22b8ed95575'))
   t.is(err.name, 'TooManyRequestsException')
   t.is(err.message, 'The client has sent too many requests within a certain amount of time')
 })

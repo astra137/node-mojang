@@ -13,7 +13,7 @@ const {USER_AGENT, SESSION_API} = require('../constants')
  * @returns {Promise.<Object>} resolves to `{id, name, timestamp, skin, cape, isSlim}`
  * @see {@link http://wiki.vg/Mojang_API#UUID_-.3E_Profile_.2B_Skin.2FCape}
  */
-function getProfile (profileId) {
+function getSession (profileId) {
   return got(`${SESSION_API}/session/minecraft/profile/${profileId}`, {
     headers: { 'user-agent': USER_AGENT },
     json: true
@@ -42,4 +42,4 @@ function getProfile (profileId) {
     })
 }
 
-module.exports = getProfile
+module.exports = getSession
