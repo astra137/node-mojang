@@ -6,7 +6,7 @@ const {USER_AGENT, MOJANG_API} = require('../constants')
  * Gets a logged-in user's private Mojang account information.
  *
  * @param {String} accessToken - valid access token for the user's account
- * @returns {Promise.<MojangUser>} resolves if access token is valid
+ * @returns {Promise<MojangUser>} resolves if access token is valid
  * @see {@link http://wiki.vg/Mojang_API#User_Info}
  */
 function getUser (accessToken) {

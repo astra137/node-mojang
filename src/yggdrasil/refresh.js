@@ -3,14 +3,14 @@ const onApiError = require('../on-api-error')
 const {USER_AGENT, YGGDRASIL_API} = require('../constants')
 
 /**
-  * Refreshes a given access token. May work on invalid access tokens.
+  * Refreshes a given access token. May work on invalid access tokens (about 1 token back in time).
   *
   * @param {String} accessToken - a session access token
   * @param {String} clientToken - must match the one used to obtain the access token
   * @param {Object} [selectedProfile] - use only with access tokens that were **not** assigned a game profile
   * @param {String} selectedProfile.id - profile UUID
   * @param {String} selectedProfile.name - profile name (IGN)
-  * @returns {Promise.<Object>} resolves to a new session `{clientToken, accessToken, selectedProfile, user}`
+ * @returns {Promise<MojangSession>} resolves if the Mojang gods are feeling generous
   * @see {@link http://wiki.vg/Authentication#Refresh}
   * @example
   * if (!await mojang.isValid(accessToken, clientToken)) {

@@ -3,10 +3,10 @@ const onApiError = require('../on-api-error')
 const {USER_AGENT, MOJANG_API} = require('../constants')
 
 /**
- * Gets a list of a logged-in user's game profiles.
+ * Gets a list of all of a logged-in user's game profiles.
  *
  * @param {String} accessToken - a valid access token for the user's account
- * @returns {Promise.<Array.<MojangProfile>>} resolves if access token is valid
+ * @returns {Promise<Array<MojangProfile>>} resolves if access token is valid
  * @see **Undocumented** maccelerated just guessed this endpoint would exist
  */
 function getUserProfiles (accessToken) {

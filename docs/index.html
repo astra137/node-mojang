@@ -45,9 +45,49 @@
               
                 
                 <li><a
+                  href='#mojangsession'
+                  class="">
+                  MojangSession
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#check'
                   class="">
                   check
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getnamehistory'
+                  class="">
+                  getNameHistory
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getprofileat'
+                  class="">
+                  getProfileAt
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getprofiles'
+                  class="">
+                  getProfiles
                   
                 </a>
                 
@@ -145,36 +185,6 @@
               
                 
                 <li><a
-                  href='#getnamehistory'
-                  class="">
-                  getNameHistory
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#getprofileat'
-                  class="">
-                  getProfileAt
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#getprofiles'
-                  class="">
-                  getProfiles
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
                   href='#getuser'
                   class="">
                   getUser
@@ -262,7 +272,7 @@
       
         <div class='space-bottom0'>
           <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-          : unique user ID
+          : user UUID
 
           
         </div>
@@ -445,7 +455,7 @@
       
         <div class='space-bottom0'>
           <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-          : unique profile ID
+          : profile UUID
 
           
         </div>
@@ -466,7 +476,8 @@
       
         <div class='space-bottom0'>
           <span class='code bold'>userId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-          
+          : user UUID
+
           
         </div>
       
@@ -497,6 +508,94 @@
         <div class='space-bottom0'>
           <span class='code bold'>migrated</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)</code>
           
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='mojangsession'>
+      MojangSession
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>MojangSession</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>selectedProfile</span> <code class='quiet'>({id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>}?)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>availableProfiles</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;{id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>}>?)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>user</span> <code class='quiet'>({id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>}?)</code>
+          : always included by 
+<a href="#authenticate">authenticate</a>
+
           
         </div>
       
@@ -580,6 +679,266 @@
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='getnamehistory'>
+      getNameHistory
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets all name changes for a given player's profile UUID.</p>
+
+
+  <div class='pre p1 fill-light mt0'>getNameHistory(profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>profileId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    profile UUID (does not work with user UUID)
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></code>:
+        resolves with 
+<code>[{name, changedToAt}]</code>
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getprofileat'>
+      getProfileAt
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets an abbreviated game profile at a given timestamp.</p>
+<p><strong>Prefer <a href="#getprofiles">getProfiles</a> when looking up current data.</strong></p>
+
+
+  <div class='pre p1 fill-light mt0'>getProfileAt(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>?, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    current profile name (IGN) of the user
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>date</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>?)</code>
+	    UNIX timestamp to check the username at
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>agent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?
+            = <code>&#39;minecraft&#39;</code>)</code>
+	    game agent to check against
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
+        resolves with 
+<code>{id, name, legacy, demo}</code>
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> {id, name, legacy, demo} = <span class="hljs-keyword">await</span> getProfileAt(<span class="hljs-string">'Notch'</span>, <span class="hljs-number">1503335853700</span>)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getprofiles'>
+      getProfiles
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets a list of abbreviated game profiles from the list of profile names.</p>
+<p><em>It seems results are reordered alphabetically.</em></p>
+<p><strong>You cannot request more than 100 names per request.</strong></p>
+
+
+  <div class='pre p1 fill-light mt0'>getProfiles(names: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>>, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>names</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>>)</code>
+	    list of current profile names (IGN)
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>agent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?
+            = <code>&#39;minecraft&#39;</code>)</code>
+	    game agent to search within (minecraft, scrolls)
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></code>:
+        resolves with 
+<code>[{id, name, legacy?, demo?}]</code>
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPaidMinecraftProfiles</span> (<span class="hljs-params">names</span>) </span>{
+  <span class="hljs-keyword">const</span> list = <span class="hljs-keyword">await</span> getProfiles(names)
+  <span class="hljs-keyword">return</span> list.filter(<span class="hljs-function">(<span class="hljs-params">{demo}</span>) =&gt;</span> !demo)
+}
+
+<span class="hljs-keyword">const</span> paidProfiles = <span class="hljs-keyword">await</span> getProfiles([<span class="hljs-string">'notch'</span>, <span class="hljs-string">'nonExistingPlayer'</span>])
+<span class="hljs-comment">// [{id: '...', name: 'Notch'}]</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='authenticate'>
       authenticate
     </h3>
@@ -593,7 +952,7 @@
 <p><strong>Handle access tokens securely.</strong></p>
 
 
-  <div class='pre p1 fill-light mt0'>authenticate(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  <div class='pre p1 fill-light mt0'>authenticate(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojangsession">MojangSession</a>></div>
   
   
 
@@ -686,9 +1045,8 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
-        resolves to a session 
-<code>{clientToken, accessToken, selectedProfile, user}</code>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojangsession">MojangSession</a>></code>:
+        resolves if credentials are valid
 
       
     
@@ -821,10 +1179,10 @@
   </div>
   
 
-  <p>Refreshes a given access token. May work on invalid access tokens.</p>
+  <p>Refreshes a given access token. May work on invalid access tokens (about 1 token back in time).</p>
 
 
-  <div class='pre p1 fill-light mt0'>refresh(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, selectedProfile: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  <div class='pre p1 fill-light mt0'>refresh(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, selectedProfile: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojangsession">MojangSession</a>></div>
   
   
 
@@ -906,9 +1264,8 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
-        resolves to a new session 
-<code>{clientToken, accessToken, selectedProfile, user}</code>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojangsession">MojangSession</a>></code>:
+        resolves if the Mojang gods are feeling generous
 
       
     
@@ -1421,265 +1778,6 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='getnamehistory'>
-      getNameHistory
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Gets all name changes for a given player's profile ID.</p>
-
-
-  <div class='pre p1 fill-light mt0'>getNameHistory(profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>profileId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    profile UUID (does not work with user ID)
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></code>:
-        resolves with 
-<code>[{name, changedToAt}]</code>
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='getprofileat'>
-      getProfileAt
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Gets an abbreviated game profile from a given timestamp.</p>
-
-
-  <div class='pre p1 fill-light mt0'>getProfileAt(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>?, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
-  
-  
-
-  <div>Deprecated: prefer searching by UUID instead of name
-</div>
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    current profile name (IGN) of the user
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>date</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>?)</code>
-	    UNIX timestamp to check the username at
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>agent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?
-            = <code>&#39;minecraft&#39;</code>)</code>
-	    game agent to check against
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
-        resolves with 
-<code>{id, name, legacy, demo}</code>
-
-      
-    
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> {id, name, legacy, demo} = <span class="hljs-keyword">await</span> getProfileAt(<span class="hljs-string">'Notch'</span>)</pre>
-    
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='getprofiles'>
-      getProfiles
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Gets a list of abbreviated game profiles from the list of profile names.</p>
-<p><strong>It seems results are reordered alphabetically.</strong></p>
-
-
-  <div class='pre p1 fill-light mt0'>getProfiles(names: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>>, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>names</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>>)</code>
-	    list of current profile names (IGN)
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>agent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?
-            = <code>&#39;minecraft&#39;</code>)</code>
-	    game agent to search within (minecraft, scrolls)
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></code>:
-        resolves with 
-<code>[{id, name, legacy?, demo?}]</code>
-
-      
-    
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPaidMinecraftProfiles</span> (<span class="hljs-params">names</span>) </span>{
-  <span class="hljs-keyword">const</span> list = <span class="hljs-keyword">await</span> getProfiles(names)
-  <span class="hljs-keyword">return</span> list.filter(<span class="hljs-function">(<span class="hljs-params">{demo}</span>) =&gt;</span> !demo)
-}
-
-<span class="hljs-keyword">const</span> paidProfiles = <span class="hljs-keyword">await</span> getProfiles([<span class="hljs-string">'notch'</span>, <span class="hljs-string">'nonExistingPlayer'</span>])
-<span class="hljs-comment">// [{id: '...', name: 'Notch'}]</span></pre>
-    
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='getuser'>
       getUser
     </h3>
@@ -1856,7 +1954,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>profileId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    which profile to update the skin of (Minecraft profile UUID)
+	    which profile UUID to update the skin of
 
           </div>
           
@@ -1890,7 +1988,7 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
-        resolves if access token, profile ID, and skin URL are valid
+        resolves if access token, profile UUID, and skin URL are valid
 
       
     
@@ -1953,7 +2051,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>profileId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    which profile to update the skin of (Minecraft profile UUID)
+	    which profile UUID to update the skin of
 
           </div>
           

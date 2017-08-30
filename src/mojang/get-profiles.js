@@ -5,7 +5,9 @@ const {USER_AGENT, MOJANG_API} = require('../constants')
 /**
   * Gets a list of abbreviated game profiles from the list of profile names.
   *
-  * **It seems results are reordered alphabetically.**
+  * *It seems results are reordered alphabetically.*
+  *
+  * **You cannot request more than 100 names per request.**
   *
   * @param {Array<String>} names - list of current profile names (IGN)
   * @param {String} [agent] - game agent to search within (minecraft, scrolls)

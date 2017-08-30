@@ -15,7 +15,7 @@ const {USER_AGENT, YGGDRASIL_API} = require('../constants')
  * @param {Object} [agent] - if valid, adds `selectedProfile` to response
  * @param {String} agent.name - name of the agent ('Minecraft' or 'Scrolls')
  * @param {Number} agent.version - version number of the agent (use `1`)
- * @returns {Promise.<Object>} resolves to a session `{clientToken, accessToken, selectedProfile, user}`
+ * @returns {Promise<MojangSession>} resolves if credentials are valid
  * @see {@link http://wiki.vg/Authentication#Authenticate}
  * @example
  * const clientToken = await savedSettings.read('clientToken')
