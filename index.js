@@ -18,9 +18,11 @@ exports.getSession = require('./src/session/get-session')
 exports.getBlockedServers = require('./src/session/get-blocked-servers')
 
 exports.getUser = require('./src/mojang/get-user')
-exports.getUserProfiles = require('./src/mojang/get-user-profiles')
 exports.setSkin = require('./src/mojang/set-skin')
 exports.resetSkin = require('./src/mojang/reset-skin')
+
+exports.getUserProfiles = require('./src/mojang/get-user-profiles')
+exports.getUserCapeData = require('./src/mojang/get-user-cape-data')
 
 // For document types, prefer dotless Array<Object>
 // https://github.com/jsdoc3/jsdoc/issues/1375
