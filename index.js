@@ -28,6 +28,16 @@ exports.getUserCapeData = require('./src/mojang/get-user-cape-data')
 // https://github.com/jsdoc3/jsdoc/issues/1375
 
 /**
+  * @typedef {Object} CustomSession
+  * @property {String} id - profile UUID
+  * @property {String} name - in-game name (IGN)
+  * @property {Number} timestamp
+  * @property {String} skin - URL of the current skin texture
+  * @property {String} cape - URL of the current cape texture
+  * @property {Boolean} isSlim - true if profile is using slim model
+  */
+
+/**
   * @typedef {Object} MojangSession
   * @property {String} clientToken
   * @property {String} accessToken
@@ -47,6 +57,15 @@ exports.getUserCapeData = require('./src/mojang/get-user-cape-data')
   * @property {Boolean} deleted
   * @property {Boolean} paid
   * @property {Boolean} migrated
+  */
+
+/**
+  * @typedef {Object} MojangChallenge
+  * @property {Object} answer
+  * @property {Number} answer.id - used in {@link answerChallenges}
+  * @property {Object} question
+  * @property {Number} question.id
+  * @property {String} question.question - text to prompt user with
   */
 
 /**

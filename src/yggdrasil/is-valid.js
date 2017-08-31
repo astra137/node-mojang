@@ -7,7 +7,7 @@ const {USER_AGENT, YGGDRASIL_API} = require('../constants')
   *
   * @param {String} accessToken - a session access token
   * @param {String} [clientToken] - must match the one used to obtain the access token
-  * @returns {Promise.<Boolean>} resolves true if tokens are valid
+  * @returns {Promise<Boolean>} resolves true if tokens are valid
   * @see {@link http://wiki.vg/Authentication#Validate}
   * @example
   * if (await mojang.isValid(accessToken, clientToken)) {

@@ -3,12 +3,12 @@ const onApiError = require('../on-api-error')
 const {USER_AGENT, MOJANG_API} = require('../constants')
 
 /**
- * Submits a logged-in user's security challenge answers to trust the current IP.
+ * **Undocumented:** Submits a logged-in user's security challenge answers to trust the current IP.
  *
  * @param {String} accessToken - valid access token for the user's account
  * @param {Array} answers - list of answers like `[{id, answer}]`
  * @returns {Promise} resolves if location was secured
- * @see **Undocumented** observed from official launcher & minecraft.net XHR
+ * @see official launcher & minecraft.net XHR
  * @example
  * const challenges = await getChallenges(accessToken)
  * const answers = await Promise.all(challenges.map(async c => {

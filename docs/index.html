@@ -35,6 +35,16 @@
               
                 
                 <li><a
+                  href='#mojangchallenge'
+                  class="">
+                  MojangChallenge
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#mojangprofile'
                   class="">
                   MojangProfile
@@ -48,6 +58,16 @@
                   href='#mojangsession'
                   class="">
                   MojangSession
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#customsession'
+                  class="">
+                  CustomSession
                   
                 </a>
                 
@@ -441,6 +461,96 @@
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='mojangchallenge'>
+      MojangChallenge
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>MojangChallenge</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>answer</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+          
+          
+            <ul>
+              
+                <li><code>answer.id</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>
+                  
+                  <p>used in <a href="#answerchallenges">answerChallenges</a></p>
+</li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>question</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+          
+          
+            <ul>
+              
+                <li><code>question.id</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>
+                  
+                  </li>
+              
+                <li><code>question.question</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+                  
+                  <p>text to prompt user with</p>
+</li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='mojangprofile'>
       MojangProfile
     </h3>
@@ -615,6 +725,103 @@
           <span class='code bold'>user</span> <code class='quiet'>({id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>}?)</code>
           : always included by 
 <a href="#authenticate">authenticate</a>
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='customsession'>
+      CustomSession
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>CustomSession</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+          : profile UUID
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+          : in-game name (IGN)
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>timestamp</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>skin</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+          : URL of the current skin texture
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>cape</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+          : URL of the current cape texture
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>isSlim</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)</code>
+          : true if profile is using slim model
 
           
         </div>
@@ -1498,7 +1705,7 @@
   </div>
   
 
-  <p>Gets a logged-in user's IP security status for the current IP.</p>
+  <p><strong>Undocumented:</strong> Gets a logged-in user's IP security status for the current IP.</p>
 
 
   <div class='pre p1 fill-light mt0'>isSecure(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>></div>
@@ -1573,10 +1780,10 @@
   </div>
   
 
-  <p>Gets a logged-in user's security challenge questions.</p>
+  <p><strong>Undocumented:</strong> Gets a logged-in user's security challenge questions.</p>
 
 
-  <div class='pre p1 fill-light mt0'>getChallenges(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></div>
+  <div class='pre p1 fill-light mt0'>getChallenges(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#mojangchallenge">MojangChallenge</a>>></div>
   
   
 
@@ -1608,9 +1815,8 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></code>:
-        resolves with 
-<code>[{answer:{id}, question:{id, question}}]</code>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#mojangchallenge">MojangChallenge</a>>></code>:
+        resolves if access token is valid
 
       
     
@@ -1643,7 +1849,7 @@
   </div>
   
 
-  <p>Submits a logged-in user's security challenge answers to trust the current IP.</p>
+  <p><strong>Undocumented:</strong> Submits a logged-in user's security challenge answers to trust the current IP.</p>
 
 
   <div class='pre p1 fill-light mt0'>answerChallenges(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, answers: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
@@ -1739,7 +1945,7 @@
 <p><strong>Rate limit: You can request the same profile once per minute.</strong></p>
 
 
-  <div class='pre p1 fill-light mt0'>getSession(profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  <div class='pre p1 fill-light mt0'>getSession(profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#customsession">CustomSession</a>></div>
   
   
 
@@ -1771,9 +1977,8 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
-        resolves to 
-<code>{id, name, timestamp, skin, cape, isSlim}</code>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#customsession">CustomSession</a>></code>:
+        resolves if profile exists
 
       
     
