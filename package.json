@@ -27,6 +27,7 @@
   "homepage": "https://github.com/jamen/node-mojang",
   "devDependencies": {
     "ava": "^0.22.0",
+    "codecov": "^2.3.0",
     "documentation": "^5.2.2",
     "eslint": "^4.5.0",
     "eslint-config-standard": "^10.2.1",

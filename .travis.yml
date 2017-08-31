@@ -1,13 +1,10 @@
 language: node_js
 node_js:
-  - "node"
   - 8
   - 7
   - 6
   - 5
 
-install:
-  - npm install -g codecov
 after_success:
   - ./node_modules/.bin/nyc report --reporter lcovonly -- -R spec
   - codecov
