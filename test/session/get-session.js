@@ -41,11 +41,12 @@ test('resolves with no cape if profile does not have one', async t => {
   const profile = await getSession('47c49720c9ee42009ef05e1c4cd2760c')
   t.truthy(profile.skin)
   t.falsy(profile.cape)
+  t.falsy(profile.isSlim)
 })
 
 // User is using the slim skin version and metadata is on textures.SKIN
 // API behavior observed 28.08.2017 by maccelerated
-test('resolves with no cape if profile does not have one', async t => {
+test('resolves with isSlim taken from metadata', async t => {
   nock('https://sessionserver.mojang.com')
     .get('/session/minecraft/profile/47c49720c9ee42009ef05e1c4cd2760c')
     .reply(200, {

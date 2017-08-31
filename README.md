@@ -1,6 +1,16 @@
-# mojang [![Build Status][build]][travis]
+<!-- repo location specific -->
+[docs]: https://maccelerated.github.io/node-mojang
+[issues]: https://github.com/jamen/node-mojang/issues
+[build]: https://api.travis-ci.org/maccelerated/node-mojang.svg?branch=master
+[travis]: https://travis-ci.org/maccelerated/node-mojang[travis]
+[coverage]: https://codecov.io/gh/maccelerated/node-mojang/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/maccelerated/node-mojang
 
-> Unofficial Node.js library for nearly all of Mojang's HTTP APIs.
+# mojang [![travisci][build]][travis] [![codecov][coverage]][codecov]
+
+> Unofficial Node.js library for Mojang's HTTP APIs
+
+Create sessions, get user info, change skins, and more with promises.
 
 Includes the functions described on the [Minecraft modern wiki](http://wiki.vg/Main_Page), as well as several equally-important but undocumented endpoints. Every function makes a single HTTP request. This library requires Internet access to do anything. Please use [GitHub Issues][issues] to submit a bug, request an example, or report a missing feature.
 
@@ -21,24 +31,43 @@ mojang.authenticate('email@domain.tld', 'mojang secret')
   .catch(err => console.error(err))
 ```
 
-## Testing
+## Integration Testing
+Optionally create *.env* file for `node-foreman` to load values out of.
+
+```
+CLIENT_TOKEN=<random UUID>
+USERNAME=<mojang email>
+PASSWORD=<mojang secret>
+ANSWER1=<secret answer>
+ANSWER2=<secret answer>
+ANSWER3=<secret answer>
+PROFILE_ID=<game profile to change skin>
+SKIN_URL=<url of skin image to change to>
+USE_SLIM=<leave blank or use "slim">
+```
+
 > Rate limit errors may look like `Invalid credentials. Invalid username or password.`
 
 ```shell
-$ npm test
 $ nf run npx ava test-online/yggdrasil.js
 $ nf run npx ava test-online/security.js
+$ nf run node examples/change-skin.js
 ```
 
+## Related
+
+- [mojang-api](https://github.com/minecrafter/mojang-api) - small library for some public Mojang endpoints
+
+## Credits
+
+|![@jamen](https://github.com/jamen.png?size=100) | ![@maccelerated](https://github.com/maccelerated.png?size=100) |
+|---|---|
+|[@jamen](https://github.com/jamen) | [Rob Mac](https://github.com/maccelerated) |
+
 ## License
-[MIT](LICENSE) &copy; Jamen Marzonie
+
+[MIT © Jamen Marzonie](LICENSE)
 
 > This repository is not affiliated with Mojang.
 
 > "Minecraft" is a trademark of Mojang Synergies AB.
-
-<!-- repo location specific -->
-[build]: https://api.travis-ci.org/maccelerated/node-mojang.svg?branch=master
-[travis]: https://travis-ci.org/maccelerated/node-mojang[travis]
-[issues]: https://github.com/jamen/node-mojang/issues
-[docs]: https://maccelerated.github.io/node-mojang

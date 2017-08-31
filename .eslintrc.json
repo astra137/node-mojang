@@ -1,6 +1,10 @@
 {
+  "plugins": [
+    "ava"
+  ],
   "extends": [
-    "standard"
+    "standard",
+    "plugin:ava/recommended"
   ],
   "rules": {
     "valid-jsdoc": "warn"

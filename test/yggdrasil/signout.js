@@ -2,8 +2,8 @@ const test = require('ava')
 const nock = require('nock')
 const {signout} = require('../..')
 
+// API behavior observed 17.08.2017 by maccelerated
 test('resolves with valid credentials', async t => {
-  // Behavior observed 17.08.2017 by maccelerated
   nock('https://authserver.mojang.com')
     .post('/signout', {
       username: 'valid@user.com',
@@ -15,8 +15,8 @@ test('resolves with valid credentials', async t => {
   t.pass()
 })
 
+// API behavior observed 17.08.2017 by maccelerated
 test('rejects with invalid credentials', async t => {
-  // Behavior observed 17.08.2017 by maccelerated
   nock('https://authserver.mojang.com')
     .post('/signout', {
       username: 'invalid@user.com',

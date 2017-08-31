@@ -2,8 +2,8 @@ const test = require('ava')
 const nock = require('nock')
 const {refresh} = require('../..')
 
+// API behavior observed 17.08.2017 by maccelerated
 test('returns a new access and client token', async t => {
-  // Behavior observed 17.08.2017 by maccelerated
   nock('https://authserver.mojang.com')
     .post('/refresh', {
       accessToken: 'oldvalid',
@@ -31,8 +31,8 @@ test('returns a new access and client token', async t => {
   t.truthy(nextSession.user)
 })
 
+// API behavior observed 17.08.2017 by maccelerated
 test('rejects with invalid tokens', async t => {
-  // Behavior observed 17.08.2017 by maccelerated
   nock('https://authserver.mojang.com')
     .post('/refresh', {
       accessToken: 'invalid',

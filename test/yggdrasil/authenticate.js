@@ -2,8 +2,8 @@ const test = require('ava')
 const nock = require('nock')
 const {authenticate} = require('../..')
 
+// API behavior observed 17.08.2017 by maccelerated
 test('resolves with accessToken and clientToken', async t => {
-  // Behavior observed 17.08.2017 by maccelerated
   nock('https://authserver.mojang.com')
     .post('/authenticate', {
       username: 'user@domain.tld',
@@ -19,8 +19,8 @@ test('resolves with accessToken and clientToken', async t => {
   t.truthy(session.clientToken)
 })
 
+// API behavior observed 17.08.2017 by maccelerated
 test('rejects with API\'s error on invalid credentials', async t => {
-  // Behavior observed 17.08.2017 by maccelerated
   nock('https://authserver.mojang.com')
     .post('/authenticate', {
       username: 'user@domain.tld',
