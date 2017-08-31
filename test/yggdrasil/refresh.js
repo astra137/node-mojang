@@ -44,7 +44,7 @@ test('rejects with invalid tokens', async t => {
     })
 
   const err = await t.throws(refresh('invalid', 'client', null, true))
-  t.is(err.statusCode, 403)
-  t.is(err.name, 'ForbiddenOperationException')
   t.is(err.message, 'Invalid token')
+  t.is(err.name, 'ForbiddenOperationException')
+  t.is(err.statusCode, 403)
 })

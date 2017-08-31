@@ -32,7 +32,7 @@ test('rejects with API\'s error on invalid credentials', async t => {
     })
 
   const err = await t.throws(authenticate('user@domain.tld', 'incorrect secret'))
-  t.is(err.statusCode, 403)
-  t.is(err.name, 'ForbiddenOperationException')
   t.is(err.message, 'Invalid credentials. Invalid username or password.')
+  t.is(err.name, 'ForbiddenOperationException')
+  t.is(err.statusCode, 403)
 })

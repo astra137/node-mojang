@@ -57,9 +57,11 @@ test('rejects if access token is bad', async t => {
     .reply(401, {
       'error': 'Unauthorized',
       'errorMessage': 'The request requires user authentication'
+    }, {
+      'WWW-Authenticate': `Bearer realm="Mojang", error="invalid_token", error_description="The access token is invalid"`
     })
 
   const err = await t.throws(getChallenges(accessToken))
+  t.is(err.message, 'The access token is invalid')
   t.is(err.name, 'Unauthorized')
-  t.is(err.message, 'The request requires user authentication')
 })

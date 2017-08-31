@@ -2,26 +2,8 @@ const test = require('ava')
 const nock = require('nock')
 const {getUser} = require('../..')
 
-test('wraps api error on bad access token', async t => {
-  // bahavior observed 22.08.2017 by maccelerated
-  nock('https://api.mojang.com', {
-    reqheaders: {
-      'authorization': 'Bearer badormissing'
-    }
-  })
-    .get('/user')
-    .reply(401, {
-      error: 'UnauthorizedOperationException',
-      errorMessage: 'User not authenticated'
-    })
-
-  const err = await t.throws(getUser('badormissing'))
-  t.is(err.name, 'UnauthorizedOperationException')
-  t.is(err.message, 'User not authenticated')
-})
-
+// API behavior observed 30.08.2017 by maccelerated
 test('resolves with a valid access token', async t => {
-  // bahavior observed 22.08.2017 by maccelerated
   nock('https://api.mojang.com', {
     reqheaders: {
       'authorization': 'Bearer goodaccesstoken'
@@ -54,4 +36,24 @@ test('resolves with a valid access token', async t => {
 
   const info = await getUser('goodaccesstoken')
   t.truthy(info.username)
+})
+
+// API behavior observed 30.08.2017 by maccelerated
+test('wraps api error on bad access token', async t => {
+  nock('https://api.mojang.com', {
+    reqheaders: {
+      'authorization': 'Bearer badormissing'
+    }
+  })
+    .get('/user')
+    .reply(401, {
+      error: 'UnauthorizedOperationException',
+      errorMessage: 'User not authenticated'
+    }, {
+      'WWW-Authenticate': 'Bearer realm="Mojang", error="invalid_token", error_description="The access token is invalid"'
+    })
+
+  const err = await t.throws(getUser('badormissing'))
+  t.is(err.message, 'The access token is invalid')
+  t.is(err.name, 'UnauthorizedOperationException')
 })

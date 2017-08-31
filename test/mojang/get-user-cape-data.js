@@ -20,6 +20,24 @@ test('resolves with empty array if profile has no cape', async t => {
 })
 
 // API behavior observed 30.08.2017 by maccelerated
+test('rejects if profile and access token are from different accounts', async t => {
+  nock('https://api.mojang.com', {
+    reqheaders: {
+      'authorization': 'Bearer wrongaccesstoken'
+    }
+  })
+    .get('/user/profile/069a79f444e94726a5befca90e38aaf5/cape') // Notch's profile
+    .reply(403, {
+      'error': 'ForbiddenOperationException',
+      'errorMessage': 'Invalid profile id or access token.'
+    })
+
+  const err = await t.throws(getUserCapeData('wrongaccesstoken', '069a79f444e94726a5befca90e38aaf5'))
+  t.is(err.message, 'Invalid profile id or access token.')
+  t.is(err.name, 'ForbiddenOperationException')
+})
+
+// API behavior observed 30.08.2017 by maccelerated
 test('rejects if access token is invalid', async t => {
   nock('https://api.mojang.com', {
     reqheaders: {
@@ -36,23 +54,5 @@ test('rejects if access token is invalid', async t => {
 
   const err = await t.throws(getUserCapeData('badaccesstoken', 'notused'))
   t.is(err.message, 'The access token is invalid')
-  t.is(err.name, 'invalid_token')
-})
-
-// API behavior observed 30.08.2017 by maccelerated
-test('rejects if profile and access token are from different accounts', async t => {
-  nock('https://api.mojang.com', {
-    reqheaders: {
-      'authorization': 'Bearer wrongaccesstoken'
-    }
-  })
-    .get('/user/profile/069a79f444e94726a5befca90e38aaf5/cape') // Notch's profile
-    .reply(403, {
-      'error': 'ForbiddenOperationException',
-      'errorMessage': 'Invalid profile id or access token.'
-    })
-
-  const err = await t.throws(getUserCapeData('wrongaccesstoken', '069a79f444e94726a5befca90e38aaf5'))
-  t.is(err.message, 'Invalid profile id or access token.')
   t.is(err.name, 'ForbiddenOperationException')
 })

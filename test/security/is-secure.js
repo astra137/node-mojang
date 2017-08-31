@@ -50,5 +50,5 @@ test('rejects if access token is bad', async t => {
 
   const err = await t.throws(isSecure('badaccesstoken'))
   t.is(err.message, 'The access token is invalid')
-  t.is(err.name, 'invalid_token')
+  t.is(err.name, 'Unauthorized')
 })

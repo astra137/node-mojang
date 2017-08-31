@@ -34,3 +34,23 @@ test('rejects when IP is not secured', async t => {
   t.is(err.name, 'Forbidden')
   t.is(err.message, 'Current IP not secured')
 })
+
+// API behavior observed 30.08.2017 by maccelerated
+test('rejects when access token is invalid', async t => {
+  nock('https://api.mojang.com', {
+    reqheaders: {
+      'authorization': 'Bearer badaccesstoken'
+    }
+  })
+    .delete(`/user/profile/a984c00af9274878820fce723d73a0ca/skin`)
+    .reply(401, {
+      'error': 'Unauthorized',
+      'errorMessage': 'The request requires user authentication'
+    }, {
+      'WWW-Authenticate': 'Bearer realm="Mojang", error="invalid_token", error_description="The access token is invalid"'
+    })
+
+  const err = await t.throws(resetSkin('badaccesstoken', 'a984c00af9274878820fce723d73a0ca'))
+  t.is(err.message, 'The access token is invalid')
+  t.is(err.name, 'Unauthorized')
+})

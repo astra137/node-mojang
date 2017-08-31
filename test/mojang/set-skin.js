@@ -48,7 +48,7 @@ test('rejects when URL is bad', async t => {
   t.is(err.message, 'Content is not an image')
 })
 
-// API behavior observed 28.08.2017 by maccelerated
+// API behavior observed 30.08.2017 by maccelerated
 test('rejects when access token is bad', async t => {
   nock('https://api.mojang.com', {
     reqheaders: {
@@ -59,9 +59,11 @@ test('rejects when access token is bad', async t => {
     .reply(401, {
       'error': 'Unauthorized',
       'errorMessage': 'The request requires user authentication'
+    }, {
+      'WWW-Authenticate': 'Bearer realm="Mojang", error="invalid_token", error_description="The access token is invalid"'
     })
 
   const err = await t.throws(setSkin('badaccesstoken', '7ddf32e17a6ac5ce04a8ecbf782ca509', 'urlOfPNG'))
+  t.is(err.message, 'The access token is invalid')
   t.is(err.name, 'Unauthorized')
-  t.is(err.message, 'The request requires user authentication')
 })

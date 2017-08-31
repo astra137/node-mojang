@@ -28,7 +28,7 @@ test('rejects with invalid credentials', async t => {
     })
 
   const err = await t.throws(signout('invalid@user.com', 'password'))
-  t.is(err.statusCode, 403)
-  t.is(err.name, 'ForbiddenOperationException')
   t.is(err.message, 'Invalid credentials. Invalid username or password.')
+  t.is(err.name, 'ForbiddenOperationException')
+  t.is(err.statusCode, 403)
 })

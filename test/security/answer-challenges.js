@@ -79,5 +79,5 @@ test('rejects if access token is bad', async t => {
   ]))
 
   t.is(err.message, 'The access token is invalid')
-  t.is(err.name, 'invalid_token')
+  t.is(err.name, 'Unauthorized')
 })

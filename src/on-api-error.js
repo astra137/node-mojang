@@ -1,17 +1,17 @@
 const parse = require('./parse-res-bearer')
 
-// Mojang endpoints all return errors in the same format.
-// This attaches those values to the error being thrown.
+// All Mojang endpoints return errors in the same format.
+// This attaches API responses to the errors being thrown.
 // https://github.com/sindresorhus/got#errors
+// http://wiki.vg/Authentication#Errors
+/* eslint-disable camelcase */
 module.exports = function onError (err) {
-  if (err.name === 'HTTPError' && err.headers['www-authenticate']) {
-    const {error, error_description} = parse(err.headers['www-authenticate'])
-    err.name = error
-    err.message = error_description // eslint-disable-line camelcase
-  } else if (err.name === 'HTTPError' && err.response) {
-    err.name = err.response.body.error
-    err.message = err.response.body.errorMessage
-    err.cause = err.response.body.cause
+  if (err.name === 'HTTPError') {
+    const {error, errorMessage, cause} = err.response.body
+    const {error_description} = parse(err.headers['www-authenticate'])
+    err.message = error_description || errorMessage || err.message
+    if (error) err.name = error // overwrite name if available
+    if (cause) err.cause = cause // only on some endpoints
   }
   throw err
 }
