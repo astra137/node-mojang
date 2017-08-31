@@ -1,8 +1,8 @@
-# mojang [![Build Status](https://travis-ci.org/jamen/node-mojang.svg?branch=master)](https://travis-ci.org/jamen/node-mojang)
+# mojang [![Build Status][build]][travis]
 
 > Unofficial Node.js library for nearly all of Mojang's HTTP APIs.
 
-Includes the functions described on the [Minecraft modern wiki](http://wiki.vg/Main_Page), as well as several equally-important but undocumented endpoints. Every function makes a single HTTP request. This library requires Internet access to do anything. Please use [GitHub Issues](https://github.com/jamen/node-mojang/issues) to submit a bug, request an example, or report a missing feature.
+Includes the functions described on the [Minecraft modern wiki](http://wiki.vg/Main_Page), as well as several equally-important but undocumented endpoints. Every function makes a single HTTP request. This library requires Internet access to do anything. Please use [GitHub Issues][issues] to submit a bug, request an example, or report a missing feature.
 
 ## Install
 ```shell
@@ -10,7 +10,7 @@ $ npm install mojang
 ```
 
 ## Usage
-Read the [documentation](https://maccelerated.github.io/node-mojang) or look in [examples/](/tree/master/examples) and [test/](/tree/master/test) folders.
+Read the [documentation][docs] or look in [examples/](/tree/master/examples) and [test/](/tree/master/test) folders.
 
 ```js
 const mojang = require('mojang')
@@ -26,7 +26,8 @@ mojang.authenticate('email@domain.tld', 'mojang secret')
 
 ```shell
 $ npm test
-$ nf run npm run test-online
+$ nf run npx ava test-online/yggdrasil.js
+$ nf run npx ava test-online/security.js
 ```
 
 ## License
@@ -35,3 +36,9 @@ $ nf run npm run test-online
 > This repository is not affiliated with Mojang.
 
 > "Minecraft" is a trademark of Mojang Synergies AB.
+
+<!-- repo location specific -->
+[build]: https://api.travis-ci.org/maccelerated/node-mojang.svg?branch=master
+[travis]: https://travis-ci.org/maccelerated/node-mojang[travis]
+[issues]: https://github.com/jamen/node-mojang/issues
+[docs]: https://maccelerated.github.io/node-mojang

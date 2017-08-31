@@ -1,10 +1,10 @@
 {
   "name": "mojang",
-  "version": "0.4.1",
-  "description": "A node.js wrapper for Mojang's API.",
+  "version": "1.0.0-rc",
+  "description": "Unofficial Node.js library for nearly all of Mojang's HTTP APIs.",
   "main": "lib/",
   "scripts": {
-    "test": "ava",
+    "test": "nyc ava",
     "docs": "documentation build index.js -f html -o docs",
     "test-online": "ava -c 1 test-online/"
   },
@@ -14,14 +14,17 @@
   },
   "keywords": [
     "mojang",
-    "minecraft"
+    "minecraft",
+    "yggdrasil",
+    "scrolls",
+    "cobalt"
   ],
   "author": "Jamen Marzonie <jamenmarz@gmail.com> (http://jamenmarz.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jamen/node-mojang/issues"
   },
-  "homepage": "https://github.com/jamen/node-mojang#readme",
+  "homepage": "https://github.com/jamen/node-mojang",
   "devDependencies": {
     "ava": "^0.22.0",
     "documentation": "^5.2.2",
@@ -31,7 +34,8 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "nock": "^9.0.13"
+    "nock": "^9.0.13",
+    "nyc": "^11.1.0"
   },
   "dependencies": {
     "got": "^7.1.0",
