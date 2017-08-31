@@ -2,7 +2,6 @@ language: node_js
 node_js:
   - node
   - lts/*
-  - 4.1
 
 after_success:
   - ./node_modules/.bin/nyc report --reporter lcovonly -- -R spec

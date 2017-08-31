@@ -6,7 +6,7 @@
   "scripts": {
     "docs": "documentation build index.js -f html -o docs",
     "lint": "eslint index.js src/ test/",
-    "test": "nyc ava -- --harmony_destructuring",
+    "test": "nyc ava",
     "test-online": "ava -c 1 test-online/"
   },
   "repository": {
