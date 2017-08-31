@@ -2,7 +2,7 @@
 [docs]: https://maccelerated.github.io/node-mojang
 [issues]: https://github.com/jamen/node-mojang/issues
 [build]: https://api.travis-ci.org/maccelerated/node-mojang.svg?branch=master
-[travis]: https://travis-ci.org/maccelerated/node-mojang[travis]
+[travis]: https://travis-ci.org/maccelerated/node-mojang
 [coverage]: https://codecov.io/gh/maccelerated/node-mojang/branch/master/graph/badge.svg
 [codecov]: https://codecov.io/gh/maccelerated/node-mojang
 
