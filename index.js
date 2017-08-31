@@ -15,6 +15,7 @@ exports.getChallenges = require('./src/security/get-challenges')
 exports.answerChallenges = require('./src/security/answer-challenges')
 
 exports.getSession = require('./src/session/get-session')
+exports.getBlockedServers = require('./src/session/get-blocked-servers')
 
 exports.getUser = require('./src/mojang/get-user')
 exports.getUserProfiles = require('./src/mojang/get-user-profiles')

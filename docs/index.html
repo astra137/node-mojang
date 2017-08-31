@@ -185,6 +185,16 @@
               
                 
                 <li><a
+                  href='#getblockedservers'
+                  class="">
+                  getBlockedServers
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#getuser'
                   class="">
                   getUser
@@ -1778,6 +1788,62 @@
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='getblockedservers'>
+      getBlockedServers
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Returns a list of SHA1 hashes used to check server addresses against when the client tries to connect.</p>
+<p><em>See <a href="http://wiki.vg/Mojang_API#Blocked_Servers">http://wiki.vg/Mojang_API#Blocked_Servers</a> for how this list is used.</em></p>
+
+
+  <div class='pre p1 fill-light mt0'>getBlockedServers(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>>></code>:
+        resolves to a list of address hashes
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='getuser'>
       getUser
     </h3>
@@ -1855,7 +1921,7 @@
   </div>
   
 
-  <p>Gets a list of a logged-in user's game profiles.</p>
+  <p>Gets a list of all of a logged-in user's game profiles.</p>
 
 
   <div class='pre p1 fill-light mt0'>getUserProfiles(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#mojangprofile">MojangProfile</a>>></div>
