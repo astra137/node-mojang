@@ -5,8 +5,12 @@
 [travis]: https://travis-ci.org/maccelerated/node-mojang
 [coverage]: https://codecov.io/gh/maccelerated/node-mojang/branch/master/graph/badge.svg
 [codecov]: https://codecov.io/gh/maccelerated/node-mojang
+[deps]: https://dependencyci.com/github/maccelerated/node-mojang/badge
+[depci]: https://dependencyci.com/github/maccelerated/node-mojang
+[vuln]: https://snyk.io/test/github/maccelerated/node-mojang/badge.svg
+[snyk]: https://snyk.io/test/github/maccelerated/node-mojang
 
-# mojang [![travisci][build]][travis] [![codecov][coverage]][codecov]
+# mojang [![Build Status][build]][travis] [![Coverage][coverage]][codecov] [![Dependency Status][deps]][depci] [![Known Vulnerabilities][vuln]][snyk]
 
 > Unofficial Node.js library for Mojang's HTTP APIs
 
@@ -20,7 +24,7 @@ $ npm install mojang
 ```
 
 ## Usage
-Read the [documentation][docs] or look in [examples/](/tree/master/examples) and [test/](/tree/master/test) folders.
+Read the [documentation][docs] or look in [examples/](/examples) and [test/](/test) folders.
 
 ```js
 const mojang = require('mojang')
