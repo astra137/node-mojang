@@ -1,7 +1,7 @@
 {
   "name": "mojang",
   "version": "1.0.0-rc",
-  "description": "Unofficial Node.js library for nearly all of Mojang's HTTP APIs.",
+  "description": "Unofficial Node.js library for Mojang's HTTP APIs",
   "main": "index.js",
   "scripts": {
     "docs": "documentation build index.js -f html -o docs",
