@@ -1,8 +1,8 @@
 # mojang [![Build Status](https://travis-ci.org/jamen/node-mojang.svg?branch=master)](https://travis-ci.org/jamen/node-mojang)
 
-> An async Node.js library that wraps Mojang's HTTP APIs.
+> The most complete Node.js library for Mojang's HTTP APIs.
 
-Includes the functions described on the [Minecraft modern wiki](http://wiki.vg/Main_Page), as well as several equally-important but undocumented endpoints. Please use [GitHub Issues](https://github.com/jamen/node-mojang/issues) to submit a bug, request an example, or report a missing feature.
+Includes the functions described on the [Minecraft modern wiki](http://wiki.vg/Main_Page), as well as several equally-important but undocumented endpoints. Every function makes a single HTTP request. This library requires Internet access to do anything. Please use [GitHub Issues](https://github.com/jamen/node-mojang/issues) to submit a bug, request an example, or report a missing feature.
 
 ## Install
 ```shell
@@ -22,7 +22,7 @@ mojang.authenticate('email@domain.tld', 'mojang secret')
 ```
 
 ## Testing
-> Rate limit errors look like `Invalid credentials. Invalid username or password.`
+> Rate limit errors may look like `Invalid credentials. Invalid username or password.`
 
 ```shell
 $ npm test
