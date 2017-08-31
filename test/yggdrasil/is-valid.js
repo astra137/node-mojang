@@ -32,3 +32,20 @@ test('resolves false with an invalid accessToken or clientToken', async t => {
   const valid = await isValid('invalid', 'orwrongclient')
   t.false(valid)
 })
+
+// API behavior observed 17.08.2017 by maccelerated
+test('rejects with API error that is not about an invalid token', async t => {
+  nock('https://authserver.mojang.com')
+    .post('/validate', {
+      accessToken: 'goodtoken',
+      clientToken: 'clientoken'
+    })
+    .reply(400, {
+      error: 'FakeErrorException',
+      errorMessage: 'Whoops'
+    })
+
+  const err = await t.throws(isValid('goodtoken', 'clientoken'))
+  t.is(err.message, 'Whoops')
+  t.is(err.name, 'FakeErrorException')
+})
