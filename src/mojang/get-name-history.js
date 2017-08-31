@@ -6,7 +6,7 @@ const {USER_AGENT, MOJANG_API} = require('../constants')
  * Gets all name changes for a given player's profile UUID.
  *
  * @param {String} profileId - profile UUID (does not work with user UUID)
- * @returns {Promise.<Array>} resolves with `[{name, changedToAt}]`
+ * @returns {Promise<{name: String, changedToAt: Number}[]>} resolves if profile exists
  * @see {@link http://wiki.vg/Mojang_API#UUID_-.3E_Name_history}
  */
 function getNameHistory (profileId) {

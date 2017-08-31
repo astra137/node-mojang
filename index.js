@@ -3,6 +3,7 @@ exports.check = require('./src/status/check')
 exports.getNameHistory = require('./src/mojang/get-name-history')
 exports.getProfileAt = require('./src/mojang/get-profile-at')
 exports.getProfiles = require('./src/mojang/get-profiles')
+exports.getOrdersStatistics = require('./src/mojang/get-orders-statistics')
 
 exports.authenticate = require('./src/yggdrasil/authenticate')
 exports.isValid = require('./src/yggdrasil/is-valid')
