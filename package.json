@@ -3,12 +3,6 @@
   "version": "1.0.0-rc",
   "description": "Unofficial Node.js library for Mojang's HTTP APIs",
   "main": "index.js",
-  "scripts": {
-    "docs": "documentation build index.js -f html -o docs",
-    "lint": "eslint index.js src/ test/",
-    "test": "nyc ava",
-    "test-online": "ava -c 1 test-online/"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jamen/node-mojang.git"
@@ -26,6 +20,17 @@
     "url": "https://github.com/jamen/node-mojang/issues"
   },
   "homepage": "https://github.com/jamen/node-mojang",
+  "scripts": {
+    "docs": "documentation build index.js -f html -o docs",
+    "lint": "eslint index.js src/ test/",
+    "test": "nyc ava",
+    "test-online": "ava -c 1 test-online/",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+  },
+  "dependencies": {
+    "got": "^7.1.0",
+    "js-base64": "^2.1.9"
+  },
   "devDependencies": {
     "ava": "^0.22.0",
     "codecov": "^2.3.0",
@@ -39,9 +44,5 @@
     "eslint-plugin-standard": "^3.0.1",
     "nock": "^9.0.13",
     "nyc": "^11.1.0"
-  },
-  "dependencies": {
-    "got": "^7.1.0",
-    "js-base64": "^2.1.9"
   }
 }

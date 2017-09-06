@@ -2,7 +2,5 @@ language: node_js
 node_js:
   - node
   - lts/*
-
 after_success:
-  - ./node_modules/.bin/nyc report --reporter lcovonly -- -R spec
-  - codecov
+  - npm run coverage
