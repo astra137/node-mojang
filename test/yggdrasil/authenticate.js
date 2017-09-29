@@ -7,7 +7,8 @@ test('resolves with accessToken and clientToken', async t => {
   nock('https://authserver.mojang.com')
     .post('/authenticate', {
       username: 'user@domain.tld',
-      password: 'user secret'
+      password: 'user secret',
+      requestUser: true
     })
     .reply(200, {
       accessToken: '64e594b461a8c348a81005a43bcbf00d',
@@ -24,7 +25,8 @@ test('rejects with API\'s error on invalid credentials', async t => {
   nock('https://authserver.mojang.com')
     .post('/authenticate', {
       username: 'user@domain.tld',
-      password: 'incorrect secret'
+      password: 'incorrect secret',
+      requestUser: true
     })
     .reply(403, {
       error: 'ForbiddenOperationException',

@@ -36,7 +36,9 @@ test('rejects with invalid tokens', async t => {
   nock('https://authserver.mojang.com')
     .post('/refresh', {
       accessToken: 'invalid',
-      clientToken: 'client'
+      clientToken: 'client',
+      selectedProfile: null,
+      requestUser: true
     })
     .reply(403, {
       error: 'ForbiddenOperationException',
