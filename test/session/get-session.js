@@ -93,7 +93,7 @@ test('rejects if textures is missing', async t => {
     })
 
   const err = await t.throws(getSession('c32b3ba80aa6d20e8a118b595e6b838d'))
-  t.is(err.message, `Cannot read property 'name' of undefined`)
+  t.is(err.message, `Cannot read property 'value' of undefined`)
 })
 
 // API behavior observed 22.08.2017 by maccelerated

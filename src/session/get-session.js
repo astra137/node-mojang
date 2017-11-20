@@ -1,5 +1,6 @@
 const got = require('got')
 const {Base64} = require('js-base64')
+const onApiError = require('../on-api-error')
 const {USER_AGENT, SESSION_API} = require('../constants')
 
 /**
@@ -18,17 +19,10 @@ function getSession (profileId) {
     headers: { 'user-agent': USER_AGENT },
     json: true
   })
-    .catch(err => {
-      if (err.response) {
-        err.name = err.response.body.error
-        err.message = err.response.body.errorMessage
-      }
-      throw err
-    })
+    .catch(onApiError)
     .then(res => {
       if (res.statusCode === 204) throw new Error('no such profile')
       const {id, name, properties} = res.body
-      if (properties[0].name !== 'textures') throw new Error(`textures missing: ${id}`)
       const {timestamp, textures} = JSON.parse(Base64.decode(properties[0].value))
       const {SKIN, CAPE} = textures
       return {
