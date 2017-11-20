@@ -10,7 +10,7 @@ const {USER_AGENT, YGGDRASIL_API} = require('../constants')
   * @param {Object} [selectedProfile] - use only with access tokens that were **not** assigned a game profile
   * @param {String} selectedProfile.id - profile UUID
   * @param {String} selectedProfile.name - profile name (IGN)
- * @returns {Promise<MojangSession>} resolves if the Mojang gods are feeling generous
+  * @returns {Promise<MojangSession>} resolves if the Mojang gods are feeling generous
   * @see {@link http://wiki.vg/Authentication#Refresh}
   * @example
   * if (!await mojang.isValid(accessToken, clientToken)) {
