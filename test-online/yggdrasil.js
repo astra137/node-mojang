@@ -1,12 +1,13 @@
+/* eslint-disable ava/no-ignored-test-files */
+
 const test = require('ava')
 const mojang = require('..')
 
 const {USERNAME, PASSWORD, CLIENT_TOKEN} = process.env
+
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 test('yggdrasil integration', async t => {
-  await delay(30000)
-
   // create unprofiled session
   const session = await mojang.authenticate(USERNAME, PASSWORD, CLIENT_TOKEN)
   t.is(session.clientToken, CLIENT_TOKEN)

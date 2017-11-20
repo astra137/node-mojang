@@ -36,15 +36,18 @@ mojang.authenticate('email@domain.tld', 'mojang secret')
 ```
 
 ## Integration Testing
-Optionally create *.env* file for `node-foreman` to load values out of.
+Create *.env* file for `env-cmd` to load values out of. Wait a minute between tests.
 
 ```
+# security, yggdrasil, change-skin
 CLIENT_TOKEN=<random UUID>
 USERNAME=<mojang email>
 PASSWORD=<mojang secret>
+# security
 ANSWER1=<secret answer>
 ANSWER2=<secret answer>
 ANSWER3=<secret answer>
+# change-skin
 PROFILE_ID=<game profile to change skin>
 SKIN_URL=<url of skin image to change to>
 USE_SLIM=<leave blank or use "slim">
@@ -53,9 +56,9 @@ USE_SLIM=<leave blank or use "slim">
 > Rate limit errors may look like `Invalid credentials. Invalid username or password.`
 
 ```shell
-$ nf run npx ava test-online/yggdrasil.js
-$ nf run npx ava test-online/security.js
-$ nf run node examples/change-skin.js
+$ npx env-cmd .env npx ava test-online/yggdrasil.js
+$ npx env-cmd .env npx ava test-online/security.js
+$ npx env-cmd .env node examples/change-skin.js
 ```
 
 ## Related
