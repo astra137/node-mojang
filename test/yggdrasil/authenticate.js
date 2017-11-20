@@ -38,3 +38,24 @@ test('rejects with API\'s error on invalid credentials', async t => {
   t.is(err.name, 'ForbiddenOperationException')
   t.is(err.statusCode, 403)
 })
+
+// API behavior spoofed, based on http://wiki.vg/Authentication#Errors
+test('rejects with cause if account is migrated', async t => {
+  nock('https://authserver.mojang.com')
+    .post('/authenticate', {
+      username: 'username',
+      password: 'other secret',
+      requestUser: true
+    })
+    .reply(403, {
+      error: 'ForbiddenOperationException',
+      errorMessage: 'Invalid credentials. Account migrated, use e-mail as username.',
+      cause: 'UserMigratedException'
+    })
+
+  const err = await t.throws(authenticate('username', 'other secret'))
+  t.is(err.message, 'Invalid credentials. Account migrated, use e-mail as username.')
+  t.is(err.name, 'ForbiddenOperationException')
+  t.is(err.cause, 'UserMigratedException')
+  t.is(err.statusCode, 403)
+})
