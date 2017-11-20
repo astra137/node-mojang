@@ -51,7 +51,7 @@ test('resolves with scrolls profiles if specified', async t => {
 // A sort of input validation.
 test('rejects with got error if names is not array or string', async t => {
   const err = await t.throws(getProfiles('notch'))
-  t.is(err.message, 'options.body must be a plain Object or Array when options.form or options.json is used')
+  t.is(err.message, 'The `body` option must be a plain Object or Array when the `form` or `json` option is used')
 })
 
 // API behavior observed 30.08.2017 by maccelerated
