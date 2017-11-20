@@ -4,7 +4,7 @@ const onApiError = require('../src/on-api-error')
 
 // Like when authserver.mojang.com endpoints get bad credentials
 test(`injects API response into thrown error`, t => {
-  const originalError = new got.HTTPError(403, {}, {})
+  const originalError = new got.HTTPError(403, '', {}, {})
   originalError.response = {
     body: {
       error: 'ForbiddenOperationException',
@@ -18,7 +18,7 @@ test(`injects API response into thrown error`, t => {
 
 // Like when api.mojang.com endpoints require Authorization: Bearer ${accessToken}
 test(`injects www-authorization error description into thrown error`, t => {
-  const originalError = new got.HTTPError(401, {
+  const originalError = new got.HTTPError(401, '', {
     'www-authenticate': 'Bearer realm="Mojang", error="invalid_token", error_description="The access token is invalid"'
   }, {})
   originalError.response = {
@@ -34,7 +34,7 @@ test(`injects www-authorization error description into thrown error`, t => {
 
 // Just in case
 test(`gracefully handles empty api error response`, t => {
-  const originalError = new got.HTTPError(400, {}, {})
+  const originalError = new got.HTTPError(400, '', {}, {})
   originalError.response = {body: ''}
   const err = t.throws(() => onApiError(originalError))
   t.is(err.message, 'Response code 400 (Bad Request)')
