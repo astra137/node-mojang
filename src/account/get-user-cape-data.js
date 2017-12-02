@@ -7,12 +7,13 @@ const {USER_AGENT, MOJANG_API} = require('../constants')
  *
  * **I have no idea what this endpoint returns!**
  *
- * @param {String} accessToken - a valid access token for the user's account
+ * @param {Object} session - object from authentication
+ * @param {String} session.accessToken - valid access token for the user's account
  * @param {String} profileId - game profile UUID to look for capes in
  * @returns {Promise<Array>} resolves with an array of something
  * @see minecraft.net XHR requests
  */
-function getUserCapeData (accessToken, profileId) {
+function getUserCapeData ({accessToken}, profileId) {
   return got(`${MOJANG_API}/user/profile/${profileId}/cape`, {
     headers: {
       'user-agent': USER_AGENT,

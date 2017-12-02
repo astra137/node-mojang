@@ -5,18 +5,19 @@ const {USER_AGENT, YGGDRASIL_API} = require('../constants')
 /**
   * Checks if an access token is suitable for use with a Minecraft server.
   *
-  * @param {String} accessToken - a session access token
-  * @param {String} [clientToken] - must match the one used to obtain the access token
-  * @returns {Promise<Boolean>} resolves true if tokens are valid
+  * @param {Object} session - a session access token
+  * @param {String} session.accessToken - a session access token
+  * @param {String=} session.clientToken - must match the one used to obtain the access token
+  * @returns {Promise.<Boolean>} resolves true if tokens are valid
   * @see {@link http://wiki.vg/Authentication#Validate}
   * @example
-  * if (await mojang.isValid(accessToken, clientToken)) {
+  * if (await mojang.isValid(session)) {
   *   console.debug('access token still good')
   * } else {
   *   console.debug('access token has gone bad')
   * }
   */
-function isValid (accessToken, clientToken) {
+function isValid ({accessToken, clientToken}) {
   return got(`${YGGDRASIL_API}/validate`, {
     headers: { 'user-agent': USER_AGENT },
     json: true,

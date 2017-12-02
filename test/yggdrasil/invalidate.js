@@ -11,7 +11,9 @@ test('resolves with valid tokens', async t => {
     })
     .reply(204)
 
-  await invalidate('valid', 'whatever')
+  const accessToken = 'valid'
+  const clientToken = 'whatever'
+  await invalidate({accessToken, clientToken})
   t.pass()
 })
 
@@ -25,6 +27,8 @@ test('should also resolve with invalid tokens', async t => {
     })
     .reply(204)
 
-  await invalidate('invalid', 'whatever')
+  const accessToken = 'invalid'
+  const clientToken = 'whatever'
+  await invalidate({accessToken, clientToken})
   t.pass()
 })

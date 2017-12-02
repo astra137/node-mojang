@@ -1332,10 +1332,10 @@
 
   <p>Authenticates a user with their Mojang credentials.</p>
 <p><em>Use <code>agent</code> if session is for a game client, ie. a Minecraft launcher.</em></p>
-<p><strong>Handle access tokens securely.</strong></p>
+<p><strong>Handle access tokens securely, but they do invalidate easily. </strong></p>
 
 
-  <div class='pre p1 fill-light mt0'>authenticate(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?, agent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojangsession">MojangSession</a>></div>
+  <div class='pre p1 fill-light mt0'>authenticate(credentials: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojangsession">MojangSession</a>></div>
   
   
 
@@ -1352,37 +1352,8 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>username</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    username (email) of a Mojang account
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>password</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    password for the given account
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
-	    server will generate a client token if empty
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>agent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
-	    if valid, adds 
-<code>selectedProfile</code>
- to response
+            <span class='code bold'>credentials</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    the payload of the auth request
 
           </div>
           
@@ -1400,22 +1371,62 @@
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>agent.name</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  <td class='break-word'><span class='code bold'>credentials.username</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
   </td>
-  <td class='break-word'><span>name of the agent ('Minecraft' or 'Scrolls')
+  <td class='break-word'><span>email or username of a Mojang account
 </span></td>
 </tr>
 
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>agent.version</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
+  <td class='break-word'><span class='code bold'>credentials.password</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>password for the given account
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>credentials.clientToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?</code>
+  </td>
+  <td class='break-word'><span>if empty, server will generate a client token
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>credentials.agent</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span>if valid, adds 
+<code>selectedProfile</code>
+ to response
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>credentials.agent.name</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>name of the agent ('Minecraft' or 'Scrolls')
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>credentials.agent.version</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
   </td>
   <td class='break-word'><span>version number of the agent (use 
 <code>1</code>
 )
 </span></td>
 </tr>
+
+
+  
 
 
               
@@ -1445,12 +1456,12 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> clientToken = <span class="hljs-keyword">await</span> savedSettings.read(<span class="hljs-string">'clientToken'</span>)
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> clientToken = <span class="hljs-string">'loaded from settings'</span>
 <span class="hljs-keyword">const</span> agent = {<span class="hljs-attr">name</span>: <span class="hljs-string">'Minecraft'</span>, <span class="hljs-attr">version</span>: <span class="hljs-number">1</span>}
-<span class="hljs-keyword">const</span> session = <span class="hljs-keyword">await</span> mojang.authenticate(username, password, clientToken, agent)
-<span class="hljs-keyword">await</span> savedSettings.write(<span class="hljs-string">'accessToken'</span>, session.accessToken)
-<span class="hljs-keyword">await</span> savedSettings.write(<span class="hljs-string">'profileUuid'</span>, session.selectedProfile.id)
-<span class="hljs-built_in">console</span>.debug(<span class="hljs-string">'profile name'</span>, session.selectedProfile.name)
+<span class="hljs-keyword">const</span> session = <span class="hljs-keyword">await</span> mojang.authenticate({username, password, clientToken, agent})
+<span class="hljs-built_in">console</span>.debug(<span class="hljs-string">'access token'</span>, session.accessToken)
+<span class="hljs-built_in">console</span>.debug(<span class="hljs-string">'profile id'</span>, session.selectedProfile.id)
+<span class="hljs-built_in">console</span>.debug(<span class="hljs-string">'minecraft ign'</span>, session.selectedProfile.name)
 <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">'user id'</span>, session.user.id)</pre>
     
   
@@ -1481,7 +1492,7 @@
   <p>Checks if an access token is suitable for use with a Minecraft server.</p>
 
 
-  <div class='pre p1 fill-light mt0'>isValid(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>></div>
+  <div class='pre p1 fill-light mt0'>isValid(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>></div>
   
   
 
@@ -1498,19 +1509,44 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
 	    a session access token
 
           </div>
           
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
-	    must match the one used to obtain the access token
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>a session access token
+</span></td>
+</tr>
 
-          </div>
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.clientToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?</code>
+  </td>
+  <td class='break-word'><span>must match the one used to obtain the access token
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -1535,7 +1571,7 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">if</span> (<span class="hljs-keyword">await</span> mojang.isValid(accessToken, clientToken)) {
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">if</span> (<span class="hljs-keyword">await</span> mojang.isValid(session)) {
   <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">'access token still good'</span>)
 } <span class="hljs-keyword">else</span> {
   <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">'access token has gone bad'</span>)
@@ -1569,7 +1605,7 @@
   <p>Refreshes a given access token. May work on invalid access tokens (about 1 token back in time).</p>
 
 
-  <div class='pre p1 fill-light mt0'>refresh(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, selectedProfile: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojangsession">MojangSession</a>></div>
+  <div class='pre p1 fill-light mt0'>refresh(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojangsession">MojangSession</a>></div>
   
   
 
@@ -1586,28 +1622,8 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
 	    a session access token
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    must match the one used to obtain the access token
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>selectedProfile</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
-	    use only with access tokens that were 
-<strong>not</strong>
- assigned a game profile
 
           </div>
           
@@ -1625,20 +1641,51 @@
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>selectedProfile.id</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
   </td>
-  <td class='break-word'><span>profile UUID
+  <td class='break-word'><span>a session access token
 </span></td>
 </tr>
 
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>selectedProfile.name</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  <td class='break-word'><span class='code bold'>session.clientToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?</code>
+  </td>
+  <td class='break-word'><span>must match the one used to obtain the access token
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.selectedProfile</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span>use only with access tokens that were 
+<strong>not</strong>
+ assigned a game profile
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>session.selectedProfile.id</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>profile UUID
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>session.selectedProfile.name</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
   </td>
   <td class='break-word'><span>profile name (IGN)
 </span></td>
 </tr>
+
+
+  
 
 
               
@@ -1668,8 +1715,8 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">if</span> (!<span class="hljs-keyword">await</span> mojang.isValid(accessToken, clientToken)) {
-  <span class="hljs-keyword">const</span> nextSession = <span class="hljs-keyword">await</span> mojang.refresh(accessToken, clientToken)
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">if</span> (!<span class="hljs-keyword">await</span> mojang.isValid(session)) {
+  <span class="hljs-keyword">const</span> nextSession = <span class="hljs-keyword">await</span> mojang.refresh(session)
 }</pre>
     
   
@@ -1700,7 +1747,7 @@
   <p>Invalidate an access token.</p>
 
 
-  <div class='pre p1 fill-light mt0'>invalidate(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, clientToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+  <div class='pre p1 fill-light mt0'>invalidate(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
   
   
 
@@ -1717,19 +1764,44 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    a session access token
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    a session to end/invalidate
 
           </div>
           
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>clientToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
-	    must match the one used to obtain the access token
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>a session access token
+</span></td>
+</tr>
 
-          </div>
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.clientToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?</code>
+  </td>
+  <td class='break-word'><span>must match the one used to obtain the access token
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -1754,9 +1826,10 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>mojang.invalidate(accessToken, clientToken)
-  .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'logged out'</span>))
-  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.error(err))</pre>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> session = <span class="hljs-keyword">await</span> mojang.authenticate(credentials)
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'logged in'</span>, session.selectedProfile.name)
+<span class="hljs-keyword">await</span> mojang.invalidate(session)
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'logged out'</span>)</pre>
     
   
 
@@ -1786,7 +1859,7 @@
   <p>Invalidates access tokens of a given Mojang account.</p>
 
 
-  <div class='pre p1 fill-light mt0'>signout(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+  <div class='pre p1 fill-light mt0'>signout(credentials: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
   
   
 
@@ -1803,19 +1876,44 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>username</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    username (email) of a Mojang account
+            <span class='code bold'>credentials</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    account credentials
 
           </div>
           
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>password</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    password for the given account
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>credentials.username</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>email or username of a Mojang account
+</span></td>
+</tr>
 
-          </div>
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>credentials.password</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>password for the given account
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -1840,7 +1938,7 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>mojang.signout(username, password)
+      <pre class='p1 overflow-auto round fill-light'>mojang.signout({username, password})
   .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'user signed out'</span>))
   .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.error(err))</pre>
     
@@ -1872,7 +1970,7 @@
   <p><strong>Undocumented:</strong> Gets a logged-in user's IP security status for the current IP.</p>
 
 
-  <div class='pre p1 fill-light mt0'>isSecure(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>></div>
+  <div class='pre p1 fill-light mt0'>isSecure(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>></div>
   
   
 
@@ -1889,10 +1987,35 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    valid access token for the user's account
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    object from authentication
 
           </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>valid access token for the user's account
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -1947,7 +2070,7 @@
   <p><strong>Undocumented:</strong> Gets a logged-in user's security challenge questions.</p>
 
 
-  <div class='pre p1 fill-light mt0'>getChallenges(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#mojangchallenge">MojangChallenge</a>>></div>
+  <div class='pre p1 fill-light mt0'>getChallenges(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#mojangchallenge">MojangChallenge</a>>></div>
   
   
 
@@ -1964,10 +2087,35 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    valid access token for the user's account
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    object from authentication
 
           </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>valid access token for the user's account
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -2016,7 +2164,7 @@
   <p><strong>Undocumented:</strong> Submits a logged-in user's security challenge answers to trust the current IP.</p>
 
 
-  <div class='pre p1 fill-light mt0'>answerChallenges(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, answers: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+  <div class='pre p1 fill-light mt0'>answerChallenges(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, answers: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
   
   
 
@@ -2033,10 +2181,35 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    valid access token for the user's account
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    object from authentication
 
           </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>valid access token for the user's account
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -2071,13 +2244,13 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> challenges = <span class="hljs-keyword">await</span> getChallenges(accessToken)
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> challenges = <span class="hljs-keyword">await</span> getChallenges(session)
 <span class="hljs-keyword">const</span> answers = <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all(challenges.map(<span class="hljs-keyword">async</span> c =&gt; {
   <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> prompt(c.question.question)
   <span class="hljs-keyword">return</span> {<span class="hljs-attr">id</span>: c.answer.id, answer}
 }))
-<span class="hljs-keyword">await</span> answerChallenges(accessToken, answers) <span class="hljs-comment">// might throw</span>
-<span class="hljs-keyword">await</span> isSecure(accessToken) <span class="hljs-comment">// true if successful</span></pre>
+<span class="hljs-keyword">await</span> answerChallenges(session, answers) <span class="hljs-comment">// might throw</span>
+<span class="hljs-keyword">await</span> isSecure(session) <span class="hljs-comment">// true if successful</span></pre>
     
   
 
@@ -2234,7 +2407,7 @@
   <p>Gets a logged-in user's private Mojang account information.</p>
 
 
-  <div class='pre p1 fill-light mt0'>getUser(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojanguser">MojangUser</a>></div>
+  <div class='pre p1 fill-light mt0'>getUser(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#mojanguser">MojangUser</a>></div>
   
   
 
@@ -2251,10 +2424,35 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    valid access token for the user's account
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    object from authentication
 
           </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>valid access token for the user's account
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -2303,7 +2501,7 @@
   <p>Sets a logged-in user's in-game skin to an online image.</p>
 
 
-  <div class='pre p1 fill-light mt0'>setSkin(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, skinUrl: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, isSlim: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+  <div class='pre p1 fill-light mt0'>setSkin(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, skinUrl: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, isSlim: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
   
   
 
@@ -2320,10 +2518,35 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    valid access token for the user's account
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    object from authentication
 
           </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>valid access token for the user's account
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -2400,7 +2623,7 @@
   <p>Resets/deletes a logged-in user's in-game skin.</p>
 
 
-  <div class='pre p1 fill-light mt0'>resetSkin(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+  <div class='pre p1 fill-light mt0'>resetSkin(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
   
   
 
@@ -2417,10 +2640,35 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    valid access token for the user's account
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    object from authentication
 
           </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>valid access token for the user's account
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -2478,7 +2726,7 @@
   <p><strong>Undocumented:</strong> Gets a list of all of a logged-in user's game profiles.</p>
 
 
-  <div class='pre p1 fill-light mt0'>getUserProfiles(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#mojangprofile">MojangProfile</a>>></div>
+  <div class='pre p1 fill-light mt0'>getUserProfiles(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#mojangprofile">MojangProfile</a>>></div>
   
   
 
@@ -2495,10 +2743,35 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    a valid access token for the user's account
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    object from authentication
 
           </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>valid access token for the user's account
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -2548,7 +2821,7 @@
 <p><strong>I have no idea what this endpoint returns!</strong></p>
 
 
-  <div class='pre p1 fill-light mt0'>getUserCapeData(accessToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></div>
+  <div class='pre p1 fill-light mt0'>getUserCapeData(session: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, profileId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>></div>
   
   
 
@@ -2565,10 +2838,35 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>accessToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    a valid access token for the user's account
+            <span class='code bold'>session</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    object from authentication
 
           </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>session.accessToken</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>valid access token for the user's account
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
           
         </div>
       

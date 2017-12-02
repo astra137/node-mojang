@@ -9,35 +9,41 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 test('yggdrasil integration', async t => {
   // create unprofiled session
-  const session = await mojang.authenticate(USERNAME, PASSWORD, CLIENT_TOKEN)
+  const credentials = {
+    username: USERNAME,
+    password: PASSWORD,
+    clientToken: CLIENT_TOKEN
+  }
+
+  const session = await mojang.authenticate(credentials)
   t.is(session.clientToken, CLIENT_TOKEN)
 
   // access token is good
   await delay(1000)
-  t.true(await mojang.isValid(session.accessToken, CLIENT_TOKEN))
+  t.true(await mojang.isValid(session))
 
   // refresh session
   await delay(1000)
-  const nextSession = await mojang.refresh(session.accessToken, CLIENT_TOKEN)
+  const nextSession = await mojang.refresh(session)
   t.not(nextSession.accessToken, session.accessToken)
 
   // old access token is bad
   await delay(1000)
-  t.false(await mojang.isValid(session.accessToken, CLIENT_TOKEN))
+  t.false(await mojang.isValid(session))
 
   // new access token is good
   await delay(1000)
-  t.true(await mojang.isValid(nextSession.accessToken, CLIENT_TOKEN))
+  t.true(await mojang.isValid(nextSession))
 
   // invalidate newest access token
   await delay(1000)
-  await mojang.invalidate(nextSession.accessToken, CLIENT_TOKEN)
+  await mojang.invalidate(nextSession)
 
   // newest access token is also bad
   await delay(1000)
-  t.false(await mojang.isValid(nextSession.accessToken, CLIENT_TOKEN))
+  t.false(await mojang.isValid(nextSession))
 
   // signout for good measure
   await delay(1000)
-  await mojang.signout(USERNAME, PASSWORD)
+  await mojang.signout(credentials)
 })

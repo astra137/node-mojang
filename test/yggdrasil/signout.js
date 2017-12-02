@@ -11,7 +11,9 @@ test('resolves with valid credentials', async t => {
     })
     .reply(204)
 
-  await signout('valid@user.com', 'password')
+  const username = 'valid@user.com'
+  const password = 'password'
+  await signout({username, password})
   t.pass()
 })
 
@@ -27,7 +29,9 @@ test('rejects with invalid credentials', async t => {
       errorMessage: 'Invalid credentials. Invalid username or password.'
     })
 
-  const err = await t.throws(signout('invalid@user.com', 'password'))
+  const username = 'invalid@user.com'
+  const password = 'password'
+  const err = await t.throws(signout({username, password}))
   t.is(err.message, 'Invalid credentials. Invalid username or password.')
   t.is(err.name, 'ForbiddenOperationException')
   t.is(err.statusCode, 403)

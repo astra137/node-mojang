@@ -8,7 +8,6 @@ test('returns a new access and client token', async t => {
     .post('/refresh', {
       accessToken: 'oldvalid',
       clientToken: 'client',
-      selectedProfile: null,
       requestUser: true
     })
     .reply(200, {
@@ -24,7 +23,9 @@ test('returns a new access and client token', async t => {
       }
     })
 
-  const nextSession = await refresh('oldvalid', 'client', null, true)
+  const accessToken = 'oldvalid'
+  const clientToken = 'client'
+  const nextSession = await refresh({accessToken, clientToken})
   t.is(nextSession.accessToken, 'newvalid')
   t.is(nextSession.clientToken, 'client')
   t.truthy(nextSession.selectedProfile)
@@ -37,7 +38,6 @@ test('rejects with invalid tokens', async t => {
     .post('/refresh', {
       accessToken: 'invalid',
       clientToken: 'client',
-      selectedProfile: null,
       requestUser: true
     })
     .reply(403, {
@@ -45,7 +45,9 @@ test('rejects with invalid tokens', async t => {
       errorMessage: 'Invalid token'
     })
 
-  const err = await t.throws(refresh('invalid', 'client', null, true))
+  const accessToken = 'invalid'
+  const clientToken = 'client'
+  const err = await t.throws(refresh({accessToken, clientToken}))
   t.is(err.message, 'Invalid token')
   t.is(err.name, 'ForbiddenOperationException')
   t.is(err.statusCode, 403)

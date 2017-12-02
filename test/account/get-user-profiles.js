@@ -24,7 +24,8 @@ test('resolves with a valid access token', async t => {
       }
     ])
 
-  const list = await getUserProfiles('goodaccesstoken')
+  const accessToken = 'goodaccesstoken'
+  const list = await getUserProfiles({accessToken})
   t.is(list.length, 1)
   t.truthy(list[0].name)
 })
@@ -44,7 +45,8 @@ test('wraps api error on bad access token', async t => {
       'WWW-Authenticate': 'Bearer realm="Mojang", error="invalid_token", error_description="The access token is invalid"'
     })
 
-  const err = await t.throws(getUserProfiles('badormissing'))
+  const accessToken = 'badormissing'
+  const err = await t.throws(getUserProfiles({accessToken}))
   t.is(err.message, 'The access token is invalid')
   t.is(err.name, 'Unauthorized')
 })

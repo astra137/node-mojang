@@ -4,9 +4,11 @@ const {getUser} = require('../..')
 
 // API behavior observed 30.08.2017 by maccelerated
 test('resolves with a valid access token', async t => {
+  const accessToken = 'goodaccesstoken'
+
   nock('https://api.mojang.com', {
     reqheaders: {
-      'authorization': 'Bearer goodaccesstoken'
+      'authorization': `Bearer ${accessToken}`
     }
   })
     .get('/user')
@@ -34,15 +36,17 @@ test('resolves with a valid access token', async t => {
       'hashed': false
     })
 
-  const info = await getUser('goodaccesstoken')
+  const info = await getUser({accessToken})
   t.truthy(info.username)
 })
 
 // API behavior observed 30.08.2017 by maccelerated
 test('wraps api error on bad access token', async t => {
+  const accessToken = 'badormissing'
+
   nock('https://api.mojang.com', {
     reqheaders: {
-      'authorization': 'Bearer badormissing'
+      'authorization': `Bearer ${accessToken}`
     }
   })
     .get('/user')
@@ -53,7 +57,7 @@ test('wraps api error on bad access token', async t => {
       'WWW-Authenticate': 'Bearer realm="Mojang", error="invalid_token", error_description="The access token is invalid"'
     })
 
-  const err = await t.throws(getUser('badormissing'))
+  const err = await t.throws(getUser({accessToken}))
   t.is(err.message, 'The access token is invalid')
   t.is(err.name, 'UnauthorizedOperationException')
 })

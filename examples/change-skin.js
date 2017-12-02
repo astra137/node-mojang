@@ -9,22 +9,22 @@ async function changeSkin () {
     const newSkinUrl = process.env.SKIN_URL
     const useSlim = process.env.USE_SLIM
 
-    const {accessToken} = await mojang.authenticate(username, password, clientToken)
+    const session = await mojang.authenticate(username, password, clientToken)
 
     await new Promise(resolve => setTimeout(resolve, 1000))
-    const isAccessValid = await mojang.isValid(accessToken, clientToken)
+    const isAccessValid = await mojang.isValid(session)
     if (!isAccessValid) throw new Error('bad access token')
 
-    const canUploadSkin = await mojang.isSecure(accessToken)
+    const canUploadSkin = await mojang.isSecure(session)
     if (!canUploadSkin) throw new Error('log into minecraft.net first')
 
-    await mojang.setSkin(accessToken, profileId, newSkinUrl, Boolean(useSlim))
+    await mojang.setSkin(session, profileId, newSkinUrl, Boolean(useSlim))
 
     await new Promise(resolve => setTimeout(resolve, 5000))
 
     const {name, timestamp, skin, isSlim} = await mojang.getSession(profileId)
 
-    console.log('accessToken', accessToken)
+    console.log('accessToken', session.accessToken)
     console.log('name', name)
     console.log('timestamp', new Date(timestamp))
     console.log('skin', skin)

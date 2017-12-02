@@ -17,7 +17,8 @@ test('resolves with access token and security answers', async t => {
     ])
     .reply(204)
 
-  await answerChallenges('goodaccesstoken', [
+  const accessToken = 'goodaccesstoken'
+  await answerChallenges({accessToken}, [
     {'id': 200000006, 'answer': 'pet'},
     {'id': 200000007, 'answer': 'movie'},
     {'id': 200000008, 'answer': 'age'}
@@ -43,7 +44,8 @@ test('rejects and wraps incorrect answer error', async t => {
       'errorMessage': 'At least one answer was incorrect'
     })
 
-  const err = await t.throws(answerChallenges('otheraccesstoken', [
+  const accessToken = 'otheraccesstoken'
+  const err = await t.throws(answerChallenges({accessToken}, [
     {'id': 200000006, 'answer': 'wrong pet'},
     {'id': 200000007, 'answer': 'movie'},
     {'id': 200000008, 'answer': 'age'}
@@ -72,7 +74,8 @@ test('rejects if access token is bad', async t => {
       'WWW-Authenticate': `Bearer realm="Mojang", error="invalid_token", error_description="The access token is invalid"`
     })
 
-  const err = await t.throws(answerChallenges('badaccesstoken', [
+  const accessToken = 'badaccesstoken'
+  const err = await t.throws(answerChallenges({accessToken}, [
     {'id': 200000006, 'answer': 'pet'},
     {'id': 200000007, 'answer': 'movie'},
     {'id': 200000008, 'answer': 'age'}

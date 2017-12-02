@@ -4,9 +4,11 @@ const {getChallenges} = require('../..')
 
 // API behavior observed 28.08.2017 by maccelerated
 test('resolves with valid access token', async t => {
+  const accessToken = 'goodaccesstoken'
+
   nock('https://api.mojang.com', {
     reqheaders: {
-      'authorization': 'Bearer goodaccesstoken'
+      'authorization': `Bearer ${accessToken}`
     }
   })
     .get('/user/security/challenges')
@@ -40,7 +42,7 @@ test('resolves with valid access token', async t => {
       }
     ])
 
-  const list = await getChallenges('goodaccesstoken')
+  const list = await getChallenges({accessToken})
   t.is(list[0].question.id, 1)
   t.is(list[0].answer.id, 200000006)
 })
@@ -61,7 +63,7 @@ test('rejects if access token is bad', async t => {
       'WWW-Authenticate': `Bearer realm="Mojang", error="invalid_token", error_description="The access token is invalid"`
     })
 
-  const err = await t.throws(getChallenges(accessToken))
+  const err = await t.throws(getChallenges({accessToken}))
   t.is(err.message, 'The access token is invalid')
   t.is(err.name, 'Unauthorized')
 })
