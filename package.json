@@ -1,6 +1,6 @@
 {
   "name": "mojang",
-  "version": "1.0.0-rc",
+  "version": "2.0.0",
   "description": "Unofficial Node.js library for Mojang's HTTP APIs",
   "main": "index.js",
   "repository": {
@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/jamen/node-mojang/issues"
   },
-  "homepage": "https://github.com/jamen/node-mojang",
+  "homepage": "https://github.com/jamen/node-mojang#readme",
   "scripts": {
     "docs": "documentation build index.js -f html -o docs",
     "lint": "eslint index.js src/ test/",
