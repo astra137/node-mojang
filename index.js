@@ -1,5 +1,6 @@
 exports.check = require('./src/status/check')
 
+exports.getProfile = require('./src/mojang/get-profile')
 exports.getNameHistory = require('./src/mojang/get-name-history')
 exports.getProfileAt = require('./src/mojang/get-profile-at')
 exports.getProfiles = require('./src/mojang/get-profiles')
