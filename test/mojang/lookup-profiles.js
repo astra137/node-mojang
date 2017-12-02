@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const {getProfiles} = require('../..')
+const {lookupProfiles} = require('../..')
 
 // API behavior observed 30.08.2017 by maccelerated
 test('resolves with minecraft profiles by default', async t => {
@@ -21,7 +21,7 @@ test('resolves with minecraft profiles by default', async t => {
       }
     ])
 
-  const list = await getProfiles(['notch', 'move99', 'nonExistingPlayer'])
+  const list = await lookupProfiles(['notch', 'move99', 'nonExistingPlayer'])
   t.is(list.length, 2, 'only two of the given names exist')
   t.is(list[0].name, 'Move99', 'name is case-corrected')
   t.is(list[1].name, 'Notch', 'name is case-corrected')
@@ -42,7 +42,7 @@ test('resolves with scrolls profiles if specified', async t => {
       }
     ])
 
-  const list = await getProfiles(['jeb'], 'scrolls')
+  const list = await lookupProfiles(['jeb'], 'scrolls')
   t.is(list[0].name, 'jeb')
   t.falsy(list[0].legacy)
   t.falsy(list[0].demo)
@@ -50,7 +50,7 @@ test('resolves with scrolls profiles if specified', async t => {
 
 // A sort of input validation.
 test('rejects with got error if names is not array or string', async t => {
-  const err = await t.throws(getProfiles('notch'))
+  const err = await t.throws(lookupProfiles('notch'))
   t.is(err.message, 'The `body` option must be a plain Object or Array when the `form` or `json` option is used')
 })
 
@@ -63,7 +63,7 @@ test('rejects with API error if profile name is null or empty', async t => {
       'errorMessage': 'profileName can not be null or empty.'
     })
 
-  const err = await t.throws(getProfiles(['']))
+  const err = await t.throws(lookupProfiles(['']))
   t.is(err.message, `profileName can not be null or empty.`)
   t.is(err.name, `IllegalArgumentException`)
 })
@@ -78,7 +78,7 @@ test('rejects with API error if list is undefined', async t => {
       'errorMessage': 'profileNames is null'
     })
 
-  const err = await t.throws(getProfiles())
+  const err = await t.throws(lookupProfiles())
   t.is(err.message, `profileNames is null`)
   t.is(err.name, `IllegalArgumentException`)
 })
@@ -93,7 +93,7 @@ test('rejects with API error if list is an object', async t => {
     .post('/profiles/minecraft', {})
     .reply(400, apiError)
 
-  const err = await t.throws(getProfiles({}))
+  const err = await t.throws(lookupProfiles({}))
   t.is(err.message, apiError.errorMessage)
   t.is(err.name, apiError.error)
 })

@@ -7,7 +7,7 @@ const {USER_AGENT, STATUS_API} = require('../constants')
  * @returns {Promise<Array>} resolves a list like `[{hostname, color, isAvailable, hasIssues}]`
  * @see {@link http://wiki.vg/Mojang_API#API_Status}
  */
-function check () {
+function status () {
   return got(`${STATUS_API}/check`, {
     headers: { 'user-agent': USER_AGENT },
     json: true
@@ -25,4 +25,4 @@ function check () {
     }, []))
 }
 
-module.exports = check
+module.exports = status

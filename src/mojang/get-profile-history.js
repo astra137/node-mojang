@@ -9,7 +9,8 @@ const {USER_AGENT, MOJANG_API} = require('../constants')
  * @returns {Promise<{name: String, changedToAt: Number}[]>} resolves if profile exists
  * @see {@link http://wiki.vg/Mojang_API#UUID_-.3E_Name_history}
  */
-function getNameHistory (profileId) {
+function getProfileHistory (profileId) {
+  // BASE/user/profile/:id/names also seems to provide the same endpoint
   return got(`${MOJANG_API}/user/profiles/${profileId}/names`, {
     headers: {'user-agent': USER_AGENT},
     json: true
@@ -24,4 +25,4 @@ function getNameHistory (profileId) {
     })
 }
 
-module.exports = getNameHistory
+module.exports = getProfileHistory

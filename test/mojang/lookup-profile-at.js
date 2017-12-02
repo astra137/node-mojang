@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const {getProfileAt} = require('../..')
+const {lookupProfileAt} = require('../..')
 
 test('resolves with a valid username', async t => {
   // behavior observed 23.08.2017 by maccelerated
@@ -11,7 +11,7 @@ test('resolves with a valid username', async t => {
       'name': 'Notch'
     })
 
-  const info = await getProfileAt('notch')
+  const info = await lookupProfileAt('notch')
   t.is(info.id, '069a79f444e94726a5befca90e38aaf5')
 })
 
@@ -24,7 +24,7 @@ test('resolves with name and date', async t => {
       'name': 'MoVo99'
     })
 
-  const info = await getProfileAt('MoVo99', 1503335853700)
+  const info = await lookupProfileAt('MoVo99', 1503335853700)
   t.is(info.id, '47c49720c9ee42009ef05e1c4cd2760c')
 })
 
@@ -34,7 +34,7 @@ test('rejects with invalid username', async t => {
     .get('/users/profiles/minecraft/notrealusername')
     .reply(204)
 
-  const err = await t.throws(getProfileAt('notrealusername'))
+  const err = await t.throws(lookupProfileAt('notrealusername'))
   t.is(err.message, 'so such name at time: notrealusername')
 })
 
@@ -44,7 +44,7 @@ test('rejects if username did not exist at the time', async t => {
     .get('/users/profiles/minecraft/notch?at=0')
     .reply(204)
 
-  const err = await t.throws(getProfileAt('notch', 0))
+  const err = await t.throws(lookupProfileAt('notch', 0))
   t.is(err.message, 'so such name at time: notch')
 })
 
@@ -57,7 +57,7 @@ test('rejects wrapped error on invalid timestamp', async t => {
       'errorMessage': 'Invalid timestamp.'
     })
 
-  const err = await t.throws(getProfileAt('notrealusername', 'badtimestamp'))
+  const err = await t.throws(lookupProfileAt('notrealusername', 'badtimestamp'))
   t.is(err.name, 'IllegalArgumentException')
   t.is(err.message, 'Invalid timestamp.')
 })

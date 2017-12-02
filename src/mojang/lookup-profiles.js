@@ -18,11 +18,8 @@ const {USER_AGENT, MOJANG_API} = require('../constants')
   *   const list = await getProfiles(names)
   *   return list.filter(({demo}) => !demo)
   * }
-  *
-  * const paidProfiles = await getProfiles(['notch', 'nonExistingPlayer'])
-  * // [{id: '...', name: 'Notch'}]
   */
-function getProfiles (names, agent = 'minecraft') {
+function lookupProfiles (names, agent = 'minecraft') {
   return got(`${MOJANG_API}/profiles/${agent}`, {
     headers: {'user-agent': USER_AGENT},
     json: true,
@@ -33,4 +30,4 @@ function getProfiles (names, agent = 'minecraft') {
     .then(res => res.body)
 }
 
-module.exports = getProfiles
+module.exports = lookupProfiles

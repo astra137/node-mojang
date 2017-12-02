@@ -3,19 +3,19 @@ const onApiError = require('../on-api-error')
 const {USER_AGENT, MOJANG_API} = require('../constants')
 
 /**
- * Gets an abbreviated game profile at a given timestamp.
+ * Gets an abbreviated game profile at a given timestamp for an IGN name.
  *
- * **Prefer {@link getProfiles} when looking up current data.**
+ * **Prefer {@link lookupProfiles} when looking up current data.**
  *
  * @param {String} name - current profile name (IGN) of the user
  * @param {Number} [date] - UNIX timestamp to check the username at
  * @param {String} [agent] - game agent to check against
- * @returns {Promise.<Object>} resolves with `{id, name, legacy?, demo?}`
+ * @returns {Promise<Object>} resolves with `{id, name, legacy?, demo?}`
  * @see {@link http://wiki.vg/Mojang_API#Username_-.3E_UUID_at_time}
  * @example
- * const {id, name, legacy, demo} = await getProfileAt('Notch', 1503335853700)
+ * const {id, name, legacy, demo} = await lookupProfileAt('Notch', 1503335853700)
  */
-function getProfileAt (name, date, agent = 'minecraft') {
+function lookupProfileAt (name, date, agent = 'minecraft') {
   const hasDate = typeof date !== 'undefined'
   const query = hasDate
     ? `/users/profiles/${agent}/${name}?at=${date}`
@@ -35,4 +35,4 @@ function getProfileAt (name, date, agent = 'minecraft') {
     })
 }
 
-module.exports = getProfileAt
+module.exports = lookupProfileAt

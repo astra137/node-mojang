@@ -1,9 +1,9 @@
-exports.check = require('./src/status/check')
 
+exports.status = require('./src/mojang/status')
 exports.getProfile = require('./src/mojang/get-profile')
-exports.getNameHistory = require('./src/mojang/get-name-history')
-exports.getProfileAt = require('./src/mojang/get-profile-at')
-exports.getProfiles = require('./src/mojang/get-profiles')
+exports.getProfileHistory = require('./src/mojang/get-profile-history')
+exports.lookupProfiles = require('./src/mojang/lookup-profiles')
+exports.lookupProfileAt = require('./src/mojang/lookup-profile-at')
 exports.getOrdersStatistics = require('./src/mojang/get-orders-statistics')
 
 exports.authenticate = require('./src/yggdrasil/authenticate')
@@ -19,12 +19,11 @@ exports.answerChallenges = require('./src/security/answer-challenges')
 exports.getSession = require('./src/session/get-session')
 exports.getBlockedServers = require('./src/session/get-blocked-servers')
 
-exports.getUser = require('./src/mojang/get-user')
-exports.setSkin = require('./src/mojang/set-skin')
-exports.resetSkin = require('./src/mojang/reset-skin')
-
-exports.getUserProfiles = require('./src/mojang/get-user-profiles')
-exports.getUserCapeData = require('./src/mojang/get-user-cape-data')
+exports.getUser = require('./src/account/get-user')
+exports.setSkin = require('./src/account/set-skin')
+exports.resetSkin = require('./src/account/reset-skin')
+exports.getUserProfiles = require('./src/account/get-user-profiles')
+exports.getUserCapeData = require('./src/account/get-user-cape-data')
 
 // For document types, prefer dotless Array<Object>
 // https://github.com/jsdoc3/jsdoc/issues/1375

@@ -1,6 +1,6 @@
 const test = require('ava')
 const nock = require('nock')
-const {getNameHistory} = require('../..')
+const {getProfileHistory} = require('../..')
 
 // The profile id is actually KrisJelbring's :P
 // API behavior observed 30.08.2017 by maccelerated
@@ -17,7 +17,7 @@ test('resolves with a valid profile id', async t => {
       }
     ])
 
-  const names = await getNameHistory('7125ba8b1c864508b92bb5c042ccfe2b')
+  const names = await getProfileHistory('7125ba8b1c864508b92bb5c042ccfe2b')
   t.is(names.length, 2)
 })
 
@@ -27,6 +27,6 @@ test('rejects when profile id does not exist', async t => {
     .get('/user/profiles/0d252b7218b648bfb86c2ae476954d32/names')
     .reply(204)
 
-  const err = await t.throws(getNameHistory('0d252b7218b648bfb86c2ae476954d32'))
+  const err = await t.throws(getProfileHistory('0d252b7218b648bfb86c2ae476954d32'))
   t.is(err.message, 'no such profile: 0d252b7218b648bfb86c2ae476954d32')
 })

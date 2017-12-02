@@ -3,10 +3,10 @@ const onApiError = require('../on-api-error')
 const {USER_AGENT, MOJANG_API} = require('../constants')
 
 /**
- * **Undocumented:** Gets the current IGN for the profile UUID.
+ * **Undocumented:** Gets profile data for the given profile UUID.
  *
  * @param {String} profileId - profile UUID (does not work with user UUID)
- * @returns {Promise<{id: String, name: String}>} resolves if profile exists
+ * @returns {Promise<Object>} resolves with `{id, name, legacy?, demo?}`
  */
 function getProfile (profileId) {
   return got(`${MOJANG_API}/user/profile/${profileId}`, {
