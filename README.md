@@ -1,10 +1,10 @@
 <!-- repo location specific -->
-[docs]: https://maccelerated.github.io/node-mojang
+[docs]: https://jamen.github.io/node-mojang
 [issues]: https://github.com/jamen/node-mojang/issues
-[build]: https://api.travis-ci.org/maccelerated/node-mojang.svg?branch=master
-[travis]: https://travis-ci.org/maccelerated/node-mojang
-[coverage]: https://codecov.io/gh/maccelerated/node-mojang/branch/master/graph/badge.svg
-[codecov]: https://codecov.io/gh/maccelerated/node-mojang
+[build]: https://api.travis-ci.org/jamen/node-mojang.svg?branch=master
+[travis]: https://travis-ci.org/jamen/node-mojang
+[coverage]: https://codecov.io/gh/jamen/node-mojang/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/jamen/node-mojang
 
 # mojang [![Build Status][build]][travis] [![Coverage][coverage]][codecov]
 
@@ -35,32 +35,6 @@ mojang.authenticate({username, password})
 
 - [mojang-api](https://github.com/minecrafter/mojang-api) - small library for some Mojang username and profile endpoints
 - [yggdrasil](https://github.com/zekesonxx/node-yggdrasil) - PrismarineJS's Mojang authentication with server joining
-
-## Integration Testing
-Create *.env* file for `env-cmd` to load values out of. Wait a minute between tests.
-
-```
-# security, yggdrasil, change-skin
-CLIENT_TOKEN=<random UUID>
-USERNAME=<mojang email>
-PASSWORD=<mojang secret>
-# security
-ANSWER1=<secret answer>
-ANSWER2=<secret answer>
-ANSWER3=<secret answer>
-# change-skin
-PROFILE_ID=<game profile to change skin>
-SKIN_URL=<url of skin image to change to>
-USE_SLIM=<leave blank or use "slim">
-```
-
-> Rate limit errors may look like `Invalid credentials. Invalid username or password.`
-
-```shell
-$ npx env-cmd .env npx ava test-online/yggdrasil.js
-$ npx env-cmd .env npx ava test-online/security.js
-$ npx env-cmd .env node examples/change-skin.js
-```
 
 ## License
 
