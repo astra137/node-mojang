@@ -1,148 +1,45 @@
-mojang
-======
-[![Build Status](https://travis-ci.org/jamen/node-mojang.svg?branch=master)](https://travis-ci.org/jamen/node-mojang)
+<!-- repo location specific -->
+[docs]: https://jamen.github.io/node-mojang
+[issues]: https://github.com/jamen/node-mojang/issues
+[build]: https://api.travis-ci.org/jamen/node-mojang.svg?branch=master
+[travis]: https://travis-ci.org/jamen/node-mojang
+[coverage]: https://codecov.io/gh/jamen/node-mojang/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/jamen/node-mojang
 
-> A node.js wrapper for Mojang's API.
+# mojang [![Build Status][build]][travis] [![Coverage][coverage]][codecov]
 
-A simple Node.js wrapper for Mojang's HTTP API.  It uses HTTPS requests wrapped in `Promise` objects, so you can perform multi-request actions easier.  Manage multiple Mojang requests easier with this API.
+> Unofficial Node.js library for Mojang's HTTP APIs
 
-## Installation
+Create sessions, get user info, change skins, and more with promises.
+
+Includes the functions described on the [Minecraft modern wiki](http://wiki.vg/Main_Page), as well as several equally-important but undocumented endpoints. Every function makes a single request. This library requires Internet access to do anything. Please use [GitHub Issues][issues] to submit a bug, request an example, or report a missing feature.
+
+## Install
 ```shell
 $ npm install mojang
 ```
 
 ## Usage
-```javascript
-// ES6
-import mojang from 'mojang';
+Read the [documentation][docs] or look in [examples/](/examples) and [test/](/test) folders.
 
-// ES5
-var mojang = require('mojang');
+```js
+const mojang = require('mojang')
+
+mojang.authenticate({username, password})
+  .then(session => mojang.getUser(session))
+  .then(user => console.info(user))
+  .catch(err => console.error(err))
 ```
 
-### `mojang.username(name, [date])`
-Fetch UUID from the name(s).
- - `name`: (String, Array, Object) name, array of names, or object of names with dates.
- - `date`: (String) A unix timestamp
+## Related
 
-```javascript
-mojang.username('RamenMarz').then(...);
-mojang.username('RamenMarz', Date.now()).then;
-mojang.username([ 'RamenMarz', 'Foo' ]).then(...);
-mojang.username([ 'RamenMarz', 'Foo' ], Date.now()).then(...);
-mojang.username({ 'RamenMarz': Date.now(), 'Foo': Date.now() }).then(...);
-```
-
-### `mojang.status()`
-Get Mojang's servers' statuses.
-
-```javascript
-mojang.status().then(...);
-```
-
-### `mojang.profile(uuid)`
-Get profile from UUIDs.
- - `uuid`: (String, Array) UUID(s) of profile(s) you want.
-
-```javascript
-mojang.profile('123FOO').then(...);
-mojang.profile([ '123FOO', '456BAR' ]).then(...)
-```
-
-### `mojang.history(uuid)`
-Fetch history by UUID.
- - `uuid`: (String, Array) UUID(s) of history(ies) you want.
-
-```javascript
-mojang.history('123FOO').then(...);
-mojang.history([ '123FOO', '456BAR' ]).then(...)
-```
-
-### `mojang.auth(username, password, [clientToken])`
-Authenticate
- - `username`: (String) email or uesrname of the Mojang account.
- - `password`: (String) password of the Mojang account.
- - `clientToken` (String) optional clientToken.
- - `authAgent` (Object) agent object containing a *name* and a *version* property
-
-```javascript
-mojang.auth('foo', 'bar', 'baz').then(...);
-```
-
-### `mojang.validate(accessToken, clientToken)`
-Validate
- - `accessToken`: (String) accessToken of authentication.
- - `clientToken`: (String) clientToken of authentication.
-
-```javascript
-mojang.validate('foo', 'bar').then(...);
-```
-
-### `mojang.refresh(accessToken, clientToken, [profile])`
-Refresh
- - `accessToken`: (String) accessToken of authentication.
- - `clientToken`: (String) clientToken of authentication.
- - `profile`: (Object) selectedProfile
-
-```javascript
-mojang.refresh('foo', 'bar', {}).then(...);
-```
-
-### `mojang.invalidate(accessToken, clientToken)`
-Invalidate
- - `accessToken`: (String) accessToken of authentication.
- - `clientToken`: (String) clientToken of authentication.
-
-```javascript
-mojang.invalidate('foo', 'bar').then(...);
-```
-
-
-### `mojang.signout(username, password)`
-Signout
- - `username`: (String) username of Mojang account.
- - `password`: (String) password of Mojang account.
-
-
-### `mojang.user(accessToken)`
-Get detailed information about a validated user. Check the [wiki][wiki-user] for details on the returned Object.
-- `accessToken`: (String) accessToken of authentication.
-
-```javascript
-mojang.user('foo').then(...);
-```
-
-
-### Using in parity
-Since `node-mojang` is designed around promises, you can do quick multi-request actions.  For instance, if you want to get the history from a username, you can do something like this:
-```javascript
-mojang.username('RamenMarz')
-.then(user => mojang.history(user.id))
-.then(function(history) {
-  // ...
-});
-```
-
-## Support
- - [Repo Issues](https://github.com/jamen/node-mojang/issues)
- - [Authors](#Credits)
-
-## Credits
-
-|![Jamen Marz][jamen-image]|
-|:--------:|
-| [@jamen] |
+- [mojang-api](https://github.com/minecrafter/mojang-api) - small library for some Mojang username and profile endpoints
+- [yggdrasil](https://github.com/zekesonxx/node-yggdrasil) - PrismarineJS's Mojang authentication with server joining
 
 ## License
-[MIT][license] &copy; Jamen Marzonie
 
-<!-- All links must be "tagged" -->
- [example-badge]: https://img.shields.io/badge/example-badge-green.svg
- [foobar-badge]: https://img.shields.io/badge/foobar-baz-green.svg
+[MIT © Jamen Marzonie](LICENSE)
 
- [wiki-user]: http://wiki.vg/Mojang_API#Response_9
+> This repository is not affiliated with Mojang.
 
- [@jamen]: https://github.com/jamen
- [jamen-image]: https://avatars2.githubusercontent.com/u/6251703?v=3&s=125
-
- [license]: LICENSE
+> "Minecraft" is a trademark of Mojang Synergies AB.

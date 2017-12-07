@@ -1,18 +1,18 @@
 {
   "name": "mojang",
-  "version": "0.4.1",
-  "description": "A node.js wrapper for Mojang's API.",
-  "main": "lib/",
-  "scripts": {
-    "test": "mocha"
-  },
+  "version": "2.0.0",
+  "description": "Unofficial Node.js library for Mojang's HTTP APIs",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jamen/node-mojang.git"
   },
   "keywords": [
     "mojang",
-    "minecraft"
+    "minecraft",
+    "yggdrasil",
+    "scrolls",
+    "cobalt"
   ],
   "author": "Jamen Marzonie <jamenmarz@gmail.com> (http://jamenmarz.com/)",
   "license": "MIT",
@@ -20,9 +20,29 @@
     "url": "https://github.com/jamen/node-mojang/issues"
   },
   "homepage": "https://github.com/jamen/node-mojang#readme",
+  "scripts": {
+    "docs": "documentation build index.js -f html -o docs",
+    "lint": "eslint index.js src/ test/",
+    "test": "nyc ava",
+    "test-online": "ava -c 1 test-online/",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+  },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.3.0",
-    "nock": "^9.0.13"
+    "ava": "^0.23.0",
+    "codecov": "^3.0.0",
+    "documentation": "^5.3.3",
+    "eslint": "^4.11.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-ava": "^4.2.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "nock": "^9.1.0",
+    "nyc": "^11.3.0"
+  },
+  "dependencies": {
+    "got": "^8.0.0",
+    "js-base64": "^2.3.2"
   }
 }
