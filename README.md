@@ -1,10 +1,10 @@
 <!-- repo location specific -->
-[docs]: https://jamen.github.io/node-mojang
-[issues]: https://github.com/jamen/node-mojang/issues
-[build]: https://api.travis-ci.org/jamen/node-mojang.svg?branch=master
-[travis]: https://travis-ci.org/jamen/node-mojang
-[coverage]: https://codecov.io/gh/jamen/node-mojang/branch/master/graph/badge.svg
-[codecov]: https://codecov.io/gh/jamen/node-mojang
+[docs]: https://maccelerated.github.io/node-mojang
+[issues]: https://github.com/maccelerated/node-mojang/issues
+[build]: https://api.travis-ci.org/maccelerated/node-mojang.svg?branch=master
+[travis]: https://travis-ci.org/maccelerated/node-mojang
+[coverage]: https://codecov.io/gh/maccelerated/node-mojang/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/maccelerated/node-mojang
 
 # mojang [![Build Status][build]][travis] [![Coverage][coverage]][codecov]
 
@@ -12,7 +12,9 @@
 
 Create sessions, get user info, change skins, and more with promises.
 
-Includes the functions described on the [Minecraft modern wiki](http://wiki.vg/Main_Page), as well as several equally-important but undocumented endpoints. Every function makes a single request. This library requires Internet access to do anything. Please use [GitHub Issues][issues] to submit a bug, request an example, or report a missing feature.
+Includes the functions described on the [Minecraft modern wiki](http://wiki.vg/Main_Page), as well as several equally-important but undocumented endpoints. Every function makes a single request. This library requires Internet access to do anything.
+
+Please use [GitHub Issues][issues] to submit a bug, request new examples, or report a missing feature. Pull requests welcome.
 
 ## Install
 ```shell
@@ -38,7 +40,9 @@ mojang.authenticate({username, password})
 
 ## License
 
-[MIT © Jamen Marzonie](LICENSE)
+[MIT](LICENSE) © [Jamen Marzonie](https://github.com/jamen)
+
+> Ownership transferred from `jamen/node-mojang`.
 
 > This repository is not affiliated with Mojang.
 
