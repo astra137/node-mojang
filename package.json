@@ -3,9 +3,10 @@
   "version": "2.0.0",
   "description": "Unofficial Node.js library for Mojang's HTTP APIs",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jamen/node-mojang.git"
+  "repository": "maccelerated/node-mojang",
+  "homepage": "https://github.com/maccelerated/node-mojang#readme",
+  "bugs": {
+    "url": "https://github.com/maccelerated/node-mojang/issues"
   },
   "keywords": [
     "mojang",
@@ -16,10 +17,6 @@
   ],
   "author": "Jamen Marzonie <jamenmarz@gmail.com> (http://jamenmarz.com/)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jamen/node-mojang/issues"
-  },
-  "homepage": "https://github.com/jamen/node-mojang#readme",
   "scripts": {
     "docs": "documentation build index.js -f html -o docs",
     "lint": "eslint index.js src/ test/",
