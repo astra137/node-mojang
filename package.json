@@ -2,27 +2,20 @@
   "name": "mojang",
   "version": "2.0.1",
   "description": "Unofficial Node.js library for Mojang's HTTP APIs",
-  "main": "index.js",
+  "license": "MIT",
   "repository": "maccelerated/node-mojang",
-  "homepage": "https://github.com/maccelerated/node-mojang#readme",
   "bugs": {
     "url": "https://github.com/maccelerated/node-mojang/issues"
   },
-  "keywords": [
-    "mojang",
-    "minecraft",
-    "yggdrasil",
-    "scrolls",
-    "cobalt"
-  ],
+  "homepage": "https://github.com/maccelerated/node-mojang#readme",
   "author": "Jamen Marzonie <jamenmarz@gmail.com> (http://jamenmarz.com/)",
-  "license": "MIT",
+  "main": "index.js",
   "scripts": {
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "docs": "documentation build index.js -f html -o docs",
     "lint": "eslint index.js src/ test/",
     "test": "nyc ava",
-    "test-online": "ava -c 1 test-online/",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "test-online": "ava -c 1 test-online/"
   },
   "files": [
     "src/",
@@ -30,6 +23,17 @@
     "README.md",
     "LICENSE"
   ],
+  "keywords": [
+    "mojang",
+    "minecraft",
+    "yggdrasil",
+    "scrolls",
+    "cobalt"
+  ],
+  "dependencies": {
+    "got": "^8.0.0",
+    "js-base64": "^2.3.2"
+  },
   "devDependencies": {
     "ava": "^0.23.0",
     "codecov": "^3.0.0",
@@ -43,9 +47,5 @@
     "eslint-plugin-standard": "^3.0.1",
     "nock": "^9.1.0",
     "nyc": "^11.3.0"
-  },
-  "dependencies": {
-    "got": "^8.0.0",
-    "js-base64": "^2.3.2"
   }
 }
