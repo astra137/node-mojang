@@ -1,6 +1,6 @@
 {
   "name": "mojang",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Unofficial Node.js library for Mojang's HTTP APIs",
   "license": "MIT",
   "repository": "maccelerated/node-mojang",
@@ -8,8 +8,6 @@
     "url": "https://github.com/maccelerated/node-mojang/issues"
   },
   "homepage": "https://github.com/maccelerated/node-mojang#readme",
-  "author": "Jamen Marzonie <jamenmarz@gmail.com> (http://jamenmarz.com/)",
-  "main": "index.js",
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "docs": "documentation build index.js -f html -o docs",
@@ -30,22 +28,42 @@
     "scrolls",
     "cobalt"
   ],
+  "maintainers": [
+    {
+      "email": "jamenmarz+gh@gmail.com",
+      "name": "Jamen Marzonie",
+      "url": "jamenmarz.com"
+    },
+    {
+      "name": "Dan",
+      "url": "github.com/dscalzi"
+    },
+    {
+      "name": "Moritz",
+      "url": "github.com/modev"
+    },
+    {
+      "email": "robmac@maccelerated.me",
+      "name": "Rob Mac",
+      "url": "github.com/maccelerated"
+    }
+  ],
   "dependencies": {
-    "got": "^8.0.0",
-    "js-base64": "^2.3.2"
+    "got": "^8.0.2",
+    "js-base64": "^2.4.1"
   },
   "devDependencies": {
-    "ava": "^0.23.0",
+    "ava": "^0.24.0",
     "codecov": "^3.0.0",
-    "documentation": "^5.3.3",
-    "eslint": "^4.11.0",
+    "documentation": "^5.3.5",
+    "eslint": "^4.15.0",
     "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-ava": "^4.2.2",
+    "eslint-plugin-ava": "^4.4.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "nock": "^9.1.0",
-    "nyc": "^11.3.0"
+    "nock": "^9.1.6",
+    "nyc": "^11.4.1"
   }
 }
