@@ -24,6 +24,12 @@
     "test-online": "ava -c 1 test-online/",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
+  "files": [
+    "src/",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "devDependencies": {
     "ava": "^0.23.0",
     "codecov": "^3.0.0",
