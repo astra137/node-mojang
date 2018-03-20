@@ -65,5 +65,5 @@ test('rejects on missing metricKeys param', async t => {
   const err = await t.throws(getOrdersStatistics([]))
   t.is(err.message, 'No key provided.')
   t.is(err.name, 'IllegalArgumentException')
-  t.is(err.statusCode, 400)
+  t.is(err.response.status, 400)
 })

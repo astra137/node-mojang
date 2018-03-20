@@ -4,15 +4,18 @@ const {refresh} = require('../..')
 
 // API behavior observed 17.08.2017 by maccelerated
 test('returns a new access and client token', async t => {
+  const accessToken = 'oldvalid'
+  const clientToken = 'client'
+
   nock('https://authserver.mojang.com')
     .post('/refresh', {
-      accessToken: 'oldvalid',
-      clientToken: 'client',
+      accessToken,
+      clientToken,
       requestUser: true
     })
     .reply(200, {
       accessToken: 'newvalid',
-      clientToken: 'client',
+      clientToken,
       selectedProfile: {
         id: 'profile identifier',
         name: 'player name'
@@ -23,8 +26,6 @@ test('returns a new access and client token', async t => {
       }
     })
 
-  const accessToken = 'oldvalid'
-  const clientToken = 'client'
   const nextSession = await refresh({accessToken, clientToken})
   t.is(nextSession.accessToken, 'newvalid')
   t.is(nextSession.clientToken, 'client')
@@ -34,10 +35,13 @@ test('returns a new access and client token', async t => {
 
 // API behavior observed 17.08.2017 by maccelerated
 test('rejects with invalid tokens', async t => {
+  const accessToken = 'invalid'
+  const clientToken = 'client'
+
   nock('https://authserver.mojang.com')
     .post('/refresh', {
-      accessToken: 'invalid',
-      clientToken: 'client',
+      accessToken,
+      clientToken,
       requestUser: true
     })
     .reply(403, {
@@ -45,10 +49,8 @@ test('rejects with invalid tokens', async t => {
       errorMessage: 'Invalid token'
     })
 
-  const accessToken = 'invalid'
-  const clientToken = 'client'
   const err = await t.throws(refresh({accessToken, clientToken}))
   t.is(err.message, 'Invalid token')
   t.is(err.name, 'ForbiddenOperationException')
-  t.is(err.statusCode, 403)
+  t.is(err.response.status, 403)
 })
