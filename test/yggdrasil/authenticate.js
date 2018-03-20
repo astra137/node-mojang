@@ -4,10 +4,13 @@ const {authenticate} = require('../..')
 
 // API behavior observed 17.08.2017 by maccelerated
 test('resolves with accessToken and clientToken', async t => {
+  const username = 'user@domain.tld'
+  const password = 'user secret'
+
   nock('https://authserver.mojang.com')
     .post('/authenticate', {
-      username: 'user@domain.tld',
-      password: 'user secret',
+      username,
+      password,
       requestUser: true
     })
     .reply(200, {
@@ -15,8 +18,6 @@ test('resolves with accessToken and clientToken', async t => {
       clientToken: 'ab1c5e7d2446675769c125ad494a290b'
     })
 
-  const username = 'user@domain.tld'
-  const password = 'user secret'
   const session = await authenticate({username, password})
   t.truthy(session.accessToken)
   t.truthy(session.clientToken)
@@ -40,15 +41,18 @@ test('rejects with API\'s error on invalid credentials', async t => {
   const err = await t.throws(authenticate({username, password}))
   t.is(err.message, 'Invalid credentials. Invalid username or password.')
   t.is(err.name, 'ForbiddenOperationException')
-  t.is(err.statusCode, 403)
+  t.is(err.response.status, 403)
 })
 
 // API behavior spoofed, based on http://wiki.vg/Authentication#Errors
 test('rejects with cause if account is migrated', async t => {
+  const username = 'username'
+  const password = 'other secret'
+
   nock('https://authserver.mojang.com')
     .post('/authenticate', {
-      username: 'username',
-      password: 'other secret',
+      username,
+      password,
       requestUser: true
     })
     .reply(403, {
@@ -57,11 +61,9 @@ test('rejects with cause if account is migrated', async t => {
       cause: 'UserMigratedException'
     })
 
-  const username = 'username'
-  const password = 'other secret'
   const err = await t.throws(authenticate({username, password}))
   t.is(err.message, 'Invalid credentials. Account migrated, use e-mail as username.')
   t.is(err.name, 'ForbiddenOperationException')
   t.is(err.cause, 'UserMigratedException')
-  t.is(err.statusCode, 403)
+  t.is(err.response.status, 403)
 })
