@@ -8,7 +8,6 @@
     "url": "https://github.com/maccelerated/node-mojang/issues"
   },
   "homepage": "https://github.com/maccelerated/node-mojang#readme",
-  "author": "Rob Mac <robmac@maccelerated.me> (https://github.com/maccelerated)",
   "main": "index.js",
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
@@ -17,6 +16,12 @@
     "test": "nyc ava",
     "test-online": "ava -c 1 test-online/"
   },
+  "files": [
+    "lib",
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
   "keywords": [
     "mojang",
     "minecraft",
@@ -24,11 +29,25 @@
     "scrolls",
     "cobalt"
   ],
-  "files": [
-    "lib",
-    "index.js",
-    "LICENSE",
-    "README.md"
+  "maintainers": [
+    {
+      "email": "jamenmarz+gh@gmail.com",
+      "name": "Jamen Marzonie",
+      "url": "jamenmarz.com"
+    },
+    {
+      "name": "Dan",
+      "url": "github.com/dscalzi"
+    },
+    {
+      "name": "Moritz",
+      "url": "github.com/modev"
+    },
+    {
+      "email": "robmac@maccelerated.me",
+      "name": "Rob Mac",
+      "url": "github.com/maccelerated"
+    }
   ],
   "dependencies": {
     "axios": "^0.18.0",
