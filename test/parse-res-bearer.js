@@ -1,5 +1,5 @@
 const test = require('ava')
-const parse = require('../src/parse-res-bearer')
+const parse = require('../lib/parse-res-bearer')
 
 /* eslint-disable camelcase */
 
