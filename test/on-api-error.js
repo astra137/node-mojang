@@ -1,6 +1,6 @@
 const got = require('got')
 const test = require('ava')
-const onApiError = require('../src/on-api-error')
+const onApiError = require('../lib/on-api-error')
 
 // Like when authserver.mojang.com endpoints get bad credentials
 test(`injects API response into thrown error`, t => {

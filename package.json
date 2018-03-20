@@ -12,12 +12,11 @@
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "docs": "documentation build index.js -f html -o docs",
-    "lint": "eslint index.js src/ test/",
-    "test": "nyc ava",
-    "test-online": "ava -c 1 test-online/"
+    "lint": "eslint index.js lib/ test/",
+    "test": "nyc ava"
   },
   "files": [
-    "src/",
+    "lib/",
     "index.js",
     "README.md",
     "LICENSE"
