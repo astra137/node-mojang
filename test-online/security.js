@@ -3,21 +3,27 @@
 const test = require('ava')
 const mojang = require('..')
 
-const {USERNAME, PASSWORD, CLIENT_TOKEN} = process.env
-const {ANSWER1, ANSWER2, ANSWER3} = process.env
+const {
+  MOJANG_USERNAME,
+  MOJANG_PASSWORD,
+  MOJANG_CLIENT_TOKEN,
+  MOJANG_ANSWER1,
+  MOJANG_ANSWER2,
+  MOJANG_ANSWER3
+} = process.env
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 test('security integration', async t => {
   const credentials = {
-    username: USERNAME,
-    password: PASSWORD,
-    clientToken: CLIENT_TOKEN
+    username: MOJANG_USERNAME,
+    password: MOJANG_PASSWORD,
+    clientToken: MOJANG_CLIENT_TOKEN
   }
 
   // create unprofiled session
   const session = await mojang.authenticate(credentials)
-  t.is(session.clientToken, CLIENT_TOKEN)
+  t.is(session.clientToken, MOJANG_CLIENT_TOKEN)
 
   // access token is good
   await delay(1000)
@@ -35,9 +41,9 @@ test('security integration', async t => {
   // submit answers
   await delay(1000)
   await mojang.answerChallenges(session, [
-    {id: challenges[0].answer.id, answer: ANSWER1},
-    {id: challenges[1].answer.id, answer: ANSWER2},
-    {id: challenges[2].answer.id, answer: ANSWER3}
+    {id: challenges[0].answer.id, answer: MOJANG_ANSWER1},
+    {id: challenges[1].answer.id, answer: MOJANG_ANSWER2},
+    {id: challenges[2].answer.id, answer: MOJANG_ANSWER3}
   ])
 
   // confirm IP is now secure
