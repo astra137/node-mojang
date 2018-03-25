@@ -2,12 +2,25 @@
   "name": "mojang",
   "version": "2.0.1",
   "description": "Unofficial Node.js library for Mojang's HTTP APIs",
-  "main": "index.js",
+  "license": "MIT",
   "repository": "maccelerated/node-mojang",
-  "homepage": "https://github.com/maccelerated/node-mojang#readme",
   "bugs": {
     "url": "https://github.com/maccelerated/node-mojang/issues"
   },
+  "homepage": "https://github.com/maccelerated/node-mojang#readme",
+  "main": "index.js",
+  "scripts": {
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "docs": "documentation build index.js -f html -o docs",
+    "lint": "eslint index.js lib/ test/",
+    "test": "nyc ava"
+  },
+  "files": [
+    "lib/",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "keywords": [
     "mojang",
     "minecraft",
@@ -15,31 +28,42 @@
     "scrolls",
     "cobalt"
   ],
-  "author": "Jamen Marzonie <jamenmarz@gmail.com> (http://jamenmarz.com/)",
-  "license": "MIT",
-  "scripts": {
-    "docs": "documentation build index.js -f html -o docs",
-    "lint": "eslint index.js src/ test/",
-    "test": "nyc ava",
-    "test-online": "ava -c 1 test-online/",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+  "maintainers": [
+    {
+      "email": "jamenmarz+gh@gmail.com",
+      "name": "Jamen Marzonie",
+      "url": "jamenmarz.com"
+    },
+    {
+      "name": "Dan",
+      "url": "github.com/dscalzi"
+    },
+    {
+      "name": "Moritz",
+      "url": "github.com/modev"
+    },
+    {
+      "email": "robmac@maccelerated.me",
+      "name": "Rob Mac",
+      "url": "github.com/maccelerated"
+    }
+  ],
+  "dependencies": {
+    "js-base64": "^2.4.3",
+    "node-fetch": "^2.1.1"
   },
   "devDependencies": {
-    "ava": "^0.23.0",
+    "ava": "^0.25.0",
     "codecov": "^3.0.0",
-    "documentation": "^5.3.3",
-    "eslint": "^4.11.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-ava": "^4.2.2",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.6.0",
+    "documentation": "^6.1.0",
+    "eslint": "^4.19.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-ava": "^4.5.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
-    "nock": "^9.1.0",
-    "nyc": "^11.3.0"
-  },
-  "dependencies": {
-    "got": "^8.0.0",
-    "js-base64": "^2.3.2"
+    "nock": "^9.2.3",
+    "nyc": "^11.6.0"
   }
 }

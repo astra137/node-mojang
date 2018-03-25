@@ -1,5 +1,5 @@
 const test = require('ava')
-const parse = require('../src/parse-res-bearer')
+const parse = require('../lib/parse-res-bearer')
 
 // This is the only token the API seems to error with
 test('parses mojang token error', t => {

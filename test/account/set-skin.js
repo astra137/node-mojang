@@ -9,7 +9,7 @@ test('resolves when access token, profile, and URL are valid', async t => {
   nock('https://api.mojang.com', {
     reqheaders: {
       'authorization': `Bearer ${accessToken}`,
-      'content-type': 'application/x-www-form-urlencoded'
+      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
   }).post(`/user/profile/7ddf32e17a6ac5ce04a8ecbf782ca509/skin`, 'model=&url=urlOfPNG')
     .reply(204)
@@ -25,7 +25,7 @@ test('Optionally sends slim skin type when selected', async t => {
   nock('https://api.mojang.com', {
     reqheaders: {
       'authorization': `Bearer ${accessToken}`,
-      'content-type': 'application/x-www-form-urlencoded'
+      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
   }).post(`/user/profile/7ddf32e17a6ac5ce04a8ecbf782ca509/skin`, 'model=slim&url=urlOfPNG')
     .reply(204)
@@ -41,7 +41,7 @@ test('rejects when URL is bad', async t => {
   nock('https://api.mojang.com', {
     reqheaders: {
       'authorization': `Bearer ${accessToken}`,
-      'content-type': 'application/x-www-form-urlencoded'
+      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
   }).post(`/user/profile/7ddf32e17a6ac5ce04a8ecbf782ca509/skin`, 'model=&url=badURL')
     .reply(400, {
@@ -61,7 +61,7 @@ test('rejects when access token is bad', async t => {
   nock('https://api.mojang.com', {
     reqheaders: {
       'authorization': `Bearer ${accessToken}`,
-      'content-type': 'application/x-www-form-urlencoded'
+      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
   }).post(`/user/profile/7ddf32e17a6ac5ce04a8ecbf782ca509/skin`, 'model=&url=urlOfPNG')
     .reply(401, {
