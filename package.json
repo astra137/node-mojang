@@ -1,6 +1,6 @@
 {
   "name": "mojang",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Unofficial Node.js library for Mojang's HTTP APIs",
   "main": "index.js",
   "repository": "maccelerated/node-mojang",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "ava": "^0.23.0",
-    "codecov": "^3.0.0",
+    "codecov": "^3.0.1",
     "documentation": "^5.3.3",
     "eslint": "^4.11.0",
     "eslint-config-standard": "^10.2.1",
