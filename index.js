@@ -21,6 +21,7 @@ exports.getBlockedServers = require('./lib/session/get-blocked-servers')
 
 exports.getUser = require('./lib/account/get-user')
 exports.setSkin = require('./lib/account/set-skin')
+exports.uploadSkin = require('./lib/account/upload-skin')
 exports.resetSkin = require('./lib/account/reset-skin')
 exports.getUserProfiles = require('./lib/account/get-user-profiles')
 exports.getUserCapeData = require('./lib/account/get-user-cape-data')
