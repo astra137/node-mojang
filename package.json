@@ -13,8 +13,8 @@
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "docs": "documentation build index.js -f html -o docs",
     "lint": "eslint index.js lib test && documentation lint index.js lib",
-    "prepare": "npm run lint && npm run docs",
-    "test": "nyc ava"
+    "test": "npm run lint && nyc ava",
+    "version": "npm run docs && git add docs"
   },
   "files": [
     "lib/",
