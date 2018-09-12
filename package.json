@@ -1,6 +1,6 @@
 {
   "name": "mojang",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Unofficial Node.js library for Mojang's HTTP APIs",
   "license": "MIT",
   "repository": "maccelerated/node-mojang",
