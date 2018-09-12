@@ -48,12 +48,6 @@ test('resolves with scrolls profiles if specified', async t => {
   t.falsy(list[0].demo)
 })
 
-// A sort of input validation.
-test('rejects with got error if names is not array or string', async t => {
-  const err = await t.throws(lookupProfiles('notch'))
-  t.is(err.message, 'The `body` option must be a plain Object or Array when the `form` or `json` option is used')
-})
-
 // API behavior observed 30.08.2017 by maccelerated
 test('rejects with API error if profile name is null or empty', async t => {
   nock('https://api.mojang.com')

@@ -1,6 +1,14 @@
-language: node_js
+language:
+  node_js
 node_js:
   - node
   - lts/*
+install:
+  - npm install
+  - npm install -g codecov nyc
+script:
+  - npm run lint
+  - nyc npm test
 after_success:
-  - npm run coverage
+  - nyc report --reporter=lcov > coverage.lcov
+  - codecov
