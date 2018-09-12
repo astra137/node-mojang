@@ -1,4 +1,4 @@
-# mojang [![Build Status][build]][travis] [![Coverage][coverage]][codecov]
+# mojang [![Build Status][build]][travis] [![Coverage][coverage]][codecov] [![Bundle Size][minified]][bundlephobia]
 
 > Unofficial Node.js library for Mojang's HTTP APIs
 
@@ -62,3 +62,5 @@ $ npx nyc npm test
 [travis]: https://travis-ci.org/maccelerated/node-mojang
 [coverage]: https://codecov.io/gh/maccelerated/node-mojang/branch/master/graph/badge.svg
 [codecov]: https://codecov.io/gh/maccelerated/node-mojang
+[bundlephobia]: https://bundlephobia.com/result?p=mojang
+[minified]: https://badgen.net/bundlephobia/min/mojang
