@@ -30,8 +30,16 @@ mojang.authenticate({username, password})
 - [mojang-api](https://github.com/minecrafter/mojang-api) - small library for some Mojang username and profile endpoints
 - [yggdrasil](https://github.com/zekesonxx/node-yggdrasil) - PrismarineJS's Mojang authentication with server joining
 
-## Coverage
+## Integration Tests
+Set up an .envrc file and `direnv` or similar to provide secrets to these tests first.
 
+```shell
+$ npx ava test-online/security.js
+$ npx ava test-online/yggdrasil.js
+$ npx ava test-online/security.js
+```
+
+## Coverage
 Available through [codecov.io][codecov], or locally.
 
 ```shell
