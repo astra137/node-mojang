@@ -1,7 +1,7 @@
 /* eslint-disable ava/no-ignored-test-files */
 
-const test = require('ava')
-const mojang = require('..')
+import test from 'ava'
+import mojang from '..'
 
 const {
   MOJANG_USERNAME,

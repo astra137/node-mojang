@@ -1,10 +1,8 @@
 /* eslint-disable ava/no-ignored-test-files */
 
 import {createReadStream} from 'fs'
-import yn from 'yn'
-
-const test = require('ava')
-const mojang = require('..')
+import test from 'ava'
+import mojang from '..'
 
 const {
   MOJANG_USERNAME,
@@ -38,15 +36,15 @@ test('security integration', async t => {
   const skinUrl = `http://assets.mojang.com/SkinTemplates/alex.png`
   await mojang.setSkin(session, PROFILE_UUID, skinUrl, true)
   console.warn(`https://minecraft.net/en-us/profile/skin`)
-  console.warn(`Check that skin is default Alex with slim`)
+  console.warn(`Check that skin is default Alex with slim enabled`)
   console.warn(`Waiting 30 seconds...`)
   await seconds(30)
 
   // Test upload stream version of skin API
-  const useSlim = yn(USE_SLIM)
+  const useSlim = Boolean(USE_SLIM)
   const sSkin = createReadStream(SKIN_FILE)
   await mojang.uploadSkin(session, PROFILE_UUID, sSkin, useSlim)
-  console.warn(`Check that skin is uploaded with useSlim: ${useSlim}`)
+  console.warn(`Check that skin is uploaded with slim: ${useSlim}`)
   await seconds(1)
 
   // invalidate only this access token
