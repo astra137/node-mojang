@@ -10,10 +10,9 @@
   "homepage": "https://github.com/maccelerated/node-mojang#readme",
   "main": "index.js",
   "scripts": {
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "docs": "documentation build index.js -f html -o docs",
     "lint": "eslint index.js lib test && documentation lint index.js lib",
-    "test": "npm run lint && nyc ava",
+    "test": "npm run lint && ava",
     "version": "npm run docs && git add docs"
   },
   "files": [
@@ -56,7 +55,6 @@
   },
   "devDependencies": {
     "ava": "^0.25.0",
-    "codecov": "^3.0.4",
     "documentation": "^8.1.0",
     "eslint": "^5.3.0",
     "eslint-config-standard": "^11.0.0",
@@ -66,7 +64,6 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "nock": "^9.4.4",
-    "nyc": "^12.0.2",
     "yn": "^2.0.0"
   }
 }
