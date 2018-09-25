@@ -1,4 +1,4 @@
-# mojang [![Build Status][build]][travis] [![Coverage][coverage]][codecov] [![Bundle Size][minified]][bundlephobia]
+# mojang [![Build Status][build]][travis] [![Coverage][coverage]][codecov] [![Package Size][installsize]][packagephobia]
 
 > Unofficial Node.js library for Mojang's HTTP APIs
 
@@ -24,6 +24,9 @@ mojang.authenticate({username, password})
   .then(user => console.info(user))
   .catch(err => console.error(err))
 ```
+
+## Bundling
+In my experiments, everything works with `lyo` and other bundlers. However, as of writing, the APIs used have not allowed cross-origin requests, so this library will not work from within a browser.
 
 ## Related
 
@@ -62,5 +65,5 @@ $ npx nyc npm test
 [travis]: https://travis-ci.org/maccelerated/node-mojang
 [coverage]: https://codecov.io/gh/maccelerated/node-mojang/branch/master/graph/badge.svg
 [codecov]: https://codecov.io/gh/maccelerated/node-mojang
-[bundlephobia]: https://bundlephobia.com/result?p=mojang
-[minified]: https://badgen.net/bundlephobia/min/mojang
+[packagephobia]: https://packagephobia.now.sh/result?p=mojang
+[installsize]: https://badgen.net/packagephobia/install/mojang
