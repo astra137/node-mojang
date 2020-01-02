@@ -59,11 +59,11 @@ $ npx nyc npm test
 
 > "Minecraft" is a trademark of Mojang Synergies AB.
 
-[githubio]: https://maccelerated.github.io/node-mojang
-[issues]: https://github.com/maccelerated/node-mojang/issues
-[build]: https://api.travis-ci.org/maccelerated/node-mojang.svg?branch=master
-[travis]: https://travis-ci.org/maccelerated/node-mojang
-[coverage]: https://codecov.io/gh/maccelerated/node-mojang/branch/master/graph/badge.svg
-[codecov]: https://codecov.io/gh/maccelerated/node-mojang
+[githubio]: https://starburn.github.io/node-mojang
+[issues]: https://github.com/starburn/node-mojang/issues
+[build]: https://api.travis-ci.org/starburn/node-mojang.svg?branch=master
+[travis]: https://travis-ci.org/starburn/node-mojang
+[coverage]: https://codecov.io/gh/starburn/node-mojang/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/starburn/node-mojang
 [packagephobia]: https://packagephobia.now.sh/result?p=mojang
 [installsize]: https://badgen.net/packagephobia/install/mojang
