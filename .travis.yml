@@ -7,7 +7,6 @@ install:
   - npm install
   - npm install -g codecov nyc
 script:
-  - npm run lint
   - nyc npm test
 after_success:
   - nyc report --reporter=lcov > coverage.lcov

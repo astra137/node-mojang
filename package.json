@@ -1,68 +1,52 @@
 {
   "name": "mojang",
-  "version": "2.2.1",
+  "version": "0.0.0",
   "description": "Unofficial Node.js library for Mojang's HTTP APIs",
-  "license": "MIT",
-  "repository": "maccelerated/node-mojang",
-  "bugs": {
-    "url": "https://github.com/maccelerated/node-mojang/issues"
-  },
-  "homepage": "https://github.com/maccelerated/node-mojang#readme",
-  "main": "index.js",
-  "scripts": {
-    "docs": "documentation build index.js -f html -o docs",
-    "lint": "eslint index.js lib test && documentation lint index.js lib",
-    "test": "npm run lint && ava",
-    "version": "npm run docs && git add docs"
-  },
-  "files": [
-    "lib/",
-    "index.js",
-    "README.md",
-    "LICENSE"
-  ],
+  "license": "ISC",
+  "repository": "starburn/node-mojang",
+  "bugs": "https://github.com/starburn/node-mojang/issues",
+  "author": "Mac <enkindled@pm.me> (https://github.com/starburn)",
   "keywords": [
     "mojang",
     "minecraft",
     "yggdrasil",
     "scrolls",
-    "cobalt"
+    "cobalt",
+    "realms"
   ],
-  "maintainers": [
-    {
-      "email": "jamenmarz+gh@gmail.com",
-      "name": "Jamen Marzonie",
-      "url": "jamenmarz.com"
-    },
-    {
-      "name": "Dan",
-      "url": "github.com/dscalzi"
-    },
-    {
-      "name": "Moritz",
-      "url": "github.com/modev"
-    },
-    {
-      "email": "robmac@maccelerated.me",
-      "name": "Rob Mac",
-      "url": "github.com/maccelerated"
-    }
+  "scripts": {
+    "prepare": "tsc",
+    "test:online": "ava test/online.js"
+  },
+  "files": [
+    "dist/"
   ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./mojang": "./dist/mojang.js",
+    "./security": "./dist/security.js",
+    "./session": "./dist/session.js",
+    "./skins": "./dist/skins.js",
+    "./status": "./dist/status.js",
+    "./yggdrasil": "./dist/yggdrasil.js"
+  },
   "dependencies": {
-    "form-data": "^2.3.2",
-    "js-base64": "^2.4.8",
-    "node-fetch": "^2.2.0"
+    "form-data": "^3.0.0",
+    "got": "^10.6.0",
+    "js-base64": "^2.5.2"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
-    "documentation": "^8.1.0",
-    "eslint": "^5.3.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-ava": "^5.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "nock": "^9.4.4"
+    "@types/js-base64": "^2.3.1",
+    "@typescript-eslint/parser": "^2.25.0",
+    "ava": "^3.5.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jose": "^1.25.0",
+    "prettier": "^1.19.1",
+    "typescript": "^3.8.3",
+    "uuid": "^3.4.0"
   }
 }

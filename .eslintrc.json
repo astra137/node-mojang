@@ -1,12 +1,24 @@
 {
-  "plugins": [
-    "ava"
-  ],
-  "extends": [
-    "standard",
-    "plugin:ava/recommended"
-  ],
-  "rules": {
-    "valid-jsdoc": "warn"
-  }
+    "parser": "@typescript-eslint/parser",
+    "env": {
+        "node": true,
+        "es2020": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "prettier/standard"
+    ],
+    "overrides": [
+        {
+            "files": "src/**/*.ts",
+            "parserOptions": {
+                "sourceType": "module"
+            }
+        }
+    ],
+    "ignorePatterns": [
+        "dist/",
+        "node_modules/"
+    ]
 }

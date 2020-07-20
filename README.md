@@ -1,64 +1,67 @@
-# mojang [![Build Status][build]][travis] [![Coverage][coverage]][codecov]
+# mojang
 
-> Unofficial Node.js library for Mojang's HTTP APIs
-
-Create sessions, get user info, change skins, and more with promises.
-
-Includes the functions described on the [Minecraft modern wiki](http://wiki.vg/Main_Page), as well as several equally-important but undocumented endpoints. Every function makes a single HTTP request.
-
-Please use [GitHub Issues][issues] to submit a bug, request new examples, or report a missing feature. Pull requests welcome.
-
-## Install
-```shell
-$ npm install mojang
-```
+> Unofficial Node.js library for multiple Mojang HTTP APIs.
 
 ## Usage
-Read the [API documentation][githubio] or look in [test/](/test/) and [test-online/](/test-online/) folders.
+
+WIP: usage
 
 ```js
 const mojang = require('mojang')
-
-mojang.authenticate({username, password})
-  .then(session => mojang.getUser(session))
-  .then(user => console.info(user))
-  .catch(err => console.error(err))
+const yggdrasil = require('mojang/yggdrasil')
+const account = require('mojang/account')
+const session = require('mojang/session')
+const realms = require('mojang/realms')
 ```
+
+```js
+await mojang.status()
+// { 'api.mojang.com': 'green', ... }
+
+await mojang.username('direwolf20')
+// { id, name }
+
+await mojang.usernames(['direwolf20'])
+// [{ id, name }, ...]
+
+await mojang.profile('6763c910dd624186bec1565b0d6c14dc')
+// { id, name }
+
+await mojang.history('6763c910dd624186bec1565b0d6c14dc')
+// [{ name }, { name, changedToAt }, ...]
+
+await mojang.ordersStatistics()
+// { total, last24h, saleVelocityPerSeconds }
+```
+
+```json
+{
+  "sub": "...",
+  "yggt": "...",
+  "spr": "...",
+  "iss": "Yggdrasil-Auth",
+  "exp": 1600000000,
+  "iat": 1600000000
+}
+```
+
+## Testing
+
+WIP: manual online testing with coverage and caveats
 
 ## Related
 
-- [mojang-api](https://github.com/minecrafter/mojang-api) - small library for some Mojang username and profile endpoints
-- [yggdrasil](https://github.com/zekesonxx/node-yggdrasil) - PrismarineJS's Mojang authentication with server joining
-
-## Integration Tests
-Set up an .envrc file and `direnv` or similar to provide secrets to these tests first.
-
-```shell
-$ npx ava test-online/security.js
-$ npx ava test-online/yggdrasil.js
-$ npx ava test-online/security.js
-```
-
-## Coverage
-Available through [codecov.io][codecov], or locally.
-
-```shell
-$ npx nyc npm test
-```
+- https://crafatar.com - API serving avatars and faces
+- https://namemc.com - Search for players, skins, and capes
+- [minecrafter/mojang-api](https://github.com/minecrafter/mojang-api) - Node library for some Mojang username and profile endpoints
+- [zekesonxx/node-yggdrasil](https://github.com/zekesonxx/node-yggdrasil) - PrismarineJS's auth & server joining
 
 ## License
 
-[MIT](LICENSE) © [Jamen Marzonie](https://github.com/jamen)
+[ISC](license.md) © [Mac](https://github.com/starburn)
 
-> Ownership transferred from `jamen/node-mojang`.
-
+> Project originally by @jamen.
+>
 > This repository is not affiliated with Mojang.
-
+>
 > "Minecraft" is a trademark of Mojang Synergies AB.
-
-[githubio]: https://maccelerated.github.io/node-mojang
-[issues]: https://github.com/maccelerated/node-mojang/issues
-[build]: https://api.travis-ci.org/maccelerated/node-mojang.svg?branch=master
-[travis]: https://travis-ci.org/maccelerated/node-mojang
-[coverage]: https://codecov.io/gh/maccelerated/node-mojang/branch/master/graph/badge.svg
-[codecov]: https://codecov.io/gh/maccelerated/node-mojang
