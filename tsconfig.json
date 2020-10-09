@@ -7,7 +7,6 @@
     "sourceMap": true,
     "strict": true,
     "resolveJsonModule": true,
-    "removeComments": true,
     "esModuleInterop": true
   },
   "include": [

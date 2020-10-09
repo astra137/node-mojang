@@ -12,12 +12,12 @@ export default got.extend({
     responseType: "json",
     hooks: {
         beforeRequest: [
-            options => {
+            (options) => {
                 const { accessToken } = options.context;
                 if (accessToken) {
                     options.headers.Authorization = `Bearer ${accessToken}`;
                 }
-            }
-        ]
-    }
+            },
+        ],
+    },
 });

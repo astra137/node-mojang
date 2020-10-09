@@ -35,12 +35,12 @@ export async function setSkin(
     url: string,
     slim = false
 ) {
-    await got.post(`/user/profile/${profileId}/skin`, {
+    await got.post(`user/profile/${profileId}/skin`, {
         context: { accessToken },
         form: {
             model: slim ? "slim" : undefined,
-            url
-        }
+            url,
+        },
     });
 }
 
@@ -63,9 +63,9 @@ export async function uploadSkin(
     body.append("model", slim ? "slim" : undefined);
     body.append("file", file);
 
-    await got.put(`/user/profile/${profileId}/skin`, {
+    await got.put(`user/profile/${profileId}/skin`, {
         context: { accessToken },
-        body
+        body,
     });
 }
 
@@ -77,5 +77,5 @@ export async function uploadSkin(
  * @see {@link http://wiki.vg/Mojang_API#Reset_Skin}
  */
 export async function resetSkin(accessToken: string, id: string) {
-    await got.delete(`/user/profile/${id}/skin`, { context: { accessToken } });
+    await got.delete(`user/profile/${id}/skin`, { context: { accessToken } });
 }

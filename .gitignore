@@ -2,4 +2,6 @@
 coverage/
 dist/
 node_modules/
+.DS_Store
 .envrc
+docs/

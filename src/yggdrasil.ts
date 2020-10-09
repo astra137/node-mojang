@@ -7,20 +7,13 @@ import { HTTPError } from "got/dist/source";
 import { Profile } from "./mojang";
 
 const got = mojang.extend({
-    prefixUrl: "https://authserver.mojang.com"
+    prefixUrl: "https://authserver.mojang.com",
 });
 
-/* eslint-disable no-unused-vars */
-enum MojangGame {
-    Minecraft = "Mincraft",
-    Scrolls = "Scrolls"
-}
-/* eslint-enable no-unused-vars */
-
-interface YggdrasilResponse {
-    /** Use and re-use tdfhe uuid v4 for a client instance */
+export interface Session {
+    /** UUID v4 client identifier */
     clientToken: string;
-    /** JWT containing acess token and other details */
+    /** JWT containing access token and other details */
     accessToken: string;
     availableProfiles?: Profile[];
     selectedProfile?: Profile;
@@ -35,15 +28,15 @@ interface YggdrasilResponse {
  *
  * @param username - Mojang account email (username for legacy accounts)
  * @param password - Mojang account secret
- * @param clientToken - UUID v4 identifier, must not change during session
- * @param agent - Which game to start session for, such as "Minecraft" or "Scrolls"
+ * @param clientToken - Random identifier, defaults to server-generated UUID v4
+ * @param agent - Game name to start session for: Minecraft or Scrolls.
  * @see {@link http://wiki.vg/Authentication#Authenticate}
  */
 export function authenticate(
     username: string,
     password: string,
-    clientToken: string,
-    agent?: MojangGame
+    clientToken?: string,
+    agent = "Minecraft"
 ) {
     return got
         .post("authenticate", {
@@ -52,21 +45,25 @@ export function authenticate(
                 password,
                 clientToken,
                 agent: agent ? { name: agent, version: 1 } : undefined,
-                requestUser: true
-            }
+                requestUser: true,
+            },
         })
-        .json<YggdrasilResponse>();
+        .json<Session>();
 }
 
 /**
- * Refresh a valid accessToken.
+ * Refresh a valid or recently valid access token.
  *
+ * @note An accessToken may be unusable for authentication with a Minecraft server, but still be good enough for refresh.
+
  * @see {@link http://wiki.vg/Authentication#Refresh}
  */
-export function refresh(accessToken: string, clientToken: string) {
+export function refresh({ accessToken, clientToken }: Session) {
     return got
-        .post("refresh", { json: { accessToken, clientToken } })
-        .json<YggdrasilResponse>();
+        .post("refresh", {
+            json: { accessToken, clientToken, requestUser: true },
+        })
+        .json<Session>();
 }
 
 /**
@@ -74,7 +71,7 @@ export function refresh(accessToken: string, clientToken: string) {
  *
  * @see {@link http://wiki.vg/Authentication#Validate}
  */
-export async function validate(accessToken: string, clientToken: string) {
+export async function validate({ accessToken, clientToken }: Session) {
     try {
         await got.post("validate", { json: { accessToken, clientToken } });
 
@@ -94,18 +91,16 @@ export async function validate(accessToken: string, clientToken: string) {
 }
 
 /**
- * Invalidates accessTokens using a client/access token pair.
+ * Invalidate an access token, ending only this session.
  *
  * @see {@link http://wiki.vg/Authentication#Invalidate}
  */
-export async function invalidate(accessToken: string, clientToken: string) {
-    await got.post("invalidate", {
-        json: { accessToken, clientToken }
-    });
+export async function invalidate({ accessToken, clientToken }: Session) {
+    await got.post("invalidate", { json: { accessToken, clientToken } });
 }
 
 /**
- * Invalidates accessTokens using an account's username and password.
+ * Invalidates access tokens using an account's username and password.
  *
  * @see {@link http://wiki.vg/Authentication#Signout}
  */

@@ -25,7 +25,7 @@ export interface SecurityAnswer {
  *
  * @see {@link http://wiki.vg/Mojang_API#Check_if_security_questions_are_needed}
  */
-export async function isSecured(accessToken: string) {
+export async function isTrusted(accessToken: string) {
     try {
         await got.get("user/security/location", { context: { accessToken } });
 
@@ -63,6 +63,6 @@ export async function challenges(accessToken: string) {
 export async function answers(accessToken: string, json: SecurityAnswer[]) {
     await got.post("user/security/location", {
         context: { accessToken },
-        json
+        json,
     });
 }

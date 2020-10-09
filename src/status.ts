@@ -1,14 +1,14 @@
 import mojang from "./mojang-got";
 
 const got = mojang.extend({
-    prefixUrl: "https://status.mojang.com"
+    prefixUrl: "https://status.mojang.com",
 });
 
 /* eslint-disable no-unused-vars */
 export enum StatusColor {
     green = "green",
     yellow = "yellow",
-    red = "red"
+    red = "red",
 }
 /* eslint-enable no-unused-vars */
 

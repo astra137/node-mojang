@@ -64,7 +64,7 @@ export enum OrdersType {
     item_sold_minecraft = "item_sold_minecraft",
     prepaid_card_redeemed_minecraft = "prepaid_card_redeemed_minecraft",
     item_sold_cobalt = "item_sold_cobalt",
-    item_sold_scrolls = "item_sold_scrolls"
+    item_sold_scrolls = "item_sold_scrolls",
 }
 
 /**

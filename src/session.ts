@@ -3,7 +3,7 @@ import { Base64 } from "js-base64";
 import mojang from "./mojang-got";
 
 const got = mojang.extend({
-    prefixUrl: "https://sessionserver.mojang.com"
+    prefixUrl: "https://sessionserver.mojang.com",
 });
 
 interface SessionResponse {
@@ -21,11 +21,12 @@ interface SessionResponse {
 }
 
 interface TexturesObject {
-    /** java time in ms */
+    /** Java time in ms */
     timestamp: number;
     profileId: string;
     profileName: string;
     signatureRequired?: boolean;
+    /** Decoded, JSON.parse'd textures property */
     textures: {
         SKIN?: {
             url: string;
@@ -40,7 +41,7 @@ interface TexturesObject {
 }
 
 /**
- * Get the player's username plus any additional information about them (e.g. skins).
+ * Get the player's username, skin, and cape information.
  * **Extremely rate limited.** See wiki.vg.
  *
  * @param id - Profile UUID
@@ -51,7 +52,7 @@ export async function session(id: string, signed = false) {
     const query = signed ? "?unsigned=false" : "";
     const route = `session/minecraft/profile/${id}${query}`;
     const { name, properties } = await got.get(route).json<SessionResponse>();
-    const { value, signature } = properties.find(p => p.name === "textures")!;
+    const { value, signature } = properties.find((p) => p.name === "textures")!;
     const textures: TexturesObject = JSON.parse(Base64.decode(value));
     return {
         name,
@@ -59,7 +60,7 @@ export async function session(id: string, signed = false) {
         skin: textures.textures.SKIN?.url,
         cape: textures.textures.CAPE?.url,
         textures,
-        signature
+        signature,
     };
 }
 
