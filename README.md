@@ -164,7 +164,7 @@ try {
 
 ### Electron
 
-Naturally, this library may be used to create Minecraft launchers in Electron. This library uses [got](https://github.com/sindresorhus/got#electron-support-has-been-removed) internally, so using it in the main process or with `electron.remote` is necessary.
+This library may be used to create Minecraft launchers with Electron. This library uses [got](https://github.com/sindresorhus/got#electron-support-has-been-removed) internally, so using it in the main process or with `electron.remote` is necessary.
 
 Modern browsers and Electron renderer processes will prohibit requests to Mojang's APIs because they do not support CORS, at the time of writing.
 
