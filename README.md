@@ -92,7 +92,7 @@ JWT.decode(accessToken)
 
 Before changing skins, a user's IP must be trusted. Changing skins on minecraft.net will prompt the user the trust their current IP address by asking security questions.
 
-Alternatively, this library's `challenges` and `answers` functions can be used to implement your own interface for answering the user's security questions. The [test/online.js](test/online.js) file contains an example of this process.
+Alternatively, this library's `challenges` and `answers` functions can be used to implement your own interface for answering the user's security questions. The file [test/online.js](https://github.com/starburn/node-mojang/test/online.js) contains an example of this process.
 
 ```js
 await isTrusted(accessToken)
@@ -178,7 +178,7 @@ I'm still learning how to maintain projects or contribute to open source in gene
 
 ESLint and TypeScript are used to lint the source.
 
-Because Mojang's APIs might spontaneously change, it makes sense to test integration with the live endpoints, instead of mock responses. The file [test/online.js](test/online.js) can be run using AVA with the necessary environment variables set. I recommend [direnv](https://github.com/direnv/direnv) for setting environment variables. Wait between sequential tests and remember to reset the test account's skin afterwards.
+Because Mojang's APIs might spontaneously change, it makes sense to test integration with the live endpoints, instead of mock responses. The file [test/online.js](https://github.com/starburn/node-mojang/test/online.js) can be run using AVA with the necessary environment variables set. I recommend [direnv](https://github.com/direnv/direnv) for setting environment variables. Wait between sequential tests and remember to reset the test account's skin afterwards.
 
 
 ## Related
@@ -191,7 +191,7 @@ Because Mojang's APIs might spontaneously change, it makes sense to test integra
 
 ## License
 
-[ISC](license.md) © [Mac](https://github.com/starburn)
+[ISC](https://github.com/starburn/node-mojang/license.md) © [Mac](https://github.com/starburn)
 
 > Project originally by @jamen.
 >
