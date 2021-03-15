@@ -1,8 +1,10 @@
 import FormData from "form-data";
-import got from "./mojang-got";
-
-// eslint-disable-next-line no-unused-vars
+import got from "./_got";
 import { Stream } from "stream";
+
+const api = got.extend({
+    prefixUrl: "https://api.mojang.com",
+});
 
 /**
  * Calculate if profile has Alex or Steve as a default skin (Crafatar's logic).
@@ -35,7 +37,7 @@ export async function setSkin(
     url: string,
     slim = false
 ) {
-    await got.post(`user/profile/${profileId}/skin`, {
+    await api.post(`user/profile/${profileId}/skin`, {
         context: { accessToken },
         form: {
             model: slim ? "slim" : undefined,
@@ -63,7 +65,7 @@ export async function uploadSkin(
     body.append("model", slim ? "slim" : undefined);
     body.append("file", file);
 
-    await got.put(`user/profile/${profileId}/skin`, {
+    await api.put(`user/profile/${profileId}/skin`, {
         context: { accessToken },
         body,
     });
@@ -77,5 +79,5 @@ export async function uploadSkin(
  * @see {@link http://wiki.vg/Mojang_API#Reset_Skin}
  */
 export async function resetSkin(accessToken: string, id: string) {
-    await got.delete(`user/profile/${id}/skin`, { context: { accessToken } });
+    await api.delete(`user/profile/${id}/skin`, { context: { accessToken } });
 }

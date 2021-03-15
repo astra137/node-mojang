@@ -1,4 +1,8 @@
-import got from "./mojang-got";
+import got from "./_got";
+
+const api = got.extend({
+    prefixUrl: "https://api.mojang.com",
+});
 
 export interface SecurityQuestion {
     answer: {
@@ -27,7 +31,7 @@ export interface SecurityAnswer {
  */
 export async function isTrusted(accessToken: string) {
     try {
-        await got.get("user/security/location", { context: { accessToken } });
+        await api.get("user/security/location", { context: { accessToken } });
 
         // 204 response means trusted IP
         return true;
@@ -50,7 +54,7 @@ export async function isTrusted(accessToken: string) {
  * @see {@link http://wiki.vg/Mojang_API#Get_list_of_questions}
  */
 export async function challenges(accessToken: string) {
-    return got
+    return api
         .get("user/security/challenges", { context: { accessToken } })
         .json<SecurityQuestion[]>();
 }
@@ -61,7 +65,7 @@ export async function challenges(accessToken: string) {
  * @see {@link http://wiki.vg/Mojang_API#Send_back_the_answers}
  */
 export async function answers(accessToken: string, json: SecurityAnswer[]) {
-    await got.post("user/security/location", {
+    await api.post("user/security/location", {
         context: { accessToken },
         json,
     });

@@ -1,9 +1,8 @@
-.nyc_output/
-coverage/
-dist/
-node_modules/
 .DS_Store
 .envrc
-docs/
-
+.nyc_output/
 .vercel
+coverage/
+dist/
+docs/
+node_modules/

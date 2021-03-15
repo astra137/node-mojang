@@ -1,12 +1,8 @@
-import mojang from "./mojang-got";
-
-// eslint-disable-next-line no-unused-vars
+import got from "./_got";
 import { HTTPError } from "got/dist/source";
+import { Profile } from "./index";
 
-// eslint-disable-next-line no-unused-vars
-import { Profile } from "./mojang";
-
-const got = mojang.extend({
+const api = got.extend({
     prefixUrl: "https://authserver.mojang.com",
 });
 
@@ -38,7 +34,7 @@ export function authenticate(
     clientToken?: string,
     agent = "Minecraft"
 ) {
-    return got
+    return api
         .post("authenticate", {
             json: {
                 username,
@@ -59,7 +55,7 @@ export function authenticate(
  * @see {@link http://wiki.vg/Authentication#Refresh}
  */
 export function refresh({ accessToken, clientToken }: Session) {
-    return got
+    return api
         .post("refresh", {
             json: { accessToken, clientToken, requestUser: true },
         })
@@ -73,7 +69,7 @@ export function refresh({ accessToken, clientToken }: Session) {
  */
 export async function validate({ accessToken, clientToken }: Session) {
     try {
-        await got.post("validate", { json: { accessToken, clientToken } });
+        await api.post("validate", { json: { accessToken, clientToken } });
 
         // 204
         return true;
@@ -96,7 +92,7 @@ export async function validate({ accessToken, clientToken }: Session) {
  * @see {@link http://wiki.vg/Authentication#Invalidate}
  */
 export async function invalidate({ accessToken, clientToken }: Session) {
-    await got.post("invalidate", { json: { accessToken, clientToken } });
+    await api.post("invalidate", { json: { accessToken, clientToken } });
 }
 
 /**
@@ -105,5 +101,5 @@ export async function invalidate({ accessToken, clientToken }: Session) {
  * @see {@link http://wiki.vg/Authentication#Signout}
  */
 export async function signout(username: string, password: string) {
-    await got.post("signout", { json: { username, password } });
+    await api.post("signout", { json: { username, password } });
 }

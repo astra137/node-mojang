@@ -1,0 +1,12 @@
+{
+    "entryPoints": [
+        "src/game.ts",
+        "src/index.ts",
+        "src/realms.ts",
+        "src/security.ts",
+        "src/session.ts",
+        "src/skins.ts",
+        "src/yggdrasil.ts"
+    ],
+    "out": "docs"
+}

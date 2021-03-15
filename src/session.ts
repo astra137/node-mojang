@@ -1,8 +1,7 @@
 import { Base64 } from "js-base64";
+import got from "./_got";
 
-import mojang from "./mojang-got";
-
-const got = mojang.extend({
+const api = got.extend({
     prefixUrl: "https://sessionserver.mojang.com",
 });
 
@@ -51,8 +50,8 @@ interface TexturesObject {
 export async function session(id: string, signed = false) {
     const query = signed ? "?unsigned=false" : "";
     const route = `session/minecraft/profile/${id}${query}`;
-    const { name, properties } = await got.get(route).json<SessionResponse>();
-    const { value, signature } = properties.find((p) => p.name === "textures")!;
+    const { name, properties } = await api.get(route).json<SessionResponse>();
+    const { value, signature } = properties.find((p) => p.name === "textures") || { value: '' };
     const textures: TexturesObject = JSON.parse(Base64.decode(value));
     return {
         name,
@@ -70,7 +69,7 @@ export async function session(id: string, signed = false) {
  * @see {@link http://wiki.vg/Mojang_API#Blocked_Servers}
  */
 export async function blockedServers() {
-    const body = await got
+    const body = await api
         .get("blockedservers", { responseType: "text" })
         .text();
     return body.split("\n").slice(0, -1);
